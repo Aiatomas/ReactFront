@@ -1,0 +1,12 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+}
+.toRight {
+    display: flex;
+    float: end;
+}
+.btnContainer {
+    display: flex;
+    width: 20vw;
+}

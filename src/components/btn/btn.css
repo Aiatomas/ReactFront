@@ -1,0 +1,25 @@
+.btn {
+    border: #E9E6DA solid 0.1vw;
+    color: #000000;
+    padding: 0.5vw;
+    font-weight: 600;
+    z-index: 33;
+    border-radius: 7vw;
+    transition: 0s;
+    font-family: 'GothamBook', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.fileActive {
+    border: #000000 solid 0.1vw;
+    background: black;
+    color: #ffffff;
+}
+.btn:hover {
+    background: #efede6;
+    border: black solid  0.1vw;
+    cursor: pointer;
+}
+.btnFile:hover {
+    display: flex;
+}
