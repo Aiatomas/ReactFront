@@ -1,5 +1,5 @@
-import {TOMAINWINDOW, TOFILES, ADDFILE, DELETEFILE, DELETECALC, PICKFILE} from "../actions/actions";
-import {GET_ALL_FILES_FAILURE, GET_ALL_FILES_REQUEST, GET_ALL_FILES_SUCCESS} from "../actions/allFiles";
+import {GET_ALL_FILES_FAILURE, GET_ALL_FILES_REQUEST, GET_ALL_FILES_SUCCESS} from "../actions/allFilesAction";
+import {ADD_FILE, DELETE_FILE, PICK_FILE} from "../actions/fileAction";
 
 const initialState = {
     allFiles: [],
@@ -10,19 +10,19 @@ const initialState = {
 
 const filesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADDFILE:
+        case ADD_FILE:
             return { ...state, allFiles: state.allFiles.concat(action.payload) };
-        case DELETECALC:
-            return { ...state, allFiles: state.allFiles.filter((item, index) => index !== action.payload) };
-        case DELETEFILE:
-            return { ...state, allFiles: state.allFiles.filter((item, index) => item.id !== action.payload) };
-        case PICKFILE:
-            const thisFile = state.allFiles.find((item, index) => index === action.payload);
+        case DELETE_FILE:
+            return {
+                ...state,
+                allFiles: state.allFiles.filter((item, index) => item.id !== action.payload)
+            };
+        case PICK_FILE:
+            const thisFile = state.allFiles.find((item) => item.id === action.payload);
             return {
                 ...state,
                 thisFile
             };
-
         case GET_ALL_FILES_REQUEST:
             return {
                 ...state,

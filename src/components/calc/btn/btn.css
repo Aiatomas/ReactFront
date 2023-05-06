@@ -1,8 +1,10 @@
 .btnFile {
     display: flex;
-    padding: 0.5vw;
 }
-.btn {
+.name {
+
+}
+.btnm {
     border: #E9E6DA solid 0.1vw;
     color: #000000;
     /*padding: 0.5vw;*/
@@ -19,8 +21,13 @@
     background: black;
     color: #ffffff;
 }
-.btn:hover {
+.btnm:hover {
     background: #efede6;
     border: black solid  0.1vw;
     cursor: pointer;
+}
+.fileActive:hover {
+    border: #000000 solid 0.1vw;
+    background: #1c1c1c;
+    color: #ffffff;
 }

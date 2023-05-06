@@ -41,27 +41,3 @@ export const fetchAllFiles = () => {
             })
     }
 }
-
-
-// export const getAllFiles = () => {
-//     return (dispatch) => {
-//         dispatch({
-//             type: GET_ALL_FILES_REQUEST
-//         });
-//
-//         fetch('/orders')
-//             .then(response => response.json())
-//             .then(data => {
-//                 dispatch({
-//                     type: GET_ALL_FILES_SUCCESS,
-//                     payload: data
-//                 });
-//             })
-//             .catch(error => {
-//                 dispatch({
-//                     type: GET_ALL_FILES_FAILURE,
-//                     payload: error.message
-//                 });
-//             });
-//     };
-// };
