@@ -4,6 +4,7 @@ import FileContainer from "../btn/FileContainer";
 import "./Files.css"
 import {fetchAllFiles} from "../../../actions/allFilesAction";
 import {pickFile} from "../../../actions/fileAction";
+import {Link} from "react-router-dom";
 
 const FilesContainer = () => {
     const files = useSelector((state) => state.files.allFiles);
@@ -38,6 +39,7 @@ const FilesContainer = () => {
                                 key={item.id}
                                 keyprop={item.id} type={item.type} name={item.name}/>
                         ))}
+                        <Link to="/react"><button className="btn btnm btn-sm">+</button></Link>
                     </div>
                 </div>
             </div>
