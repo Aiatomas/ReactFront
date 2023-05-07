@@ -13,15 +13,20 @@ const filesReducer = (state = initialState, action) => {
         case ADD_FILE:
             return { ...state, allFiles: state.allFiles.concat(action.payload) };
         case DELETE_FILE:
+            let thisF = state.thisFile
+            if(state.thisFile.id === action.payload){
+                thisF = null;
+            }
             return {
                 ...state,
-                allFiles: state.allFiles.filter((item, index) => item.id !== action.payload)
+                allFiles: state.allFiles.filter((item, index) => item.id !== action.payload),
+                thisFile: thisF
             };
         case PICK_FILE:
             const thisFile = state.allFiles.find((item) => item.id === action.payload);
             return {
                 ...state,
-                thisFile
+                thisFile: thisFile
             };
         case GET_ALL_FILES_REQUEST:
             return {

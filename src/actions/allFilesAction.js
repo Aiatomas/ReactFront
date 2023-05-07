@@ -4,20 +4,20 @@ export const GET_ALL_FILES_SUCCESS = "GET_ALL_FILES_SUCCESS";
 export const GET_ALL_FILES_FAILURE = "GET_ALL_FILES_FAILURE";
 
 // Action Creator
-const fetchUsersRequest = () => {
+const fetchFilesRequest = () => {
     return {
         type: GET_ALL_FILES_REQUEST
     }
 }
 
-const fetchUsersSuccess = (files) => {
+const fetchFilesSuccess = (files) => {
     return {
         type: GET_ALL_FILES_SUCCESS,
         payload: files
     }
 }
 
-const fetchUsersFailure = (error) => {
+const fetchFilesFailure = (error) => {
     return {
         type: GET_ALL_FILES_FAILURE,
         payload: error
@@ -27,17 +27,17 @@ const fetchUsersFailure = (error) => {
 // Async Action Creator
 export const fetchAllFiles = () => {
     return (dispatch) => {
-        dispatch(fetchUsersRequest())
+        dispatch(fetchFilesRequest())
         axios.get('/orders')
             .then(response => {
                 const users = response.data
                 console.log(response.data);
-                dispatch(fetchUsersSuccess(users))
+                dispatch(fetchFilesSuccess(users))
             })
             .catch(error => {
                 const errorMessage = error.message
                 console.log(error.message);
-                dispatch(fetchUsersFailure(errorMessage))
+                dispatch(fetchFilesFailure(errorMessage))
             })
     }
 }

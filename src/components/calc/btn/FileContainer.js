@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import './btn.css';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteFileAction, pickFile} from "../../../actions/fileAction";

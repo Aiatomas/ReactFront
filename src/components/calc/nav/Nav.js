@@ -3,16 +3,16 @@ import Logo from "./logo/Logo";
 import {Link} from "react-router-dom";
 
 const Nav = () => {
-    // const count = useSelector((state) => state.count);
-    // const dispatch = useDispatch();
 
     return (
-        <div className="navbar">
+        <div className="navbar navbar-expand-lg">
             <Logo/>
-            {/*<Link to="/react/counter"><button className="btn">0</button></Link>*/}
-            <Link to="/react"><button className="btn">(1)</button></Link>
-            <Link to="/react/files"><button className="btn">(2)</button></Link>
-            <Link to="/react/createOrder"><button className="btn">(3)</button></Link>
+            <div>
+                <Link to="/react"><button className="btn">(1)</button></Link>
+                <Link to="/react/files"><button className="btn">(2)</button></Link>
+                <Link to="/react/createOrder"><button className="btn">(3)</button></Link>
+                <Link to="/react/login"><button className="btn">login</button></Link>
+            </div>
         </div>
     );
 };
