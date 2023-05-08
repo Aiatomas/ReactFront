@@ -1,5 +1,5 @@
 import {GET_ALL_FILES_FAILURE, GET_ALL_FILES_REQUEST, GET_ALL_FILES_SUCCESS} from "../actions/allFilesAction";
-import {ADD_FILE, DELETE_FILE, PICK_FILE} from "../actions/fileAction";
+import {ADD_FILE, DELETE_FILE, PICK_FILE, UNPICK_FILE, UPDATE_FILE} from "../actions/fileAction";
 
 const initialState = {
     allFiles: [],
@@ -19,7 +19,7 @@ const filesReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                allFiles: state.allFiles.filter((item, index) => item.id !== action.payload),
+                allFiles: state.allFiles.filter((item) => item.id !== action.payload),
                 thisFile: thisF
             };
         case PICK_FILE:
@@ -27,6 +27,20 @@ const filesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 thisFile: thisFile
+            };
+        case UPDATE_FILE:
+            const newAllFiles = [];
+            for (let i = 0; i < state.allFiles.length; i++){
+                if(state.allFiles.id === action.payload.id) {
+                    newAllFiles.push(action.payload)
+                } else {
+                    newAllFiles.push(state.allFiles[i])
+                }
+            }
+            return {
+                ...state,
+                allFiles: newAllFiles,
+                thisFile: action.payload
             };
         case GET_ALL_FILES_REQUEST:
             return {
