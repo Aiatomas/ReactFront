@@ -30,7 +30,7 @@ const ChooseService = () => {
         dispatch(addFileAction("cup"));
     }
     const addPost = () => {
-        dispatch(addFileAction("post"));
+        dispatch(addFileAction("afterPrint"));
     }
 
     return (

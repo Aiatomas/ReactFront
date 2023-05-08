@@ -4,6 +4,32 @@
 .color {
     background: #E9E6DA;
 }
+.btnFile {
+    display: flex;
+}
+.btnm {
+    border: #E9E6DA solid 0.1vw;
+    color: #000000;
+    font-weight: 600;
+    z-index: 33;
+    border-radius: 7vw;
+    transition: 0s;
+    font-family: 'GothamBook', sans-serif;
+}
+.fileActive {
+    background: #2a2a2a;
+    color: #ffffff;
+    border: #2a2a2a solid 0.1vw;
+}
+.btnm:hover {
+    background: #efede6;
+    border: black solid  0.1vw;
+}
+.fileActive:hover {
+    background: #2a2a2a;
+    color: #ffffff;
+    border: #2a2a2a solid 0.1vw;
+}
 .gray {
     /*background: rgba(250, 250, 250, 0.96);*/
     background: #E9E6DA;
@@ -139,7 +165,7 @@
     font-family: 'GothamBook', sans-serif;
 }
 .containerForImgInServer {
-    position: absolute;
+    /*position: absolute;*/
     display: flex;
     justify-content: center;
     background: white;
@@ -431,6 +457,11 @@
     border: black solid 0.1vw;
     margin-left: 0.5vw;
     overflow: hidden;
+}
+.inputFormat {
+    border: none;
+    border-bottom: black solid 0.1vw;
+    border-radius: 0;
 }
 @media (max-width: 1000px){
     * {

@@ -1,11 +1,22 @@
 import {GET_ALL_FILES_FAILURE, GET_ALL_FILES_REQUEST, GET_ALL_FILES_SUCCESS} from "../actions/allFilesAction";
-import {ADD_FILE, DELETE_FILE, PICK_FILE, UNPICK_FILE, UPDATE_FILE} from "../actions/fileAction";
+import {
+    ADD_FILE,
+    DELETE_FILE, GET_IMG_FAILURE,
+    GET_IMG_REQUEST,
+    GET_IMG_SUCCESS,
+    PICK_FILE,
+    UPDATE_FILE
+} from "../actions/fileAction";
 
 const initialState = {
     allFiles: [],
     isLoading: false,
     error: null,
-    thisFile: null
+    thisFile: null,
+
+    img: null,
+    imgIsLoading: false,
+    imgError: null,
 };
 
 const filesReducer = (state = initialState, action) => {
@@ -60,6 +71,27 @@ const filesReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 error: action.payload
+            };
+
+
+        case GET_IMG_REQUEST:
+            return {
+                ...state,
+                imgIsLoading: true,
+                imgError: null
+            };
+        case GET_IMG_SUCCESS:
+            return {
+                ...state,
+                img: action.payload,
+                imgIsLoading: false,
+                imgError: null
+            };
+        case GET_IMG_FAILURE:
+            return {
+                ...state,
+                imgIsLoading: false,
+                imgError: action.payload
             };
         default:
             return state;

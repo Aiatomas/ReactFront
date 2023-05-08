@@ -5,6 +5,10 @@ export const DELETE_FILE = "DELETE_FILE";
 export const ADD_FILE = "ADD_FILE";
 export const UPDATE_FILE = "UPDATE_FILE";
 
+export const GET_IMG_REQUEST = "GET_IMG_REQUEST";
+export const GET_IMG_SUCCESS = "GET_IMG_SUCCESS";
+export const GET_IMG_FAILURE = "GET_IMG_FAILURE";
+
 export const addFile = (file) => {
     return {
         type: ADD_FILE,
@@ -123,5 +127,44 @@ export const updateFileAction = (thisFile, parameter, parameter2, parameter3, va
             .catch(error => {
                 console.log(error);
             })
+    }
+}
+
+export const startDownloadImg = () => {
+    return {
+        type: GET_IMG_REQUEST
+    };
+};
+export const successDownloadImg = (img) => {
+    return {
+        type: GET_IMG_SUCCESS,
+        payload: img
+
+    };
+};
+export const errorDownloadImg = (err) => {
+    return {
+        type: GET_IMG_FAILURE,
+        payload: err
+    };
+};
+
+export const DownloadImgAction = (thisFile) => {
+    return (dispatch) => {
+        dispatch(startDownloadImg())
+        const img = new Image();
+        img.src = thisFile.url.url;
+        img.onload = (event) => {
+            let imgP = {
+                width: event.target.naturalWidth,
+                height: event.target.naturalHeight,
+                src: event.target.src
+            }
+            console.log(imgP);
+            dispatch(successDownloadImg(imgP))
+        }
+        img.onerror = (error) => {
+            dispatch(errorDownloadImg(error))
+        }
     }
 }

@@ -1,36 +1,42 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {MDBInput} from "mdb-react-ui-kit";
+import {DownloadImgAction} from "../../../../actions/fileAction";
 
 export const View = () => {
     const thisFile = useSelector(state => state.files.thisFile);
     const allFiles = useSelector(state => state.files.allFiles);
+    const img = useSelector(state => state.files.img);
+    const imgIsLoading = useSelector(state => state.files.imgIsLoading);
+    const imgError = useSelector(state => state.files.imgError);
     const dispatch = useDispatch();
-    const [data, setData] = useState(null);
+    if(imgIsLoading){
+        return (
+            <div>loading img...</div>
+        )
+    }
+    if(imgError){
+        return (
+            <div>{imgError}</div>
+        )
+    }
+    console.log(img);
+    if(img){
+        let imgInServerStyles = {};
+        let cardForEtalonStyles = {opacity: "1"};
+        let list1Styles = {transform: "", opacity: "1",};
+        let prevStyles = {opacity: "1"};
+        let nextStyles = {opacity: "1"};
+        let containerForImgInServerStyles = {transform: ""};
+        let containerForPdfInServerStyles = {transform: ""};
+        let pdfRendererStyles = {};
 
-
-    let imgInServerStyles = {};
-    let cardForEtalonStyles = {opacity: "1"};
-    let list1Styles = {transform: "", opacity: "1",};
-    let prevStyles = {opacity: "1"};
-    let nextStyles = {opacity: "1"};
-    let containerForImgInServerStyles = {transform: ""};
-    let containerForPdfInServerStyles = {transform: ""};
-    let pdfRendererStyles = {};
-
-    useEffect(() => {
-        const img = new Image();
-        img.src = thisFile.url.url;
-        img.onload = handleImageLoad(img);
-    }, []);
-
-    let cardSizeW = 86;
-    let cardSizeH = 54;
-    const handleImageLoad = (img) => {
-        let imgWidth = img.naturalWidth;
-        let imgHeight = img.naturalHeight;
+        let cardSizeW = 86;
+        let cardSizeH = 54;
+        let imgWidth = img.width;
+        let imgHeight = img.height;
         let src = img.src;
-        if (thisFile.x && thisFile.y) {
+        if (thisFile.x > 0 && thisFile.y > 0) {
             console.log("render!!!");
             let x = thisFile.x;
             let y = thisFile.y;
@@ -112,16 +118,14 @@ export const View = () => {
                     transform: `rotate(0deg)`
                 }
             }
-            list1Styles = {
-                width: width + "vh",
-                minWidth: width + "vh",
-                height: etalonForRender + "vh",
-                minHeight: etalonForRender + "vh"
-            }
+            list1Styles.width = width + "vh";
+            list1Styles.minWidth = width + "vh";
+            list1Styles.height = etalonForRender + "vh";
+            list1Styles.minHeight = etalonForRender + "vh";
             if (coef <= 1) {
 
             }
-            setData(
+            return (
                 <div className="fileViewContainer">
                     <div className="listAndCard invisible m-auto">
                         <div className="list m-auto visible cursorPointer" style={list1Styles}>
@@ -148,13 +152,13 @@ export const View = () => {
                                 <div className="input-group-text gray navDrag" id="navDrag">
                                     <img src="" alt="d" className="mouseScroll"/>
                                 </div>
-                                <button id="page_count" className="input-group-text gray"></button>
+                                <button id="page_count" className="input-group-text gray">{thisFile.countInFile}</button>
                                 <button className="input-group-text gray">стр.</button>
                                 <MDBInput className="input-group-text gray inputs inputFormat"
                                           onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
                                           type='number' value={1}/>
-                                <button className="input-group-text gray">{imgWidth}</button>
-                                <button className="input-group-text gray">{imgHeight}</button>
+                                <button className="input-group-text gray d-none">{imgWidth}</button>
+                                <button className="input-group-text gray d-none">{imgHeight}</button>
                                 <button className="btn btn-sm input-group-text gray m-2 invisible">
                                     Завантажити файл
                                 </button>
@@ -163,33 +167,12 @@ export const View = () => {
                     </div>
                 </div>
             )
-        } else {
-            let list1Styles = {
-                transform: "",
-                opacity: "0",
-            }
-            let prevStyles = {
-                opacity: "0"
-            }
-            let nextStyles = {
-                opacity: "0"
-            }
-            let cardForEtalonStyles = {
-                opacity: "0"
-            }
         }
-    };
+        const setPage = (value) => {
 
-    const setPage = (value) => {
-
+        }
     }
-    return (<div>
-        {data ? (
-            data
-        ) : (
-            <div>Loading...
-                <img onLoad={handleImageLoad} src={thisFile.url.url} alt="" className="imgInServer d-none" draggable="false"/>
-            </div>
-        )}
-    </div>)
+    return (
+        <div>0/0</div>
+    )
 };
