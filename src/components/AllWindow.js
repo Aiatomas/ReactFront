@@ -8,6 +8,10 @@ function AllWindow() {
         <div>
             <Nav/>
             <AfterNav/>
+            <div className="invisible">
+                <p>p</p>
+                <p>p</p>
+            </div>
         </div>
     );
 }

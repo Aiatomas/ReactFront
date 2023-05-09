@@ -1,8 +1,8 @@
+import {MaterialsAndDop} from "./materialsanddop/MaterialsAndDop";
 import React from "react";
 import {FormatDrukView} from "./formatdrukview/FormatDrukView";
-import {MaterialsAndDop} from "./materialsanddop/MaterialsAndDop";
 
-export const Digital = () => {
+export const Wide = () => {
     return (
         <div>
             <FormatDrukView/>

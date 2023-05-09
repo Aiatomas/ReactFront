@@ -31,15 +31,11 @@
     border: #2a2a2a solid 0.1vw;
 }
 .gray {
-    /*background: rgba(250, 250, 250, 0.96);*/
     background: #E9E6DA;
-    /*font-weight: 600;*/
     z-index: 5;
 }
 .displayTitle {
-    /*display: flex;*/
     padding: 1vw;
-    /*padding-left: 8vw;*/
     font-weight: 600;
 }
 .promoCodeInputsContainer {
@@ -47,11 +43,9 @@
 }
 .white{
     background: white;
-    /*font-weight: 600;*/
     z-index: 5;
 }
 .presetContainer {
-    /*display: flex;*/
     justify-content: center;
     align-items: center;
 }
@@ -67,12 +61,6 @@
 }
 .FilesContainer {
     display: flex;
-    /*background: #1a1e21;*/
-    /*flex-direction: row-reverse;*/
-    /*position: absolute;*/
-    /*right: 4vw;*/
-    /*top: 5vh;*/
-    /*opacity: 50%;*/
 }
 .FilesContainer:hover {
     opacity: 1;
@@ -102,35 +90,6 @@
 .logoImg {
     height: 6vw;
 }
-/*@media (max-width: 1000px){*/
-/*    .settingsContainer {*/
-/*        flex-direction: column;*/
-/*    }*/
-/*    .btn {*/
-/*        font-size: 4vw;*/
-/*        padding: 3vw;*/
-/*    }*/
-/*    .btnm-act {*/
-/*        color: black;*/
-/*    }*/
-/*    .gray {*/
-/*        font-size: 1.5rem;*/
-/*        height: 7vw;*/
-/*    }*/
-/*    .orient {*/
-/*        !*height: 40px;*!*/
-/*    }*/
-/*    .white {*/
-/*        font-size: 1.5rem;*/
-/*        height: 7vw;*/
-/*    }*/
-/*    .fileSettingsContainer{*/
-/*        width: 99%;*/
-/*    }*/
-/*    .fileViewContainer {*/
-/*        width: 99%;*/
-/*    }*/
-/*}*/
 @media (min-width: 1000px){
     .settingsContainer {
         flex-direction: row;
@@ -142,7 +101,6 @@
         width: 31vw;
         display: flex;
         flex-direction: column;
-        /*height: 94vh;*/
     }
     .mouseScroll {
         width: 1.5vw;
@@ -165,14 +123,11 @@
     font-family: 'GothamBook', sans-serif;
 }
 .containerForImgInServer {
-    /*position: absolute;*/
     display: flex;
     justify-content: center;
     background: white;
-    /*overflow: auto;*/
     transition: 0.5s;
     width: 100%;
-    /*pointer-events: none;*/
 }
 .flexWrapNone {
     flex-wrap: nowrap;
@@ -199,14 +154,12 @@
     align-items: center;
 }
 .fileViewContainer {
-    /*background: #ffffff;*/
     display: flex;
     overflow: hidden;
     z-index: 0;
 }
 .list {
     display: flex;
-    /*position: fixed;*/
     background: white;
     margin: 1vh;
     transition: 0.5s;
@@ -219,7 +172,6 @@
     transition: 0.5s;
 }
 .imgKarta {
-    /*display: inline-block;*/
     position: absolute;
     transition: 0.5s;
 }
@@ -227,7 +179,6 @@
     transition: 0.5s;
 }
 .settingsContainer {
-    /*display: none;*/
     z-index: 9;
     overflow: auto;
 }
@@ -236,6 +187,7 @@
     flex-direction: column;
     width: 96%;
     overflow: hidden;
+    margin-left: 2vw;
 }
 .settingSelect {
     width: 75%;
@@ -287,22 +239,6 @@
 .jeltBackground:hover {
     background: #ffe900;
 }
-
-/*@media (prefers-reduced-motion: no-preference) {*/
-/*    .App-logo {*/
-/*        animation: App-logo-spin infinite 20s linear;*/
-/*    }*/
-/*}*/
-
-/*@keyframes App-logo-spin {*/
-/*    from {*/
-/*        transform: rotate(0deg);*/
-/*    }*/
-/*    to {*/
-/*        transform: rotate(360deg);*/
-/*    }*/
-/*}*/
-
 .cursorPointer:hover {
     cursor: pointer;
 }
@@ -395,9 +331,6 @@
     padding-left: 0.5vw;
     padding-right: 0.5vw;
 }
-.moreOptions {
-    background: #E9E6DA;
-}
 .addMoreFiles {
     width: 2.3vw;
     margin-top: 0;
@@ -416,7 +349,6 @@
 .inputPrice {
     font-family: 'GothamBook', sans-serif;
     border: none;
-    /*border-bottom: black solid;*/
     border-radius: 0;
     font-size: 4vw;
     margin-left: 8vw;
@@ -463,6 +395,31 @@
     border-bottom: black solid 0.1vw;
     border-radius: 0;
 }
+.moreOptions {
+    margin-top: 0.4vw;
+    width: 50vw;
+    border-radius: 7vw;
+    height: 2.65vw;
+    background: #E9E6DAFF;
+    border: black solid 0.1vw;
+}
+.moreOptionsIn {
+    margin-top: 0.4vw;
+    border-radius: 7vw;
+    height: 2.65vw;
+    background: #E9E6DAFF;
+    border: black solid 0.1vw;
+    width: 47vw;
+}
+.inMoreOptions {
+    width: 45vw;
+    border-radius: 7vw;
+    background: #E9E6DAFF;
+    border: black solid 0.1vw;
+}
+.destinyButtons {
+    font-size: 1vw;
+}
 @media (max-width: 1000px){
     * {
         font-size: 4vw;
@@ -506,7 +463,6 @@
     .btn {
         font-weight: 400;
         border-radius: 10vw;
-        /*border: #000000 solid 0.3vw;*/
         border: #E9E6DA solid 0.3vw;
         font-size: 3vw;
     }
@@ -514,7 +470,6 @@
         display: none;
     }
     .displayTitle {
-        /*display: flex;*/
         padding: 1vw;
         padding-left: 8vw;
         padding-top: 4vw;
@@ -586,10 +541,7 @@
         flex-direction: column;
     }
     .btn:hover {
-        /*background: #fcfcfc;*/
-        /*background: #fcfcfc;*/
         border: black solid  0.3vw;
-        /*transition: 0.8s;*/
     }
     .formatAndDruk {
         flex-direction: column;
@@ -607,7 +559,6 @@
         margin: 0.3vw;
     }
     .destinyButtons {
-        /*width: 42vw;*/
         font-size: 2vw;
     }
     .addMoreFiles {

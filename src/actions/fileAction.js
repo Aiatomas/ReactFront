@@ -103,6 +103,14 @@ export const updateFileAction = (thisFile, parameter, parameter2, parameter3, va
                         value: value,
                         writable: true
                     });
+                    Object.defineProperty(thisFile, parameter2, {
+                        value: value2,
+                        writable: true
+                    });
+                    Object.defineProperty(thisFile, parameter3, {
+                        value: value3,
+                        writable: true
+                    });
                     Object.defineProperty(thisFile, "x", {
                         value: response.data.x,
                         writable: true

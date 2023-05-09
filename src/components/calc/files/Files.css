@@ -1,5 +1,5 @@
 .slider-container {
-    width: 100vw;
+    width: 93vw;
     /*height:600px;*/
     position: relative;
     overflow: hidden;
@@ -53,10 +53,10 @@
     z-index: 1111;
 }
 .slider-item {
-    height: 2rem;
+    height: 2.1rem;
 }
 .FilesContainerRelative {
-    height: 2rem;
+    height: 2.1rem;
     /*background: #eeeeee;*/
     background: #ece9e0;
 }

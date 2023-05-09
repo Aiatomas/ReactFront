@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {DownloadImgAction, updateFile, updateFileAction} from "../../../../actions/fileAction";
+import {DownloadImgAction, updateFileAction} from "../../../../actions/fileAction";
 import { MDBInput } from 'mdb-react-ui-kit';
 import orient from './orient.svg';
 
@@ -33,11 +33,16 @@ export const Format = () => {
         ];
     } else if(thisFile.calc === "wide"){
         buttons = [
-            { name: "A3", value: "A3" },
+            { name: "A2", value: "A2" },
+            { name: "A1", value: "A1" },
+            { name: "A0", value: "A0" },
             { name: "Свій розмір", value: "custom" },
         ];
     } else if(thisFile.calc === "photo"){
         buttons = [
+            { name: "10х15", value: "10х15" },
+            { name: "15х21", value: "15х21" },
+            { name: "13х18", value: "13х18" },
             { name: "A4", value: "A4" },
             { name: "A3", value: "A3" },
             { name: "Свій розмір", value: "custom" },
