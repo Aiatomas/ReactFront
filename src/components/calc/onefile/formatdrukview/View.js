@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {MDBInput} from "mdb-react-ui-kit";
-import {DownloadImgAction} from "../../../../actions/fileAction";
+import PdfViewer from "../../../../modules/pdf/PdfViewer";
 
 export const View = () => {
     const thisFile = useSelector(state => state.files.thisFile);
@@ -20,6 +20,17 @@ export const View = () => {
             <div>{imgError}</div>
         )
     }
+
+    const setPage = (value) => {
+
+    }
+
+    if(!thisFile.url.img){
+        return (
+            <PdfViewer url={thisFile.url.url}/>
+        )
+    }
+
     console.log(img);
     if(img){
         let imgInServerStyles = {};
@@ -125,53 +136,86 @@ export const View = () => {
             if (coef <= 1) {
 
             }
-            return (
-                <div className="fileViewContainer">
-                    <div className="listAndCard invisible m-auto">
-                        <div className="list m-auto visible cursorPointer" style={list1Styles}>
-                            <div className="containerForImgInServer" style={containerForImgInServerStyles}>
-                                <img src={src} alt="" className="imgInServer" style={imgInServerStyles}
-                                     draggable="false"/>
+            if(thisFile.url.img){
+                return (
+                    <div className="fileViewContainer">
+                        <div className="listAndCard invisible m-auto">
+                            <div className="list m-auto visible cursorPointer" style={list1Styles}>
+                                <div className="containerForImgInServer" style={containerForImgInServerStyles}>
+                                    <img src={src} alt="" className="imgInServer" style={imgInServerStyles}
+                                         draggable="false"/>
+                                </div>
                             </div>
-
-                            <div className="containerForImgInServer d-none" style={containerForPdfInServerStyles}>
-                                <div className="imgInServer notMDr">
-                                    <div className="myPdfViewer">
-                                        <div className="theCanvas">
-                                            <canvas className="pdfRenderer" style={pdfRendererStyles}></canvas>
+                        </div>
+                        <div className="navContainer">
+                            <div id="navPanel" className="d-flex flex-column position-absolute navPanel">
+                                <div id="navigation_controls"
+                                     className="input-group d-flex justify-content-center align-items-center">
+                                    <div className="input-group-text gray navDrag" id="navDrag">
+                                        <img src="" alt="d" className="mouseScroll"/>
+                                    </div>
+                                    <button id="page_count" className="input-group-text gray">{thisFile.countInFile}</button>
+                                    <button className="input-group-text gray">стр.</button>
+                                    <MDBInput className="input-group-text gray inputs inputFormat"
+                                              onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
+                                              type='number' value={1}/>
+                                    <button className="input-group-text gray d-none">{imgWidth}</button>
+                                    <button className="input-group-text gray d-none">{imgHeight}</button>
+                                    <button className="btn btn-sm input-group-text gray m-2 invisible">
+                                        Завантажити файл
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="fileViewContainer">
+                        <div className="listAndCard invisible m-auto">
+                            <div className="list m-auto visible cursorPointer" style={list1Styles}>
+                                <div className="containerForImgInServer" style={containerForPdfInServerStyles}>
+                                    <div className="imgInServer notMDr">
+                                        <div className="myPdfViewer">
+                                            <div className="theCanvas">
+                                                {/*<canvas className="pdfRenderer" style={pdfRendererStyles}></canvas>*/}
+                                                <PdfViewer
+                                                    className="pdfRenderer"
+                                                    style={pdfRendererStyles}
+                                                    url={thisFile.url.url}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="navContainer">
-                        <div id="navPanel" className="d-flex flex-column position-absolute navPanel">
-                            <div id="navigation_controls"
-                                 className="input-group d-flex justify-content-center align-items-center">
-                                <div className="input-group-text gray navDrag" id="navDrag">
-                                    <img src="" alt="d" className="mouseScroll"/>
+                        <div className="navContainer">
+                            <div id="navPanel" className="d-flex flex-column position-absolute navPanel">
+                                <div id="navigation_controls"
+                                     className="input-group d-flex justify-content-center align-items-center">
+                                    <div className="input-group-text gray navDrag" id="navDrag">
+                                        <img src="" alt="d" className="mouseScroll"/>
+                                    </div>
+                                    <button id="page_count" className="input-group-text gray">{thisFile.countInFile}</button>
+                                    <button className="input-group-text gray">стр.</button>
+                                    <MDBInput className="input-group-text gray inputs inputFormat"
+                                              onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
+                                              type='number' value={1}/>
+                                    <button className="input-group-text gray d-none">{imgWidth}</button>
+                                    <button className="input-group-text gray d-none">{imgHeight}</button>
+                                    <button className="btn btn-sm input-group-text gray m-2 invisible">
+                                        Завантажити файл
+                                    </button>
                                 </div>
-                                <button id="page_count" className="input-group-text gray">{thisFile.countInFile}</button>
-                                <button className="input-group-text gray">стр.</button>
-                                <MDBInput className="input-group-text gray inputs inputFormat"
-                                          onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
-                                          type='number' value={1}/>
-                                <button className="input-group-text gray d-none">{imgWidth}</button>
-                                <button className="input-group-text gray d-none">{imgHeight}</button>
-                                <button className="btn btn-sm input-group-text gray m-2 invisible">
-                                    Завантажити файл
-                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            )
-        }
-        const setPage = (value) => {
-
+                )
+            }
         }
     }
+
     return (
         <div>0/0</div>
     )

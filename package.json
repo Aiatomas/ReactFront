@@ -13,6 +13,7 @@
     "history": "^5.3.0",
     "lottie-web": "^5.11.0",
     "mdb-react-ui-kit": "^6.0.0",
+    "pdfjs-dist": "^3.6.172",
     "react": "^18.2.0",
     "react-bodymovin": "^2.0.0",
     "react-bootstrap": "^2.7.4",

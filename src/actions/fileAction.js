@@ -160,19 +160,33 @@ export const errorDownloadImg = (err) => {
 export const DownloadImgAction = (thisFile) => {
     return (dispatch) => {
         dispatch(startDownloadImg())
-        const img = new Image();
-        img.src = thisFile.url.url;
-        img.onload = (event) => {
-            let imgP = {
-                width: event.target.naturalWidth,
-                height: event.target.naturalHeight,
-                src: event.target.src
+        if(thisFile.url.img){
+            const img = new Image();
+            img.src = thisFile.url.url;
+            img.onload = (event) => {
+                let imgP = {
+                    width: event.target.naturalWidth,
+                    height: event.target.naturalHeight,
+                    src: event.target.src
+                }
+                console.log(imgP);
+                dispatch(successDownloadImg(imgP))
             }
-            console.log(imgP);
-            dispatch(successDownloadImg(imgP))
-        }
-        img.onerror = (error) => {
-            dispatch(errorDownloadImg(error))
+            img.onerror = (error) => {
+                dispatch(errorDownloadImg(error))
+            }
+        } else {
+            // pdfjsLib.getDocument(thisFile.url.url).then((pdf, err) => {
+            //     if(err){
+            //         dispatch(errorDownloadImg(err))
+            //     } else {
+            //         let imgP = {
+            //             pdf: pdf
+            //         }
+            //         dispatch(successDownloadImg(imgP))
+            //     }
+            // })
+            dispatch(successDownloadImg(null))
         }
     }
 }
