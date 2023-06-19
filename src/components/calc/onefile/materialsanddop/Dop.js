@@ -21,15 +21,20 @@ export const Dop = () => {
 
     let laminationButtons = [];
     let roundCornerButtons = [];
+    let cuttingSamokleika = [];
     if(thisFile.calc === "digital"){
         laminationButtons = []
         roundCornerButtons = []
+        cuttingSamokleika = []
         for (let i = 0; i < prices.length; i++){
             if(prices[i].name === "ламінуванння") {
                 laminationButtons = prices[i].variants.filter(e => e[0][0] !== "!")
             }
             if(prices[i].name === "кути") {
                 roundCornerButtons = prices[i].variants.filter(e => e[0][0] !== "!")
+            }
+            if(prices[i].name === "Порізка самоклейки") {
+                cuttingSamokleika = prices[i].variants.filter(e => e[0][0] !== "!")
             }
         }
     }
@@ -49,9 +54,15 @@ export const Dop = () => {
     if(thisFile.roundCorner === null || thisFile.roundCorner === undefined){
         thisFile.roundCorner = "без обрізки кутів"
     }
+    if(thisFile.cuttingSamokleika === null || thisFile.cuttingSamokleika === undefined){
+        thisFile.cuttingSamokleika = "без порізки"
+    }
 
     const updateThisFileLamination = (value) => {
         dispatch(updateFileAction(thisFile, "lamination", null, null, value, null, null))
+    }
+    const updateThisFilecuttingSamokleika = (value) => {
+        dispatch(updateFileAction(thisFile, "cuttingSamokleika", null, null, value, null, null))
     }
     const updateThisFileRoundCorner = (value) => {
         dispatch(updateFileAction(thisFile, "roundCorner", null, null, value, null, null))
@@ -76,19 +87,52 @@ export const Dop = () => {
             dispatch(updateFileAction(thisFile, "holes", null, null, value, null, null))
         }    }
 
+    if(thisFile.paper === "Самоклеючі"){
+        return (
+            <div className="dopOptionsContainer">
+                <div className="displayTitle invisible">Додаткові опції</div>
+                <Accordion className="">
+                    <Accordion className="" eventkey="0">
+                        <Accordion.Button className="btn btnm moreOptions">Додаткові опції</Accordion.Button>
+                        <Accordion.Body>
+
+                            <Accordion className="">
+                                <Accordion className="" eventkey="1">
+                                    <Accordion.Button className="btn btnm moreOptionsIn">Порізка: {thisFile.cuttingSamokleika}</Accordion.Button>
+                                    <Accordion.Body>
+                                        {cuttingSamokleika.map((item) => (
+                                            <button
+                                                value={item[0]}
+                                                className={thisFile.cuttingSamokleika === item[0] ? 'btn btnm fileActive' : 'btn btnm'}
+                                                onClick={(e) => updateThisFilecuttingSamokleika(e.currentTarget.value)}
+                                                key={item[0]}>
+                                                {item[0]}
+                                            </button>
+                                        ))}
+                                    </Accordion.Body>
+                                </Accordion>
+                            </Accordion>
+
+                        </Accordion.Body>
+                    </Accordion>
+                </Accordion>
+            </div>
+        );
+    }
+
     return (
         <div className="dopOptionsContainer">
             <div className="displayTitle invisible">Додаткові опції</div>
             <Accordion className="">
-                <Accordion className="" eventKey="0">
+                <Accordion className="" eventkey="0">
                     <Accordion.Button className="btn btnm moreOptions">Додаткові опції</Accordion.Button>
                     <Accordion.Body>
 
                         <Accordion className="">
-                            <Accordion className="" eventKey="1">
+                            <Accordion className="" eventkey="1">
                                 <Accordion.Button className="btn btnm moreOptionsIn">Заламінувати: {thisFile.lamination}</Accordion.Button>
                                 <Accordion.Body>
-                                    {laminationButtons.map((item, index) => (
+                                    {laminationButtons.map((item) => (
                                         <button
                                             value={item[0]}
                                             className={thisFile.lamination === item[0] ? 'btn btnm fileActive' : 'btn btnm'}
@@ -99,27 +143,27 @@ export const Dop = () => {
                                     ))}
                                 </Accordion.Body>
                             </Accordion>
-                            <Accordion className="" eventKey="2">
+                            <Accordion className="" eventkey="2">
                                 <Accordion.Button className="btn btnm moreOptionsIn">Брошурування: {thisFile.binding}</Accordion.Button>
                                 <Accordion.Body>
                                     <div id="bindingButtons" className="d-flex justify-content-around">
                                         <div
                                             onClick={(e) => updateThisFileBinding("на скобу")}
-                                            className={thisFile.binding === "на скобу" ? 'iconButton activeChose' : 'iconButton'} toFile="на скобу">
+                                            className={thisFile.binding === "на скобу" ? 'iconButton activeChose' : 'iconButton'} key="на скобу">
                                             <img className="iconButtonSvg"
                                                  src={skoba} alt=""/>
                                             <div className="iconButtonText">скоба</div>
                                         </div>
                                         <div
                                             onClick={(e) => updateThisFileBinding("на металеву")}
-                                            className={thisFile.binding === "на металеву" ? 'iconButton activeChose' : 'iconButton'} toFile="на металеву">
+                                            className={thisFile.binding === "на металеву" ? 'iconButton activeChose' : 'iconButton'} key="на металеву">
                                             <img className="iconButtonSvg"
                                                  src={metall} alt=""/>
                                                 <div className="iconButtonText">метал</div>
                                         </div>
                                         <div
                                             onClick={(e) => updateThisFileBinding("на пластикову")}
-                                            className={thisFile.binding === "на пластикову" ? 'iconButton activeChose' : 'iconButton'} toFile="на пластикову">
+                                            className={thisFile.binding === "на пластикову" ? 'iconButton activeChose' : 'iconButton'} key="на пластикову">
                                             <img className="iconButtonSvg"
                                                  src={plastic} alt=""/>
                                                 <div className="iconButtonText">пластик</div>
@@ -127,27 +171,27 @@ export const Dop = () => {
                                     </div>
                                 </Accordion.Body>
                             </Accordion>
-                            <Accordion className="" eventKey="3">
+                            <Accordion className="" eventkey="3">
                                 <Accordion.Button className="btn btnm moreOptionsIn">Зігнути: {thisFile.big}</Accordion.Button>
                                 <Accordion.Body>
                                     <div id="bigButtons" className="d-flex justify-content-around">
                                         <div
                                             onClick={(e) => updateThisFileBig("згинання навпіл")}
-                                            className={thisFile.big === "згинання навпіл" ? 'iconButton activeChose' : 'iconButton'} toFile="згинання навпіл">
+                                            className={thisFile.big === "згинання навпіл" ? 'iconButton activeChose' : 'iconButton'} key="згинання навпіл">
                                             <img className="iconButtonSvg"
                                                  src={big1} alt=""/>
                                                 <div className="iconButtonText">згинання навпіл</div>
                                         </div>
                                         <div
                                             onClick={(e) => updateThisFileBig("2 згиби")}
-                                            className={thisFile.big === "2 згиби" ? 'iconButton activeChose' : 'iconButton'} toFile="2 згиби">
+                                            className={thisFile.big === "2 згиби" ? 'iconButton activeChose' : 'iconButton'} key="2 згиби">
                                             <img className="iconButtonSvg"
                                                  src={big2} alt=""/>
                                                 <div className="iconButtonText">2 згиби</div>
                                         </div>
                                         <div
                                             onClick={(e) => updateThisFileBig("3 згиби")}
-                                            className={thisFile.big === "3 згиби" ? 'iconButton activeChose' : 'iconButton'} toFile="3 згиби">
+                                            className={thisFile.big === "3 згиби" ? 'iconButton activeChose' : 'iconButton'} key="3 згиби">
                                             <img className="iconButtonSvg"
                                                  src={big3} alt=""/>
                                                 <div className="iconButtonText">3 згиби</div>
@@ -155,27 +199,27 @@ export const Dop = () => {
                                     </div>
                                 </Accordion.Body>
                             </Accordion>
-                            <Accordion className="" eventKey="4">
+                            <Accordion className="" eventkey="4">
                                 <Accordion.Button className="btn btnm moreOptionsIn">Дірки: {thisFile.holes}</Accordion.Button>
                                 <Accordion.Body>
                                     <div id="holesButtons" className="d-flex justify-content-around">
                                         <div
                                             onClick={(e) => updateThisFileHoles("1 отвір 5 мм")}
-                                            className={thisFile.holes === "1 отвір 5 мм" ? 'iconButton activeChose' : 'iconButton'} toFile="1 отвір 5 мм">
+                                            className={thisFile.holes === "1 отвір 5 мм" ? 'iconButton activeChose' : 'iconButton'} key="1 отвір 5 мм">
                                             <img className="iconButtonSvg"
                                                  src={hole1} alt=""/>
                                                 <div className="iconButtonText">1 отвір 5 мм</div>
                                         </div>
                                         <div
                                             onClick={(e) => updateThisFileHoles("2 отвіра 5 мм")}
-                                            className={thisFile.holes === "2 отвіра 5 мм" ? 'iconButton activeChose' : 'iconButton'} toFile="2 отвіра 5 мм">
+                                            className={thisFile.holes === "2 отвіра 5 мм" ? 'iconButton activeChose' : 'iconButton'} key="2 отвіра 5 мм">
                                             <img className="iconButtonSvg"
                                                  src={hole2} alt=""/>
                                                 <div className="iconButtonText">2 отвіра 5 мм</div>
                                         </div>
                                         <div
                                             onClick={(e) => updateThisFileHoles("3 отвіра 5 мм")}
-                                            className={thisFile.holes === "3 отвіра 5 мм" ? 'iconButton activeChose' : 'iconButton'} toFile="3 отвіра 5 мм">
+                                            className={thisFile.holes === "3 отвіра 5 мм" ? 'iconButton activeChose' : 'iconButton'} key="3 отвіра 5 мм">
                                             <img className="iconButtonSvg"
                                                  src={hole3} alt=""/>
                                                 <div className="iconButtonText">3 отвіра 5 мм</div>
@@ -183,10 +227,10 @@ export const Dop = () => {
                                     </div>
                                 </Accordion.Body>
                             </Accordion>
-                            <Accordion className="" eventKey="5">
+                            <Accordion className="" eventkey="5">
                                 <Accordion.Button className="btn btnm moreOptionsIn">Обрізка/скруглення кутів: {thisFile.roundCorner}</Accordion.Button>
                                 <Accordion.Body>
-                                    {roundCornerButtons.map((item, index) => (
+                                    {roundCornerButtons.map((item) => (
                                         <button
                                             value={item[0]}
                                             className={thisFile.roundCorner === item[0] ? 'btn btnm fileActive' : 'btn btnm'}

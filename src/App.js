@@ -9,8 +9,8 @@ import React from "react";
 import AllWindow from "./components/AllWindow";
 
 function App() {
-
-  return (
+    console.log("App");
+    return (
       <Provider store={store}>
           <Router>
               <AllWindow/>

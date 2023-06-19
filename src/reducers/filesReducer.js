@@ -25,8 +25,10 @@ const filesReducer = (state = initialState, action) => {
             return { ...state, allFiles: state.allFiles.concat(action.payload) };
         case DELETE_FILE:
             let thisF = state.thisFile
-            if(state.thisFile.id === action.payload){
-                thisF = null;
+            if(state.thisFile){
+                if(state.thisFile.id === action.payload){
+                    thisF = null;
+                }
             }
             return {
                 ...state,

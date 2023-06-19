@@ -1,41 +1,197 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import "./Nav.css"
 import Logo from "./logo/Logo";
 import {Link} from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import {fetchCurrentUser, logoutUser} from "../../actions/currentUserActions";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    MDBCollapse,
+    MDBContainer, MDBIcon, MDBInputGroup,
+    MDBNavbar,
+    MDBNavbarBrand,
+    MDBNavbarItem, MDBNavbarLink,
+    MDBNavbarNav,
+    MDBNavbarToggler
+} from "mdb-react-ui-kit";
+import Loader from "../calc/Loader";
 
 const Nav = () => {
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.currentUser.currentUser);
+    const userIsLoading = useSelector(state => state.currentUser.userIsLoading);
+    const userError = useSelector(state => state.currentUser.userError);
+    useEffect(() => {
+        dispatch(fetchCurrentUser())
+    }, [])
+    // useEffect(() => {
+    //     dispatch(fetchAllFiles())
+    // }, [])
+
+    useEffect(() => {
+        setBasicActive(document.location.pathname);
+    }, [])
+
+    const [showNav, setShowNav] = useState(false);
+    const [basicActive, setBasicActive] = useState('/');
+
+    const handleBasicClick = (value) => {
+        if (value === basicActive) {
+            return;
+        }
+        setBasicActive(value);
+    };
+
+    let logout = (event) => {
+        dispatch(logoutUser())
+    }
+
+    if(userIsLoading){
+        return (
+            <MDBNavbar expand='lg' light bgColor=''>
+                <MDBContainer fluid>
+                    <MDBNavbarBrand href='#'><Logo/></MDBNavbarBrand>
+                    <MDBNavbarToggler
+                        type='button'
+                        aria-expanded='false'
+                        aria-label='Toggle navigation'
+                        onClick={() => setShowNav(!showNav)}
+                    >
+                        <MDBIcon icon='bars' fas />
+                    </MDBNavbarToggler>
+                    <MDBCollapse navbar show={showNav} className="z-3">
+                        <MDBNavbarNav className="z-3">
+                            <MDBNavbarItem onClick={() => handleBasicClick('/')}>
+                                <Link to="/"><button className={basicActive === "/" ? 'btn btnm activeChose' : 'btn btnm'}>Home</button></Link>
+                            </MDBNavbarItem>
+                            <MDBNavbarItem onClick={() => handleBasicClick('/files')}>
+                                <Link to="/files">
+                                    <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
+                                </Link>
+                            </MDBNavbarItem>
+                            <MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>
+                                <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
+                            </MDBNavbarItem>
+                        </MDBNavbarNav>
+                    </MDBCollapse>
+
+                    <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
+                        <Loader/>
+                    </MDBInputGroup>
+                </MDBContainer>
+            </MDBNavbar>
+        )
+    }
+
+    if(currentUser){
+        if(currentUser.role === "admin"){
+            return (
+                <MDBNavbar expand='lg' light bgColor=''>
+                    <MDBContainer fluid>
+                        <MDBNavbarBrand href='#'><Logo/></MDBNavbarBrand>
+                        <MDBNavbarToggler
+                            type='button'
+                            aria-expanded='false'
+                            aria-label='Toggle navigation'
+                            onClick={() => setShowNav(!showNav)}
+                        >
+                            <MDBIcon icon='bars' fas />
+                        </MDBNavbarToggler>
+                        <MDBCollapse navbar show={showNav} className="z-3">
+                            <MDBNavbarNav className="z-3">
+                                <MDBNavbarItem onClick={() => handleBasicClick('/')}>
+                                    <Link to="/"><button className={basicActive === "/" ? 'btn btnm activeChose' : 'btn btnm'}>Home</button></Link>
+                                </MDBNavbarItem>
+                                <MDBNavbarItem onClick={() => handleBasicClick('/files')}>
+                                    <Link to="/files">
+                                        <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
+                                    </Link>
+                                </MDBNavbarItem>
+                                <MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>
+                                    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
+                                </MDBNavbarItem>
+                            </MDBNavbarNav>
+                        </MDBCollapse>
+
+                        <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
+                            <Link disabled onClick={() => handleBasicClick('/admin')} to="/admin"><button className={basicActive === "/admin" ? 'btn btnm activeChose' : 'btn btnm'}>Адмін керування</button></Link>
+                            <Link disabled onClick={() => handleBasicClick('/currentUser')} to="/currentUser"><button className={basicActive === "/currentUser" ? 'btn btnm activeChose' : 'btn btnm'}>Налаштування: {currentUser.name}</button></Link>
+                            <button onClick={logout} className="btn btnm">Вийти</button>
+                        </MDBInputGroup>
+                    </MDBContainer>
+                </MDBNavbar>
+            )
+        } else {
+            return (
+                <MDBNavbar expand='lg' light bgColor=''>
+                    <MDBContainer fluid>
+                        <MDBNavbarBrand href='#'>
+                            <Logo/>
+                        </MDBNavbarBrand>
+                        <MDBNavbarToggler
+                            type='button'
+                            aria-expanded='false'
+                            aria-label='Toggle navigation'
+                            onClick={() => setShowNav(!showNav)}
+                        >
+                            <MDBIcon icon='bars' fas />
+                        </MDBNavbarToggler>
+                        <MDBCollapse navbar show={showNav}>
+                            <MDBNavbarNav className="z-3">
+                                <MDBNavbarItem onClick={() => handleBasicClick('/')}>
+                                    <Link to="/"><button className={basicActive === "/" ? 'btn btnm activeChose' : 'btn btnm'}>Home</button></Link>
+                                </MDBNavbarItem>
+                                <MDBNavbarItem onClick={() => handleBasicClick('/files')}>
+                                    <Link to="/files">
+                                        <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
+                                    </Link>
+                                </MDBNavbarItem >
+                                <MDBNavbarItem onClick={() => handleBasicClick('/createOrder')}>
+                                    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
+                                </MDBNavbarItem>
+                            </MDBNavbarNav>
+                        </MDBCollapse>
+
+                        <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
+                            <Link onClick={() => handleBasicClick('/currentUser')} to="/currentUser"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Налаштування: {currentUser.name}</button></Link>
+                            <button onClick={logout} className="btn btnm">Вийти</button>
+                        </MDBInputGroup>
+                    </MDBContainer>
+                </MDBNavbar>
+            )
+        }
+    }
 
     return (
-        <div className="navbar navbar-expand-lg">
-            <div className="container-fluid">
-                <a className="mainLogo" href="https://printpeaks.com.ua">
-                    <div className="">
-                        <Logo/>
-                    </div>
-                </a>
-                    <Link to="/react"><Button variant="outline-warning" className="btnm">1</Button>{' '}</Link>
-                    <Link to="/react/files"><Button variant="outline-warning" className="btnm">2</Button>{' '}</Link>
-                    <Link to="/react/createOrder"><Button variant="outline-warning" className="btnm">3</Button>{' '}</Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar2"
-                        aria-controls="offcanvasNavbar2">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="offcanvas offcanvas-end menuInPhone" tabIndex="-1" id="offcanvasNavbar2"
-                     aria-labelledby="offcanvasNavbar2Label">
-                    <div className="offcanvas-header">
-                        <h5 className="offcanvas-title" id="offcanvasNavbar2Label">Меню</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <Link to="/react/login"><button className="btn">login</button></Link>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <MDBNavbar expand='lg' light bgColor=''>
+            <MDBContainer fluid>
+                <MDBNavbarBrand href='#'><Logo/></MDBNavbarBrand>
+                <MDBNavbarToggler
+                    type='button'
+                    aria-expanded='false'
+                    aria-label='Toggle navigation'
+                    onClick={() => setShowNav(!showNav)}
+                >
+                    <MDBIcon icon='bars' fas />
+                </MDBNavbarToggler>
+                <MDBCollapse navbar show={showNav}>
+                    <MDBNavbarNav className="z-3">
+                        <MDBNavbarItem onClick={() => handleBasicClick('/')}>
+                            <Link to="/"><button className={basicActive === "/" ? 'btn btnm activeChose' : 'btn btnm'}>Home</button></Link>
+                        </MDBNavbarItem>
+                        <MDBNavbarItem onClick={() => handleBasicClick('/files')}>
+                            <Link to="/files">
+                                <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
+                            </Link>
+                        </MDBNavbarItem>
+                        <MDBNavbarItem onClick={() => handleBasicClick('/createOrder')}>
+                            <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
+                        </MDBNavbarItem>
+                    </MDBNavbarNav>
+                </MDBCollapse>
+
+                <Link onClick={() => handleBasicClick('/login')} to="/login"><button className={basicActive === "/login" ? 'btn btnm activeChose' : 'btn btnm'}>Логін</button></Link>
+            </MDBContainer>
+        </MDBNavbar>
     );
 };
 

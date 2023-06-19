@@ -74,7 +74,7 @@ export const deleteFileAction = (id) => {
                 const data = response.data
                 console.log(data);
                 if(data.status === "ok"){
-                    dispatch(deleteFile(id))
+                    dispatch(deleteFile(data.id))
                 }
             })
             .catch(error => {
@@ -83,17 +83,20 @@ export const deleteFileAction = (id) => {
     }
 }
 
-export const updateFileAction = (thisFile, parameter, parameter2, parameter3, value, value2, value3) => {
+export const updateFileAction = (thisFile, parameter, parameter2, parameter3, value, value2, value3, parameter4=null, value4=null) => {
     return (dispatch) => {
         let config = {
             id: thisFile.id,
             parameter: parameter,
             parameter2: parameter2,
             parameter3: parameter3,
+            parameter4: parameter4,
             value: value,
             value2: value2,
             value3: value3,
+            value4: value4,
         };
+        console.log(config);
         axios.put('/orders', config)
             .then(response => {
                 if(response.data.status === "ok"){
@@ -111,6 +114,12 @@ export const updateFileAction = (thisFile, parameter, parameter2, parameter3, va
                         value: value3,
                         writable: true
                     });
+                    if(parameter4){
+                        Object.defineProperty(thisFile, parameter4, {
+                            value: value4,
+                            writable: true
+                        });
+                    }
                     Object.defineProperty(thisFile, "x", {
                         value: response.data.x,
                         writable: true
@@ -130,6 +139,7 @@ export const updateFileAction = (thisFile, parameter, parameter2, parameter3, va
                     dispatch(updateFile(thisFileUpdated))
                 } else {
                     console.log(response.data);
+                    dispatch(deleteFile(thisFile.id))
                 }
             })
             .catch(error => {
@@ -160,6 +170,7 @@ export const errorDownloadImg = (err) => {
 export const DownloadImgAction = (thisFile) => {
     return (dispatch) => {
         dispatch(startDownloadImg())
+        console.log("DownloadImgAction (after start");
         if(thisFile.url.img){
             const img = new Image();
             img.src = thisFile.url.url;
@@ -171,11 +182,21 @@ export const DownloadImgAction = (thisFile) => {
                 }
                 console.log(imgP);
                 dispatch(successDownloadImg(imgP))
+                console.log("DownloadImgAction (after success");
             }
             img.onerror = (error) => {
                 dispatch(errorDownloadImg(error))
             }
         } else {
+            // const loadingTask = pdfjsLib.getDocument(thisFile.url.url);
+            // loadingTask.promise.then(loadedPdf => {
+            //     let imgP = {
+            //         pdf: loadedPdf
+            //     }
+            //     dispatch(successDownloadImg(imgP))
+            // }, function (reason) {
+            //     dispatch(errorDownloadImg(reason))
+            // });
             // pdfjsLib.getDocument(thisFile.url.url).then((pdf, err) => {
             //     if(err){
             //         dispatch(errorDownloadImg(err))
@@ -187,6 +208,7 @@ export const DownloadImgAction = (thisFile) => {
             //     }
             // })
             dispatch(successDownloadImg(null))
+            console.log("DownloadImgAction (after success");
         }
     }
 }

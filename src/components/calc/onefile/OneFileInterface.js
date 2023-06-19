@@ -6,7 +6,6 @@ import {Photo} from "./Photo";
 import {Cup} from "./Cup";
 import {AfterPrint} from "./AfterPrint";
 import {CountPromoPrice} from "./CountPromoPrice";
-import {MDBInputGroup} from "mdb-react-ui-kit";
 
 const OneFileInterface = () => {
     const thisFile = useSelector(state => state.files.thisFile);

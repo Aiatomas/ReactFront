@@ -34,7 +34,7 @@ div.gif:hover .anim {
     position: absolute;
     width: 44vw;
     left: 24vw;
-    top: 5vw;
+    top: 6vw;
 }
 .widePrintContainer .noanim {
     width: 44vw;
@@ -66,6 +66,7 @@ div.gif:hover .anim {
 }
 .postPrintContainer .noanim {
     width: 29vw;
+    z-index: 1;
 }
 .cursorPointer {
     cursor: pointer;

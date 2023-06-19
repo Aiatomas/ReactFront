@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 
 export const FormatDrukView = () => {
     const thisFile = useSelector(state => state.files.thisFile);
-    const allFiles = useSelector(state => state.files.allFiles);
+    useSelector(state => state.files.allFiles);
 
     if(thisFile.calc === "digital"){
         return (

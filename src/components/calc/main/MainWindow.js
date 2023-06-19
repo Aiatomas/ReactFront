@@ -4,12 +4,11 @@ import {useDispatch} from "react-redux";
 import ChooseService from "./ChooseService";
 
 const MainWindow = () => {
-    const dispatch = useDispatch();
+    useDispatch();
 
     return (
         <div>
             <ChooseService/>
-
         </div>
     );
 };

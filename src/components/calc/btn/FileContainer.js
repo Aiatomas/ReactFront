@@ -7,9 +7,12 @@ const FileContainer = ({name, keyprop, type, id, active}) => {
     const thisFile = useSelector((state) => state.files.thisFile);
     const dispatch = useDispatch();
 
-    const deleteThisFile = () => {
-        dispatch(deleteFileAction(keyprop))
+    const deleteThisFile = (event) => {
+        if(event.target.classList.contains("btn-close")){
+            dispatch(deleteFileAction(keyprop))
+        }
     }
+
     let className1 = "btn btnm btn-sm"
     if(thisFile){
         if(thisFile.id === keyprop){

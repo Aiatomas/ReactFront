@@ -1,46 +1,43 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import * as pdfjsLib from 'pdfjs-dist/webpack';
-// import pdfjsLib from "pdfjs-dist/build/pdf";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker";
+import React, {useEffect, useRef, useState} from "react";
+import {errorDownloadImg, successDownloadImg} from "../../actions/fileAction";
+import {MDBFile, MDBInput} from "mdb-react-ui-kit";
 import {useSelector} from "react-redux";
-import {MDBInput} from "mdb-react-ui-kit";
 
-export default function PdfViewer({url}){
+export default function ImgViewer({url}){
+    const ImggRef = useRef();
     const thisFile = useSelector(state => state.files.thisFile);
     useSelector(state => state.files.thisFile.url.url);
     useSelector(state => state.files.allFiles);
-    const canvasRef = useRef();
-    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+    const [imgRef, setImgRef] = useState();
+    const [imgStyles, setImgStyles] = useState();
 
-    const [pdfRef, setPdfRef] = useState();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [canvasStyles, setCanvasStyles] = useState({
-        width: 0 + "%"
-    });
-
-    const renderPage = useCallback((pageNum, pdf=pdfRef) => {
-        pdf && pdf.getPage(pageNum).then(function(page) {
-            const viewport = page.getViewport({scale: 1.5});
-            // const viewport = page.getViewport();
-            const canvas = canvasRef.current;
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            // let context = canvas.getContext('2d');
+    useEffect(() => {
+        const img = new Image();
+        img.src = thisFile.url.url;
+        img.onload = (event) => {
+            let imgP = {
+                width: event.target.naturalWidth,
+                height: event.target.naturalHeight,
+                src: event.target.src
+            }
+            console.log(imgP);
+            setImgRef(imgP)
+            // ImggRef.current.src = imgP.src;
 
             //----------------------------------------------------------
-            let imgWidth = viewport.width;
-            let imgHeight = viewport.height;
+            let imgWidth = imgP.width;
+            let imgHeight = imgP.height;
             let imgCoef = imgHeight / imgWidth
             let x = thisFile.x;
             let y = thisFile.y;
             let coef = y / x
             if (imgCoef >= coef) {
                 let newImgCoef = 100 * coef / imgCoef
-                setCanvasStyles({
+                setImgStyles({
                     width: newImgCoef + "%"
                 })
             } else {
-                setCanvasStyles({
+                setImgStyles({
                     width: 100 + "%"
                 })
             }
@@ -49,55 +46,25 @@ export default function PdfViewer({url}){
                 let coef1 = coef
                 coef = x / y
                 if (imgCoef >= coef1) {
-                    setCanvasStyles({
+                    setImgStyles({
                         width: newImgCoef * coef + "%"
                     })
                 } else {
-                    setCanvasStyles({
+                    setImgStyles({
                         width: 100 / coef1 + "%"
                     })
                 }
             }
             //-------------------------------------------------------
-            const renderContext = {
-                canvasContext: canvas.getContext('2d'),
-                viewport: viewport
-            };
-            page.render(renderContext);
-            console.log("renderPage func done");
-        })
-    }, [pdfRef, currentPage]);
 
-    useEffect(() => {
-        renderPage(currentPage, pdfRef);
-        console.log("useEffect for render");
-    }, [pdfRef, currentPage, thisFile.x, thisFile.y]);
+            console.log("DownloadImgAction (after success");
+        }
+        img.onerror = (error) => {
+            console.error(error);
+        }
 
-    useEffect(() => {
-        const loadingTask = pdfjsLib.getDocument(url);
-        console.log("useEffect for load(before then)");
-        loadingTask.promise.then(loadedPdf => {
-            setPdfRef(loadedPdf);
-            console.log("useEffect for load(at then)");
-        }, function (reason) {
-            console.error(reason);
-        });
-        console.log("useEffect for load(after then)");
     }, [url]);
 
-    const setPage = (value) => {
-        console.log(value);
-        if(value > 0){
-            if(value <= pdfRef.numPages){
-                setCurrentPage(parseInt(value))
-                // renderPage(currentPage, pdfRef);
-            }
-        }
-    }
-
-    const nextPage = () => pdfRef && currentPage < pdfRef.numPages && setCurrentPage(currentPage + 1);
-
-    const prevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
 
     //for render---------------------------------------------------------------------------------------------------------
     let list1Styles = {transform: "", opacity: "1",};
@@ -133,20 +100,13 @@ export default function PdfViewer({url}){
     }
     //---------------------------------------------------------------------------------------------------------
 
-    console.log(canvasStyles);
-
     return (
         <div className="fileViewContainer">
             <div className="listAndCard invisible m-auto">
                 <div className="list m-auto visible cursorPointer" style={list1Styles}>
                     <div className="containerForImgInServer" style={containerForImgInServerStyles}>
-                        <div className="imgInServer notMDr">
-                            <div className="myPdfViewer">
-                                <div className="theCanvas">
-                                    <canvas className="pdfRenderer visible" ref={canvasRef} style={canvasStyles}></canvas>
-                                </div>
-                            </div>
-                        </div>
+                        <img src={ImggRef} alt="" className="imgInServer" style={imgStyles}
+                             draggable="false"/>
                     </div>
                 </div>
             </div>
@@ -160,10 +120,16 @@ export default function PdfViewer({url}){
                         <button id="page_count" className="input-group-text gray">{thisFile.countInFile}</button>
                         <button className="input-group-text gray">стр.</button>
                         <MDBInput className="input-group-text gray inputs inputFormat"
-                                  onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
-                                  type='number' value={currentPage}/>
-                        <button className="btn btn-sm input-group-text gray m-2 invisible">
-                            Завантажити файл
+                                  label='' id='typeNumber'
+                                  type='number' value={1}/>
+                        <button className="input-group-text gray d-none"></button>
+                        <button className="input-group-text gray d-none"></button>
+                        <button className="btn btn-sm input-group-text gray m-2">
+                            <MDBFile
+                                label=''
+                                id='oneFile'
+                                className="btn btn-sm"
+                            />
                         </button>
                     </div>
                 </div>

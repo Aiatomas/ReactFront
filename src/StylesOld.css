@@ -24,6 +24,7 @@
 .btnm:hover {
     background: #efede6;
     border: black solid  0.1vw;
+    color: black;
 }
 .fileActive:hover {
     background: #2a2a2a;

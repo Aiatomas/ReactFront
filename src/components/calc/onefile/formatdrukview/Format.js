@@ -1,12 +1,14 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {DownloadImgAction, updateFileAction} from "../../../../actions/fileAction";
+import {updateFileAction} from "../../../../actions/fileAction";
 import { MDBInput } from 'mdb-react-ui-kit';
 import orient from './orient.svg';
 
 export const Format = () => {
     const thisFile = useSelector(state => state.files.thisFile);
+    useSelector(state => state.files.thisFile.url.url);
+    useSelector(state => state.files.thisFile.url.img);
     useSelector(state => state.files.allFiles);
     const dispatch = useDispatch();
 
@@ -16,10 +18,6 @@ export const Format = () => {
     if(!thisFile.y){
         thisFile.y = 0
     }
-
-    useEffect(() => {
-        dispatch(DownloadImgAction(thisFile))
-    }, []);
 
     let buttons = [];
     if(thisFile.calc === "digital"){

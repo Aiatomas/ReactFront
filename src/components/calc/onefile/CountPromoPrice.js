@@ -1,15 +1,19 @@
-import React from "react";
-import {MDBInput, MDBInputGroup} from "mdb-react-ui-kit";
+import React, {useState} from "react";
+import {MDBInput} from "mdb-react-ui-kit";
 import {useDispatch, useSelector} from "react-redux";
 import {updateFileAction} from "../../../actions/fileAction";
 
 export const CountPromoPrice = () => {
     const thisFile = useSelector(state => state.files.thisFile);
-    const allFiles = useSelector(state => state.files.allFiles);
+    useSelector(state => state.files.allFiles);
     const dispatch = useDispatch();
+    const [button, setButton] = useState(false);
 
     const setCountValue = (value) => {
         dispatch(updateFileAction(thisFile, "count", null, null, value, null, null))
+    }
+    const onButton = () => {
+        setButton(!button)
     }
 
     let sss = 0
@@ -37,6 +41,69 @@ export const CountPromoPrice = () => {
             listType = "A4"
         }
     }
+    if(button){
+        return (
+            <div className="d-flex">
+                <div>
+                    <div className="displayTitle">Кількість</div>
+                    <MDBInput
+                        className="input-group-text gray inputs inputCount"
+                        onChange={(e) => setCountValue(e.currentTarget.value)}
+                        label=''
+                        id='typeNumber'
+                        type='number'
+                        min={1}
+                        value={thisFile.count}
+                    />
+                </div>
+                <div onClick={onButton}>&lt;</div>
+                <div>
+                    <div className="displayTitle">Аркущів у файлі</div>
+                    <MDBInput
+                        className="input-group-text gray inputs inputCount"
+                        label=''
+                        id='typeNumber'
+                        type='number'
+                        disabled={true}
+                        value={thisFile.countInFile}
+                    />
+                </div>
+                <div className={dNone}>
+                    <div className="displayTitle">Затрачено буде: {listType}</div>
+                    <MDBInput
+                        className="input-group-text gray inputs inputCount"
+                        label=''
+                        id='typeNumber'
+                        type='number'
+                        disabled={true}
+                        value={sss}
+                    />
+                </div>
+                <div>
+                    <div className="displayTitle">Готових аркушів</div>
+                    <MDBInput
+                        className="input-group-text gray inputs inputCount"
+                        label=''
+                        id='typeNumber'
+                        type='number'
+                        disabled={true}
+                        value={thisFile.countInFile*thisFile.count}
+                    />
+                </div>
+                <div>
+                    <div className="displayTitle">Ціна в грн.</div>
+                    <MDBInput
+                        className="input-group-text gray inputs inputCount"
+                        label=''
+                        id='typeNumber'
+                        type='number'
+                        disabled={true}
+                        value={thisFile.price}
+                    />
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="d-flex">
             <div>
@@ -51,39 +118,7 @@ export const CountPromoPrice = () => {
                     value={thisFile.count}
                 />
             </div>
-            <div>
-                <div className="displayTitle">Аркущів у файлі</div>
-                <MDBInput
-                    className="input-group-text gray inputs inputCount"
-                    label=''
-                    id='typeNumber'
-                    type='number'
-                    disabled={true}
-                    value={thisFile.countInFile}
-                />
-            </div>
-            <div className={dNone}>
-                <div className="displayTitle">Затрачено буде: {listType}</div>
-                <MDBInput
-                    className="input-group-text gray inputs inputCount"
-                    label=''
-                    id='typeNumber'
-                    type='number'
-                    disabled={true}
-                    value={sss}
-                />
-            </div>
-            <div>
-                <div className="displayTitle">Готових аркушів</div>
-                <MDBInput
-                    className="input-group-text gray inputs inputCount"
-                    label=''
-                    id='typeNumber'
-                    type='number'
-                    disabled={true}
-                    value={thisFile.countInFile*thisFile.count}
-                />
-            </div>
+            <div onClick={onButton}>></div>
             <div>
                 <div className="displayTitle">Ціна в грн.</div>
                 <MDBInput

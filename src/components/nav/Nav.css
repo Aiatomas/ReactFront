@@ -1,0 +1,22 @@
+.inputLogin {
+    width: 20vw;
+    height: 4vw;
+    margin: auto;
+    font-size: 1.1vw;
+    text-align: left;
+    font-family: 'GothamBook', sans-serif;
+}
+.titleLogin {
+    margin: auto;
+    margin-top: 5vw;
+    margin-bottom: 1.5vw;
+    font-family: 'GothamBook', sans-serif;
+}
+.buttonLogin {
+    margin: auto;
+    width: 19.5vw;
+    height: 3.4vw;
+    margin-top: 1.5vw;
+    font-size: 1.1vw;
+    font-family: 'GothamBook', sans-serif;
+}

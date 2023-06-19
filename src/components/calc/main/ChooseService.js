@@ -35,38 +35,43 @@ const ChooseService = () => {
 
     return (
         <div>
-            <div>Choose service</div>
             <div>
-                <Link to="/react/files">
+                <Link to="/files">
                     <div onClick={addDigital} className="cursorPointer gif digitalPrintContainer">
                         <BodymovinAnimation animationData={colorA} classname="card-img-top anim" />
                         <img src={color} className="card-img-top noanim" alt="..."/>
                     </div>
                 </Link>
-                <Link to="/react/files">
+                <Link to="/files">
                     <div onClick={addWide} className="cursorPointer gif widePrintContainer">
                         <BodymovinAnimation animationData={bigA} classname="card-img-top anim" />
                         <img src={big} className="card-img-top noanim" alt="..."/>
                     </div>
                 </Link>
-                <Link to="/react/files">
+                <Link to="/files">
                     <div onClick={addPhoto} className="cursorPointer gif photoPrintContainer">
                         <BodymovinAnimation animationData={photoA} classname="card-img-top anim" />
                         <img src={photo} className="card-img-top noanim" alt="..."/>
                     </div>
                 </Link>
-                <Link to="/react/files">
+                <Link to="/files">
                     <div onClick={addCup} className="cursorPointer gif cupPrintContainer">
                         <BodymovinAnimation animationData={cupA} classname="card-img-top anim" />
                         <img src={cup} className="card-img-top noanim" alt="..."/>
                     </div>
                 </Link>
-                <Link to="/react/files">
+                <Link to="/files">
                     <div onClick={addPost} className="cursorPointer gif postPrintContainer">
-                        <BodymovinAnimation aimationData={postA} classname="card-img-top anim" />
+                        <BodymovinAnimation animationData={postA} classname="card-img-top anim" />
                         <img src={post} className="card-img-top noanim" alt="..."/>
                     </div>
                 </Link>
+                {/*<Link to="/react/files">*/}
+                {/*    <div onClick={addPost} className="cursorPointer gif postPrintContainer">*/}
+                {/*        <BodymovinAnimation aimationData={photoA} classname="card-img-top anim" />*/}
+                {/*        <img src={post} className="card-img-top noanim" alt="..."/>*/}
+                {/*    </div>*/}
+                {/*</Link>*/}
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import {updateFileAction} from "../../../../actions/fileAction";
 export const Materials = () => {
     const prices = useSelector(state => state.prices.prices);
     const thisFile = useSelector(state => state.files.thisFile);
-    const allFiles = useSelector(state => state.files.allFiles);
+    useSelector(state => state.files.allFiles);
     const dispatch = useDispatch();
     let paperButtons = [];
     let toUseButtons = [];
@@ -13,10 +13,23 @@ export const Materials = () => {
     let destinyThisButtons = [];
 
     const updateThisFilePaper = (value) => {
-        dispatch(updateFileAction(thisFile, "paper", "destiny", null, value, null, null))
+        if(value === "Самоклеючі"){
+            dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
+            // dispatch(updateFileAction(thisFile, "paper", "destiny", "format", value, "Біла самоклеюча плівка", "A3", "cuttingSamokleika", "з фігурною порізкою (порізка продукції на аркуші форматом А3)"))
+        } else if(value === "Папір/Картон"){
+            dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
+            // dispatch(updateFileAction(thisFile, "paper", "destiny", "format", value, null, "A4"))
+        } else {
+            dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
+
+        }
     }
     const updateThisFileToUse = (value) => {
-        dispatch(updateFileAction(thisFile, "touse", "destiny", "destinyThis", value, null, null))
+        if(value === "Самоклеючі"){
+            dispatch(updateFileAction(thisFile, "touse", "destiny", "destinyThis", value, "Біла самоклеюча плівка", null))
+        } else {
+            dispatch(updateFileAction(thisFile, "touse", "destiny", "destinyThis", value, null, null))
+        }
     }
     const updateThisFileDestiny = (value) => {
         dispatch(updateFileAction(thisFile, "destiny", "destinyThis", null, value, null, null))
