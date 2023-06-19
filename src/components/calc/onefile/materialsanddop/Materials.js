@@ -14,11 +14,11 @@ export const Materials = () => {
 
     const updateThisFilePaper = (value) => {
         if(value === "Самоклеючі"){
-            dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
-            // dispatch(updateFileAction(thisFile, "paper", "destiny", "format", value, "Біла самоклеюча плівка", "A3", "cuttingSamokleika", "з фігурною порізкою (порізка продукції на аркуші форматом А3)"))
+            // dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
+            dispatch(updateFileAction(thisFile, "paper", "destiny", "format", value, "Біла самоклеюча плівка", "A3", "cuttingSamokleika", "з фігурною порізкою (порізка продукції на аркуші форматом А3)"))
         } else if(value === "Папір/Картон"){
-            dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
-            // dispatch(updateFileAction(thisFile, "paper", "destiny", "format", value, null, "A4"))
+            // dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
+            dispatch(updateFileAction(thisFile, "paper", "destiny", "format", value, null, "A4"))
         } else {
             dispatch(updateFileAction(thisFile, "paper", null, null, value, null, null))
 

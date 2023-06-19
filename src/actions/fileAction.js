@@ -96,6 +96,13 @@ export const updateFileAction = (thisFile, parameter, parameter2, parameter3, va
             value3: value3,
             value4: value4,
         };
+        if(parameter === "paper"){
+            config = {
+                id: thisFile.id,
+                parameter: parameter,
+                value: value,
+            }
+        }
         console.log(config);
         axios.put('/orders', config)
             .then(response => {
