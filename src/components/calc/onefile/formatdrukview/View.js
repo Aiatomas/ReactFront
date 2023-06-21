@@ -130,11 +130,11 @@ export const View = () => {
                             <div id="navPanel" className="d-flex flex-column position-absolute navPanel">
                                 <div id="navigation_controls"
                                      className="input-group d-flex justify-content-center align-items-center">
-                                    <div className="input-group-text gray navDrag" id="navDrag">
-                                        <img src="" alt="d" className="mouseScroll"/>
-                                    </div>
-                                    <button id="page_count" className="input-group-text gray">{thisFile.countInFile}</button>
-                                    <button className="input-group-text gray">стр.</button>
+                                    {/*<div className="input-group-text gray navDrag" id="navDrag">*/}
+                                    {/*    <img src="" alt="d" className="mouseScroll"/>*/}
+                                    {/*</div>*/}
+                                    <button id="page_count" className="input-group-text gray">Загалом:</button>
+                                    <button className="input-group-text gray">{thisFile.countInFile} стр.</button>
                                     <MDBInput className="input-group-text gray inputs inputFormat"
                                               onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
                                               type='number' value={1}/>

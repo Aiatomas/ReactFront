@@ -44,7 +44,7 @@ const filesReducer = (state = initialState, action) => {
         case UPDATE_FILE:
             const newAllFiles = [];
             for (let i = 0; i < state.allFiles.length; i++){
-                if(state.allFiles.id === action.payload.id) {
+                if(state.allFiles[i].id === action.payload.id) {
                     newAllFiles.push(action.payload)
                 } else {
                     newAllFiles.push(state.allFiles[i])

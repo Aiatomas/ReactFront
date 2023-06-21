@@ -458,14 +458,16 @@
         width: 40vw;
     }
     .logoImg {
-        height: 250px;
-        min-height: 200px;
+        height: 20vw;
+        min-height: 20vw;
     }
     .btn {
         font-weight: 400;
         border-radius: 10vw;
         border: #E9E6DA solid 0.3vw;
         font-size: 3vw;
+        overflow: hidden;
+        white-space: nowrap;
     }
     .mouseScrollRen {
         display: none;

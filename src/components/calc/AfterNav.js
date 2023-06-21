@@ -41,7 +41,6 @@ const AfterNav = () => {
             </div>
         )
     }
-    console.log(2);
     return (
         <div>
             <Routes>

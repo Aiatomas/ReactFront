@@ -2,7 +2,6 @@ import React from "react";
 import {useSelector} from "react-redux";
 import FileContainer from "../btn/FileContainer";
 import "./Files.css"
-import {Link} from "react-router-dom";
 import {Spinner} from "react-bootstrap";
 
 const FilesContainer = () => {
@@ -27,20 +26,6 @@ const FilesContainer = () => {
 
     if (error) {
         return <div>Error: {error}</div>;
-    }
-
-    if (files.length === 0) {
-        return (
-            <div>
-                <div className="containerForFiles">
-                    <div className="FilesContainerRelative slider-container position-relative">
-                        <div className="FilesContainer slider-track position-absolute d-flex">
-                            <Link to="/"><button className="btn btnm btn-sm">+</button></Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
     }
 
     return (

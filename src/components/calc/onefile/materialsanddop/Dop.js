@@ -93,7 +93,7 @@ export const Dop = () => {
                 <div className="displayTitle invisible">Додаткові опції</div>
                 <Accordion className="">
                     <Accordion className="" eventkey="0">
-                        <Accordion.Button className="btn btnm moreOptions">Додаткові опції</Accordion.Button>
+                        <Accordion.Button className="btn btnm moreOptions dopOptionsContainer">Додаткові опції</Accordion.Button>
                         <Accordion.Body>
 
                             <Accordion className="">
@@ -125,13 +125,13 @@ export const Dop = () => {
             <div className="displayTitle invisible">Додаткові опції</div>
             <Accordion className="">
                 <Accordion className="" eventkey="0">
-                    <Accordion.Button className="btn btnm moreOptions">Додаткові опції</Accordion.Button>
+                    <Accordion.Button className="btn btnm moreOptions dopOptionsContainer">Додаткові опції</Accordion.Button>
                     <Accordion.Body>
 
                         <Accordion className="">
                             <Accordion className="" eventkey="1">
                                 <Accordion.Button className="btn btnm moreOptionsIn">Заламінувати: {thisFile.lamination}</Accordion.Button>
-                                <Accordion.Body>
+                                <Accordion.Body className="InAccordion">
                                     {laminationButtons.map((item) => (
                                         <button
                                             value={item[0]}

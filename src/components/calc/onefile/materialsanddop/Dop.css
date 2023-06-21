@@ -53,6 +53,14 @@
     .dopOptionsContainer {
         width: 95vw;
     }
+    .moreOptionsIn {
+        width: 88vw;
+    }
+    .InAccordion {
+        width: 83vw;
+        max-width: 83vw;
+        overflow: hidden;
+    }
     .dopOptionButton {
         width: 94vw;
         text-align: left;

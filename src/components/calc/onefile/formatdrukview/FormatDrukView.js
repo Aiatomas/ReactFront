@@ -10,7 +10,7 @@ export const FormatDrukView = () => {
 
     if(thisFile.calc === "digital"){
         return (
-            <div className="d-flex">
+            <div className="d-flex formatAndDruk">
                 <Format/>
                 <Druk/>
                 <View/>
@@ -19,7 +19,7 @@ export const FormatDrukView = () => {
     }
     if(thisFile.calc === "wide"){
         return (
-            <div className="d-flex">
+            <div className="d-flex formatAndDruk">
                 <Format/>
                 <View/>
             </div>

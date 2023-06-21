@@ -9,7 +9,7 @@ import {
     MDBContainer, MDBIcon, MDBInputGroup,
     MDBNavbar,
     MDBNavbarBrand,
-    MDBNavbarItem, MDBNavbarLink,
+    MDBNavbarItem,
     MDBNavbarNav,
     MDBNavbarToggler
 } from "mdb-react-ui-kit";
@@ -19,17 +19,15 @@ const Nav = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.currentUser.currentUser);
     const userIsLoading = useSelector(state => state.currentUser.userIsLoading);
-    const userError = useSelector(state => state.currentUser.userError);
+    useSelector(state => state.currentUser.userError);
+    const allFilesForEffect = useSelector(state => state.files.allFiles);
     useEffect(() => {
         dispatch(fetchCurrentUser())
     }, [])
-    // useEffect(() => {
-    //     dispatch(fetchAllFiles())
-    // }, [])
 
     useEffect(() => {
         setBasicActive(document.location.pathname);
-    }, [])
+    }, [allFilesForEffect])
 
     const [showNav, setShowNav] = useState(false);
     const [basicActive, setBasicActive] = useState('/');
@@ -56,6 +54,7 @@ const Nav = () => {
                         aria-label='Toggle navigation'
                         onClick={() => setShowNav(!showNav)}
                     >
+                        Меню
                         <MDBIcon icon='bars' fas />
                     </MDBNavbarToggler>
                     <MDBCollapse navbar show={showNav} className="z-3">
@@ -94,6 +93,7 @@ const Nav = () => {
                             aria-label='Toggle navigation'
                             onClick={() => setShowNav(!showNav)}
                         >
+                            Меню
                             <MDBIcon icon='bars' fas />
                         </MDBNavbarToggler>
                         <MDBCollapse navbar show={showNav} className="z-3">
@@ -133,6 +133,7 @@ const Nav = () => {
                             aria-label='Toggle navigation'
                             onClick={() => setShowNav(!showNav)}
                         >
+                            Меню
                             <MDBIcon icon='bars' fas />
                         </MDBNavbarToggler>
                         <MDBCollapse navbar show={showNav}>
@@ -171,6 +172,7 @@ const Nav = () => {
                     aria-label='Toggle navigation'
                     onClick={() => setShowNav(!showNav)}
                 >
+                    Меню
                     <MDBIcon icon='bars' fas />
                 </MDBNavbarToggler>
                 <MDBCollapse navbar show={showNav}>

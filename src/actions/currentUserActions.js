@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {fetchAllFiles} from "./allFilesAction";
 export const GET_CURRENT_USER_REQUEST = "GET_CURRENT_USER_REQUEST";
 export const GET_CURRENT_USER_SUCCESS = "GET_CURRENT_USER_SUCCESS";
 export const GET_CURRENT_USER_FAILURE = "GET_CURRENT_USER_FAILURE";
@@ -55,12 +54,6 @@ const loginRequest = () => {
     }
 }
 
-const loginSuccess = () => {
-    return {
-        type: LOGIN_CURRENT_USER_SUCCESS
-    }
-}
-
 const loginFailure = (error) => {
     return {
         type: LOGIN_CURRENT_USER_FAILURE,
@@ -71,12 +64,6 @@ const loginFailure = (error) => {
 const logoutFailure = () => {
     return {
         type: LOGOUT_CURRENT_USER_FAILURE
-    }
-}
-
-const logoutSuccess = () => {
-    return {
-        type: LOGOUT_CURRENT_USER_SUCCESS
     }
 }
 
@@ -91,10 +78,10 @@ export const loginSendCurrentUser = (login, pass) => {
             .then(response => {
                 console.log(response);
                 if (response.data.err === "no"){
-                    dispatch(loginSuccess())
-                    dispatch(fetchCurrentUser())
-                    dispatch(fetchAllFiles())
-                    // document.location.href="/react"
+                    // dispatch(loginSuccess())
+                    // dispatch(fetchCurrentUser())
+                    // dispatch(fetchAllFiles())
+                    document.location.pathname="/"
                 } else {
                     dispatch(loginFailure("incorrect login/pass"))
                 }
@@ -110,9 +97,9 @@ export const logoutUser = () => {
     return (dispatch) => {
         axios.delete('/logout')
             .then(response => {
-                dispatch(logoutSuccess())
-                dispatch(fetchCurrentUser())
-                document.location.href="/react"
+                // dispatch(logoutSuccess())
+                // dispatch(fetchCurrentUser())
+                document.location.href="/"
             })
             .catch(error => {
                 const errorMessage = error.message
