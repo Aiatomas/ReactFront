@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {updateFileAction} from "../../../../actions/fileAction";
@@ -11,13 +11,21 @@ export const Format = () => {
     useSelector(state => state.files.thisFile.url.img);
     useSelector(state => state.files.allFiles);
     const dispatch = useDispatch();
-
     if(!thisFile.x){
         thisFile.x = 0
     }
     if(!thisFile.y){
         thisFile.y = 0
     }
+    const [x, setX] = useState(thisFile.x);
+    const [y, setY] = useState(thisFile.y);
+
+    useEffect(() => {
+        setX(thisFile.x)
+    }, [thisFile.x]);
+    useEffect(() => {
+        setY(thisFile.y)
+    }, [thisFile.y]);
 
     let buttons = [];
     if(thisFile.calc === "digital"){
@@ -61,7 +69,6 @@ export const Format = () => {
             dispatch(updateFileAction(thisFile, "orient", "x", "y", null, thisFile.y, thisFile.x))
         } else {
             dispatch(updateFileAction(thisFile, "orient", null, null, !thisFile.orient, null, null))
-
         }
     }
 
@@ -85,12 +92,12 @@ export const Format = () => {
 
             <div className="btn-toolbar pt-1">
                 <div className="input-group d-flex pt-2 align-items-center justify-content-center m-auto">
-                    <MDBInput className="input-group-text gray inputs inputFormat" onChange={(e) => setXValue(e.currentTarget.value)} label='' id='typeNumber' type='number' value={thisFile.x} />
+                    <MDBInput className="input-group-text gray inputs inputFormat" onChange={(e) => setX(parseInt(e.currentTarget.value))} onBlur={(e) => setXValue(e.currentTarget.value)} label='' id='typeNumber' type='number' value={x} />
                     <span className="input-group-text gray inputFormat">мм</span>
                     <Button onClick={setOrientValue} className="gray inputFormatButton orientButton">
                         <img src={orient} alt="" className="mouseScroll"/>
                     </Button>
-                    <MDBInput className="input-group-text gray inputs inputFormat" onChange={(e) => setYValue(e.currentTarget.value)} label='' id='typeNumber' type='number' value={thisFile.y} />
+                    <MDBInput className="input-group-text gray inputs inputFormat" onChange={(e) => setY(parseInt(e.currentTarget.value))} onBlur={(e) => setYValue(e.currentTarget.value)} label='' id='typeNumber' type='number' value={y} />
                     <span className="input-group-text gray inputFormat">мм</span>
                 </div>
             </div>

@@ -108,42 +108,43 @@ export const updateFileAction = (thisFile, parameter, parameter2, parameter3, va
             .then(response => {
                 if(response.data.status === "ok"){
                     console.log(response.data);
-                    let thisFileUpdated = thisFile
-                    Object.defineProperty(thisFile, parameter, {
-                        value: value,
-                        writable: true
-                    });
-                    Object.defineProperty(thisFile, parameter2, {
-                        value: value2,
-                        writable: true
-                    });
-                    Object.defineProperty(thisFile, parameter3, {
-                        value: value3,
-                        writable: true
-                    });
-                    if(parameter4){
-                        Object.defineProperty(thisFile, parameter4, {
-                            value: value4,
-                            writable: true
-                        });
-                    }
-                    Object.defineProperty(thisFile, "x", {
-                        value: response.data.x,
-                        writable: true
-                    });
-                    Object.defineProperty(thisFile, "y", {
-                        value: response.data.y,
-                        writable: true
-                    });
-                    Object.defineProperty(thisFile, "format", {
-                        value: response.data.format,
-                        writable: true
-                    });
-                    Object.defineProperty(thisFile, "price", {
-                        value: response.data.price,
-                        writable: true
-                    });
-                    dispatch(updateFile(thisFileUpdated))
+                    // let thisFileUpdated = thisFile
+                    let thisFU = response.data.thisFile
+                    // Object.defineProperty(thisFile, parameter, {
+                    //     value: value,
+                    //     writable: true
+                    // });
+                    // Object.defineProperty(thisFile, parameter2, {
+                    //     value: value2,
+                    //     writable: true
+                    // });
+                    // Object.defineProperty(thisFile, parameter3, {
+                    //     value: value3,
+                    //     writable: true
+                    // });
+                    // if(parameter4){
+                    //     Object.defineProperty(thisFile, parameter4, {
+                    //         value: value4,
+                    //         writable: true
+                    //     });
+                    // }
+                    // Object.defineProperty(thisFile, "x", {
+                    //     value: response.data.x,
+                    //     writable: true
+                    // });
+                    // Object.defineProperty(thisFile, "y", {
+                    //     value: response.data.y,
+                    //     writable: true
+                    // });
+                    // Object.defineProperty(thisFile, "format", {
+                    //     value: response.data.format,
+                    //     writable: true
+                    // });
+                    // Object.defineProperty(thisFile, "price", {
+                    //     value: response.data.price,
+                    //     writable: true
+                    // });
+                    dispatch(updateFile(thisFU))
                 } else {
                     console.log(response.data);
                     dispatch(deleteFile(thisFile.id))

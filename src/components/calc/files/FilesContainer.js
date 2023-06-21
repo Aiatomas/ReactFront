@@ -12,11 +12,35 @@ const FilesContainer = () => {
     const error = useSelector(state => state.files.error);
 
     if (isLoading) {
-        return <Spinner className="m-auto" animation="grow" />;
+        return (
+            <div>
+                <div className="containerForFiles">
+                    <div className="FilesContainerRelative slider-container position-relative">
+                        <div className="FilesContainer slider-track position-absolute d-flex">
+                            <Spinner className="m-auto" animation="grow" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     if (error) {
         return <div>Error: {error}</div>;
+    }
+
+    if (files.length === 0) {
+        return (
+            <div>
+                <div className="containerForFiles">
+                    <div className="FilesContainerRelative slider-container position-relative">
+                        <div className="FilesContainer slider-track position-absolute d-flex">
+                            <Link to="/"><button className="btn btnm btn-sm">+</button></Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -29,7 +53,7 @@ const FilesContainer = () => {
                                 key={item.id}
                                 keyprop={item.id} type={item.type} name={item.name}/>
                         ))}
-                        <Link to="/react"><button className="btn btnm btn-sm">+</button></Link>
+                        {/*<Link to="/"><button className="btn btnm btn-sm">+</button></Link>*/}
                     </div>
                 </div>
             </div>

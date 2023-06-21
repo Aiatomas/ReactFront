@@ -68,9 +68,9 @@ const Nav = () => {
                                     <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
                                 </Link>
                             </MDBNavbarItem>
-                            <MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>
-                                <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
-                            </MDBNavbarItem>
+                            {/*<MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>*/}
+                            {/*    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>*/}
+                            {/*</MDBNavbarItem>*/}
                         </MDBNavbarNav>
                     </MDBCollapse>
 
@@ -106,9 +106,9 @@ const Nav = () => {
                                         <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
                                     </Link>
                                 </MDBNavbarItem>
-                                <MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>
-                                    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
-                                </MDBNavbarItem>
+                                {/*<MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>*/}
+                                {/*    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>*/}
+                                {/*</MDBNavbarItem>*/}
                             </MDBNavbarNav>
                         </MDBCollapse>
 
@@ -145,9 +145,9 @@ const Nav = () => {
                                         <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
                                     </Link>
                                 </MDBNavbarItem >
-                                <MDBNavbarItem onClick={() => handleBasicClick('/createOrder')}>
-                                    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
-                                </MDBNavbarItem>
+                                {/*<MDBNavbarItem onClick={() => handleBasicClick('/createOrder')}>*/}
+                                {/*    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>*/}
+                                {/*</MDBNavbarItem>*/}
                             </MDBNavbarNav>
                         </MDBCollapse>
 
@@ -183,9 +183,9 @@ const Nav = () => {
                                 <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
                             </Link>
                         </MDBNavbarItem>
-                        <MDBNavbarItem onClick={() => handleBasicClick('/createOrder')}>
-                            <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>
-                        </MDBNavbarItem>
+                        {/*<MDBNavbarItem onClick={() => handleBasicClick('/createOrder')}>*/}
+                        {/*    <Link to="/createOrder"><button className={basicActive === "/createOrder" ? 'btn btnm activeChose' : 'btn btnm'}>Кошик?</button></Link>*/}
+                        {/*</MDBNavbarItem>*/}
                     </MDBNavbarNav>
                 </MDBCollapse>
 
