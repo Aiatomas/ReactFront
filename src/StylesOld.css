@@ -126,7 +126,7 @@
 .containerForImgInServer {
     display: flex;
     justify-content: center;
-    background: white;
+    background: #efede6;
     transition: 0.5s;
     width: 100%;
 }
@@ -161,7 +161,7 @@
 }
 .list {
     display: flex;
-    background: white;
+    background: #efede6;
     margin: 1vh;
     transition: 0.5s;
     overflow: hidden;
@@ -420,6 +420,31 @@
 }
 .destinyButtons {
     font-size: 1vw;
+}
+input[type="number"].inputCount::-webkit-inner-spin-button,
+input[type="number"].inputCount::-webkit-outer-spin-button{
+    /*-webkit-appearance: none;*/
+    background-color: #E9E6DA;
+    -moz-background-color: #E9E6DA;
+    -webkit-background-color: #E9E6DA;
+    -ms-background-color: #E9E6DA;
+    -webkit-background-color: #E9E6DA;
+    -khtml-background-color: #E9E6DA;
+    width: 6vw;
+    height: 6vw;
+    max-width: 6vw;
+    max-height: 6vw;
+    margin: 0;
+}
+.notDrag {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+.ResizableBoxC {
+    padding: 1vw;
 }
 @media (max-width: 1000px){
     * {

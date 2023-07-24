@@ -51,7 +51,7 @@ export const addFileAction = (calc) => {
             .then(response => {
                 const data = response.data
                 dispatch(addFile(data))
-                dispatch(unPickFile())
+                // dispatch(unPickFile())
                 dispatch(pickFile(data.id))
 
             })

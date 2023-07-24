@@ -2037,7 +2037,7 @@ progress {
   opacity: 1;
 }
 .form-control:disabled {
-  background-color: #e9ecef;
+  background: #E9E6DA;
   opacity: 1;
 }
 .form-control::-webkit-file-upload-button {
@@ -2884,7 +2884,7 @@ textarea.form-control-lg {
   --bs-btn-bg: #0d6efd;
   --bs-btn-border-color: #0d6efd;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0b5ed7;
+  --bs-btn-hover-bg: #efede6;
   --bs-btn-hover-border-color: #0a58ca;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;

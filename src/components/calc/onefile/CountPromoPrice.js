@@ -10,7 +10,9 @@ export const CountPromoPrice = () => {
     const [button, setButton] = useState(false);
 
     const setCountValue = (value) => {
-        dispatch(updateFileAction(thisFile, "count", null, null, value, null, null))
+        if(!isNaN(parseInt(value))){
+            dispatch(updateFileAction(thisFile, "count", null, null, value, null, null))
+        }
     }
     const onButton = () => {
         setButton(!button)
@@ -60,7 +62,7 @@ export const CountPromoPrice = () => {
                 <div>
                     <div className="displayTitle">Аркущів у файлі</div>
                     <MDBInput
-                        className="input-group-text gray inputs inputCount"
+                        className="input-group-text gray inputs inputCount notDisablad"
                         label=''
                         id='typeNumber'
                         type='number'
@@ -71,7 +73,7 @@ export const CountPromoPrice = () => {
                 <div className={dNone}>
                     <div className="displayTitle">Затрачено буде: {listType}</div>
                     <MDBInput
-                        className="input-group-text gray inputs inputCount"
+                        className="input-group-text gray inputs inputCount notDisablad"
                         label=''
                         id='typeNumber'
                         type='number'
@@ -82,7 +84,7 @@ export const CountPromoPrice = () => {
                 <div>
                     <div className="displayTitle">Готових аркушів</div>
                     <MDBInput
-                        className="input-group-text gray inputs inputCount"
+                        className="input-group-text gray inputs inputCount notDisablad"
                         label=''
                         id='typeNumber'
                         type='number'
@@ -93,7 +95,7 @@ export const CountPromoPrice = () => {
                 <div>
                     <div className="displayTitle">Ціна в грн.</div>
                     <MDBInput
-                        className="input-group-text gray inputs inputCount"
+                        className="input-group-text gray inputs inputCount notDisablad"
                         label=''
                         id='typeNumber'
                         type='number'
@@ -114,6 +116,7 @@ export const CountPromoPrice = () => {
                     label=''
                     id='typeNumber'
                     type='number'
+                    // step="1" min="1" max="100"
                     min={1}
                     value={thisFile.count}
                 />
@@ -122,10 +125,11 @@ export const CountPromoPrice = () => {
             <div>
                 <div className="displayTitle">Ціна в грн.</div>
                 <MDBInput
-                    className="input-group-text gray inputs inputCount"
+                    className="input-group-text gray inputs inputCount notDisablad"
                     label=''
                     id='typeNumber'
                     type='number'
+                    // step="1" min="0" max="200"
                     disabled={true}
                     value={thisFile.price}
                 />
