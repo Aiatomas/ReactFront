@@ -5,6 +5,7 @@ import AfterNav from "./calc/AfterNav";
 import {fetchPrices} from "../actions/pricesAction";
 import {useDispatch} from "react-redux";
 import Footer from "./footer/Footer";
+import PhotoLayoutEditor from "./editor";
 
 function AllWindow() {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function AllWindow() {
             <Nav/>
             <AfterNav/>
             <Footer/>
+            {/*<PhotoLayoutEditor />*/}
         </div>
     );
 }

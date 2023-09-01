@@ -4,6 +4,7 @@ import FilesContainer from "./FilesContainer";
 import OneFileInterface from "../onefile/OneFileInterface";
 import {fetchAllFiles} from "../../../actions/allFilesAction";
 import {useDispatch} from "react-redux";
+import ThreeScene from "../../../modules/three/ThreeScene";
 
 const Files = () => {
     const dispatch = useDispatch();
