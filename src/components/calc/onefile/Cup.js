@@ -5,8 +5,8 @@ import ThreeScene from "../../../modules/three/ThreeScene";
 
 export const Cup = () => {
     return (
-        <div>
-            {/*<Materials/>*/}
+        <div style={{display: 'flex', cursor: 'move'}}>
+            <Materials/>
             {/*<CupDraggable/>*/}
             <ThreeScene />
         </div>

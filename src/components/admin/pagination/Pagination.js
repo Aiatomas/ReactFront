@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import FileContainer from "../../calc/btn/FileContainer";
 
 const Pagination = ({pageCount, currentPage, setCurrentPage}) => {

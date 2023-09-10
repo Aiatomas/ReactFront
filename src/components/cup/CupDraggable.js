@@ -3,11 +3,16 @@ import Draggable, {DraggableData} from 'react-draggable';
 import { Resizable, ResizableBox } from 'react-resizable';
 import "react-resizable/css/styles.css";
 import ThreeScene from "../../modules/three/ThreeScene";
+import backGroundImage from "./background.png"
 
 const CupDraggable = () => {
 
     const [imgWidth, setImgWidth] = useState(100);
     const [imgHeight, setImgHeight] = useState(100);
+
+    const [backgroundImage, setBackgroundImage] = useState(null);
+    const [objectImage, setObjectImage] = useState(null);
+    const [compositeImage, setCompositeImage] = useState(null);
 
     const [isDragging, setIsDragging] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -17,6 +22,7 @@ const CupDraggable = () => {
     const imageRef = useRef(null);
     const inputRef = useRef(null);
     const dragRef = useRef(null);
+    const compositeRef = useRef(null);
 
     const handleImageChange = (event) => {
         const imageFile = event.target.files[0];
@@ -62,15 +68,39 @@ const CupDraggable = () => {
         setImgWidth(size.width);
     };
 
+    useEffect(() => {
+        const backgroundImg = new Image();
+        backgroundImg.src = backGroundImage;
+        backgroundImg.onload = () => setBackgroundImage(backgroundImg);
+    }, []);
+
+    const loadImageFunc = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = backgroundImage.width;
+        canvas.height = backgroundImage.height;
+
+        let canvasRect = compositeRef.current.getBoundingClientRect()
+        console.log(canvasRect);
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(backgroundImage, parseInt(canvasRect.x), parseInt(canvasRect.y));
+        ctx.drawImage(selectedImage, 0, 0); // Положение объекта можно настроить
+        //
+        // const compositeImg = new Image();
+        // compositeImg.src = canvas.toDataURL();
+        // setCompositeImage(compositeImg);
+    };
+
     return (
         <div>
             <input type="file" ref={inputRef} accept="image/*" onChange={handleImageChange} />
-            <div style={{ width: '60vw', height: '30vw', border: '1px solid #ccc', position: 'relative', overflow: 'hidden'}}>
+            <button className="btn bg-danger" about="клац" onClick={loadImageFunc}/>
+            <div style={{ width: '60vw', height: '30vw', background:'white', border: '1px solid #ccc', position: 'relative', overflow: 'hidden'}}>
                 {/*<Draggable onDrag={onDrag} cancel={isDragging ? '' : '.react-resizable-handle'}*/}
                 <Draggable
                     ref={dragRef}
                     onDrag={onDrag}
-                    // cancel={isDragging ? '' : '.react-resizable-handle'}
+                    cancel={isDragging ? '' : '.react-resizable-handle'}
                     onStart={handleDrag}
                     className="DraggableBoxC"
                     onStop={handleStop}
@@ -83,7 +113,7 @@ const CupDraggable = () => {
                         // maxConstraints={[400, 400]} // Максимальные размеры фото
                         resizeHandles={["se"]}
                         // resizeHandles={["se", "ne", "sw", "nw"]}
-                        // cancel={isDragging ? '' : '.react-draggable'}
+                        cancel={isDragging ? '' : '.react-draggable'}
                         axis="both" // Позволяет изменять размеры по горизонтали и вертикали
                         className="ResizableBoxC"
                         // className={`${isImageOverflowing() ? '' : ''}`}
@@ -110,6 +140,13 @@ const CupDraggable = () => {
                 </Draggable>
             </div>
             {/*<ThreeScene />*/}
+            <div ref={compositeRef}>
+                {compositeImage ? (
+                    <img src={compositeImage.src} alt="Composite" />
+                ) : (
+                    <p>this test an img:</p>
+                )}
+            </div>
         </div>
     );
 };
