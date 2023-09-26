@@ -3,7 +3,7 @@ import Draggable, {DraggableData} from 'react-draggable';
 import { Resizable, ResizableBox } from 'react-resizable';
 import "react-resizable/css/styles.css";
 import ThreeScene from "../../modules/three/ThreeScene";
-import backGroundImage from "./background.png"
+import backGroundImage from "../../modules/three/texture/background.png"
 
 const CupDraggable = () => {
 

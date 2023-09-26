@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import FileContainer from "../../calc/btn/FileContainer";
+import {GET_CURRENT_USER_REQUEST} from "../../../actions/currentUserActions";
 
 const Pagination = ({pageCount, currentPage, setCurrentPage}) => {
     // const [currentPage, setCurrentPage] = useState(currentPage);
-    const toPage = (value) => {
-        console.log(value);
-        // setCurrentPage(value)
-    };
 
     let pag = [];
-    console.log(pageCount);
     if(pageCount === 1 || pageCount === "1"){
         // pag.push("<")
         if(currentPage === 1){
@@ -49,10 +45,13 @@ const Pagination = ({pageCount, currentPage, setCurrentPage}) => {
         }
     }
 
-    console.log(pag);
+    const clickFunc = (e) => {
+        setCurrentPage(parseInt(e.target.getAttribute("toClick")))
+    }
+
     return <div>
         {pag.map((item) => (
-            <button className={item === currentPage ? 'btnm fileActive' : 'btnm'} key={item}>{item}</button>
+            <button onClick={clickFunc} className={item === currentPage ? 'btnm fileActive' : 'btnm'} toClick={item} key={item}>{item}</button>
         ))}
     </div>;
 };

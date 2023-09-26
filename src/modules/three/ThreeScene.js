@@ -1,8 +1,14 @@
 import React, {useEffect} from 'react';
-import * as THREE from 'three';
-import {useControls} from "leva";
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, ContactShadows, Environment, OrbitControls, Bvh } from "@react-three/drei"
+import {
+    useGLTF,
+    ContactShadows,
+    Environment,
+    OrbitControls,
+    Bvh,
+    ArcballControls,
+    TrackballControls, PointerLockControls, PresentationControls
+} from "@react-three/drei"
 import {MyMugModel} from "./MyMugModel";
 
 const ThreeScene = ({photo}) => {
@@ -25,16 +31,23 @@ const ThreeScene = ({photo}) => {
     // });
 
     return (
-        <Canvas camera-position-z={40} camera-far={100} style={{ height: `25vw`, width: `25vw`}}>
+        <Canvas shadows camera-position-z={40} camera-far={100} style={{ height: `25vw`, width: `25vw`}}>
             {/*<color attach="background" args={['#ffffff']} />*/}
-            <ambientLight intensity={1.4}  />
-            <spotLight position={[11, -5, 11]} angle={0.15} penumbra={1} intensity={555} />
-            {/*<directionalLight intensity={5} position={[10, 10, 10]} />*/}
+            <ambientLight intensity={1.7}  />
+            <spotLight position={[15, -5, 11]} angle={0.15} penumbra={1} intensity={444} />
+            <directionalLight intenysity={1} position={[10, 10, 5]} />
+            {/*<directionalLight intenysity={1} position={[5, 10, 5]} />*/}
 
-            <OrbitControls
+            {/*<OrbitControls/>*/}
+            <PresentationControls
+                enabled={true} // the controls can be disabled by setting this to false
+                global={false}
+                cursor={true}
+                polar={[-1, Math.PI / 2]}
+            >
+                <MyMugModel  />
+            </PresentationControls>
 
-            />
-            <MyMugModel  />
         </Canvas>
 
 
