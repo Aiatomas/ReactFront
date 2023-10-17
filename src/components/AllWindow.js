@@ -2,14 +2,13 @@ import React, {useEffect} from "react";
 import "./allStyles.css"
 import Nav from "./nav/Nav";
 import AfterNav from "./calc/AfterNav";
-import {fetchPrices} from "../actions/pricesAction";
+import {fetchPrices, fetchPrices2} from "../actions/pricesAction";
 import {useDispatch} from "react-redux";
 import Footer from "./footer/Footer";
 import PhotoLayoutEditor from "./editor";
 
 function AllWindow() {
     const dispatch = useDispatch();
-    console.log("AllWindow");
     useEffect(() => {
         dispatch(fetchPrices())
     }, [])

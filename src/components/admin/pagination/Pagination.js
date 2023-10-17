@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import FileContainer from "../../calc/btn/FileContainer";
-import {GET_CURRENT_USER_REQUEST} from "../../../actions/currentUserActions";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import Loader from "../../calc/Loader";
 
 const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount}) => {
     const [pag, setPag] = useState([]);
@@ -96,12 +93,12 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
     }, []);
 
     const clickFunc = (e) => {
-        setCurrentPage(parseInt(e.target.getAttribute("toClick")))
+        setCurrentPage(parseInt(e.target.getAttribute("toclick")))
 
         let dataa = {
             name: name,
             inPageCount: inPageCount,
-            currentPage: parseInt(e.target.getAttribute("toClick")),
+            currentPage: parseInt(e.target.getAttribute("toclick")),
         }
         axios.post(`admin/gettable`, dataa)
             .then(response => {
@@ -109,15 +106,15 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
                 let pageCountt = Math.ceil(response.data.count / inPageCount)
                 setPageCount(pageCountt)
                 let toPag = [];
-                for (let i = parseInt(e.target.getAttribute("toClick"))-3; i < parseInt(e.target.getAttribute("toClick"))+4; i++){
-                    if(i === parseInt(e.target.getAttribute("toClick"))-3){
-                        if(parseInt(e.target.getAttribute("toClick")) === 1){
+                for (let i = parseInt(e.target.getAttribute("toclick"))-3; i < parseInt(e.target.getAttribute("toclick"))+4; i++){
+                    if(i === parseInt(e.target.getAttribute("toclick"))-3){
+                        if(parseInt(e.target.getAttribute("toclick")) === 1){
 
                         } else {
 
                         }
                     }
-                    if(i === parseInt(e.target.getAttribute("toClick"))){
+                    if(i === parseInt(e.target.getAttribute("toclick"))){
                         toPag.push(i)
 
                     } else {
@@ -125,8 +122,8 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
                             toPag.push(i)
                         }
                     }
-                    if(i === parseInt(e.target.getAttribute("toClick"))+3){
-                        if(parseInt(e.target.getAttribute("toClick")) >= pageCountt){
+                    if(i === parseInt(e.target.getAttribute("toclick"))+3){
+                        if(parseInt(e.target.getAttribute("toclick")) >= pageCountt){
 
                         } else {
 
@@ -145,7 +142,7 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
     return (
         <div>
             <div>Кількість айтемів у сторінці:
-                <Form.Select onChange={setPageCountF} value={inPageCount}>
+                <Form.Select name="pagination" onChange={setPageCountF} value={inPageCount}>
                     <option value="1">1</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
@@ -156,7 +153,7 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
                 </Form.Select>
             </div>
             {pag.map((item) => (
-                <button onClick={clickFunc} className={item === currentPage ? 'btn btnm fileActive' : 'btn btnm'} toClick={item} key={item}>{item}</button>
+                <button onClick={clickFunc} className={item === currentPage ? 'btn btnm fileActive' : 'btn btnm'} toclick={item} key={item}>{item}</button>
             ))}
         </div>
     );

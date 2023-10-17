@@ -3,20 +3,17 @@ import Loader from "../../calc/Loader";
 import Pagination from "../pagination/Pagination";
 import axios from "axios";
 import {
-    MDBBadge,
-    MDBBtn,
     MDBCard,
     MDBCardBody, MDBCardFooter,
     MDBCardHeader,
     MDBCol, MDBContainer,
-    MDBIcon,
     MDBRow,
     MDBTable, MDBTableBody,
     MDBTableHead
 } from "mdb-react-ui-kit";
 import {Form} from "react-bootstrap";
 
-export const Table = ({name}) => {
+export const TableSessions = ({name}) => {
     const [data, setData] = useState(null);
     const [addNew, setAddNew] = useState(false);
     let setAddNewF = () => {
@@ -44,10 +41,36 @@ export const Table = ({name}) => {
         setPrice(event.target.value)
     }
     let saveAll = (event) => {
-
+        let data = {
+            tableName: name,
+            name: namee,
+            type: type,
+            units: units,
+            price: price,
+            inPageCount: inPageCount,
+            currentPage: currentPage,
+        }
+        axios.post(`admin/addtotable`, data)
+            .then(response => {
+                // console.log(response.data);
+                setData(response.data)
+                setPageCount(Math.ceil(response.data.count / inPageCount))
+                setNamee("")
+                setType("")
+                setUnits("")
+                setPrice("")
+                setAddNew(false)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
     let closeAll = () => {
         setAddNew(false)
+        setNamee("")
+        setType("")
+        setUnits("")
+        setPrice("")
     }
     //--------------------------------------------------------------------
 
@@ -60,7 +83,7 @@ export const Table = ({name}) => {
         }
         axios.post(`admin/gettable`, data)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setData(response.data)
                 setPageCount(Math.ceil(response.data.count / inPageCount))
             })
@@ -108,10 +131,10 @@ export const Table = ({name}) => {
                                                     <MDBTableHead>
                                                         <tr className="text-bg-light">
                                                             <th>id</th>
-                                                            <th>type</th>
-                                                            <th>name</th>
-                                                            <th>units</th>
-                                                            <th>price</th>
+                                                            <th>session</th>
+                                                            <th>userid</th>
+                                                            <th>userAgent</th>
+                                                            <th>ip</th>
                                                             <th></th>
                                                             <th></th>
                                                         </tr>
@@ -166,9 +189,9 @@ export const Table = ({name}) => {
                                             />
                                         </MDBCol>
                                         <MDBCol size='6' className='text-end'>
-                                            <button onClick={setAddNewF} className='btn btnm'>
-                                                add new
-                                            </button>
+                                            {/*<button onClick={setAddNewF} className='btn btnm'>*/}
+                                            {/*    add new*/}
+                                            {/*</button>*/}
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCardHeader>
@@ -179,10 +202,10 @@ export const Table = ({name}) => {
                                                 <MDBTableHead>
                                                     <tr className="bg-light">
                                                         <th>id</th>
-                                                        <th>type</th>
-                                                        <th>name</th>
-                                                        <th>units</th>
-                                                        <th>price</th>
+                                                        <th>session</th>
+                                                        <th>userid</th>
+                                                        <th>userAgent</th>
+                                                        <th>ip</th>
                                                         <th></th>
                                                         <th></th>
                                                     </tr>
@@ -191,15 +214,15 @@ export const Table = ({name}) => {
                                                     {data.rows.map((item) => (
                                                         <tr key={item.id}>
                                                             <td>{item.id}</td>
-                                                            <td>{item.type}</td>
-                                                            <td>{item.name}</td>
-                                                            <td>{item.units}</td>
-                                                            <td>{item.price}</td>
+                                                            <td>{item.session}</td>
+                                                            <td>{item.userid}</td>
+                                                            <td>{item.userAgent}</td>
+                                                            <td>{item.ip}</td>
                                                             <td>
-                                                                <button className="btn btn-info">edit</button>
+                                                                {/*<button className="btnm bg-info">edit</button>*/}
                                                             </td>
                                                             <td>
-                                                                <button className="btn btn-danger">delete</button>
+                                                                <button className="btnm bg-danger">delete</button>
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -216,10 +239,10 @@ export const Table = ({name}) => {
         )
     }
 
-return (
-    <h1 className="d-flex justify-content-center align-items-center">
-        {/*{name}*/}
-        <Loader/>
-    </h1>
-)
+    return (
+        <h1 className="d-flex justify-content-center align-items-center">
+            {/*{name}*/}
+            <Loader/>
+        </h1>
+    )
 }
