@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://127.0.0.1:5555",
   "dependencies": {
+    "@mui/icons-material": "^5.14.16",
     "@react-three/drei": "^9.83.8",
     "@react-three/fiber": "^8.14.1",
     "@redux-devtools/extension": "^3.2.5",
