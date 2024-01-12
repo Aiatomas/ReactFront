@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Loader from "../../calc/Loader";
 import Pagination from "../pagination/Pagination";
+import Image from 'react-bootstrap/Image';
 import axios from "axios";
 import {
     MDBCard,
@@ -201,48 +202,62 @@ export const TableStorage = ({name}) => {
                                             <MDBTable hover className="">
                                                 <MDBTableHead>
                                                     <tr className="bg-light">
-                                                        <th className="adminFont"></th>
-                                                        <th className="adminFont">id</th>
-                                                        <th className="adminFont">Фото</th>
-                                                        <th className="adminFont">Артикул</th>
-                                                        <th className="adminFont">Назва</th>
-                                                        <th className="adminFont">Од. виміру</th>
-                                                        <th className="adminFont">Собівартість</th>
-                                                        <th className="adminFont">Ціна</th>
-                                                        <th className="adminFont">В наявності</th>
-                                                        <th className="adminFont">Всього</th>
-                                                        <th className="adminFont">Прайс-лист</th>
-                                                        <th className="adminFont">Створив</th>
-                                                        <th className="adminFont">Постачальник</th>
-                                                        <th className="adminFont">createdAt</th>
-                                                        <th className="adminFont">updatedAt</th>
-                                                        <th className="adminFont"></th>
+                                                        <th className="adminFontTable">
+                                                            <Form.Check // prettier-ignore
+                                                                type={type}
+                                                                id={`all`}
+                                                                label={``}
+                                                            />
+                                                        </th>
+                                                        <th className="adminFontTable">id</th>
+                                                        <th className="adminFontTable">Фото</th>
+                                                        <th className="adminFontTable">Артикул</th>
+                                                        <th className="adminFontTable">Назва</th>
+                                                        <th className="adminFontTable">Од. виміру</th>
+                                                        <th className="adminFontTable">Собівартість</th>
+                                                        <th className="adminFontTable">Ціна</th>
+                                                        <th className="adminFontTable">В наявності</th>
+                                                        <th className="adminFontTable">Всього</th>
+                                                        <th className="adminFontTable">Прайс-лист</th>
+                                                        <th className="adminFontTable">Створив</th>
+                                                        <th className="adminFontTable">Постачальник</th>
+                                                        <th className="adminFontTable">createdAt</th>
+                                                        <th className="adminFontTable">updatedAt</th>
+                                                        <th className="adminFontTable"></th>
                                                     </tr>
                                                 </MDBTableHead>
                                                 <MDBTableBody>
                                                     {data.rows.map((item) => (
                                                         <tr key={item.id}>
-                                                            <td className="adminFont">[]</td>
-                                                            <td className="adminFont">{item.id}</td>
-                                                            <td className="adminFont">{item.article}</td>
-                                                            <td className="adminFont">{item.type}</td>
-                                                            <td className="adminFont">{item.name}</td>
-                                                            <td className="adminFont">{item.units}</td>
-                                                            <td className="adminFont">{item.cost}</td>
-                                                            <td className="adminFont">{item.price}</td>
-                                                            <td className="adminFont">{item.amount}</td>
-                                                            <td className="adminFont">{item.amountAll}</td>
-                                                            <td className="adminFont">{item.PriceList}</td>
-                                                            <td className="adminFont">{item.creator}</td>
-                                                            <td className="adminFont">{item.purveyor}</td>
-                                                            <td className="adminFont">{item.creator}</td>
-                                                            <td className="adminFont">{item.createdAt}</td>
-                                                            <td className="adminFont">{item.updatedAt}</td>
+                                                            <td className="adminFontTable">
+                                                                <Form.Check // prettier-ignore
+                                                                    // className="adminFontTable"
+                                                                    type={type}
+                                                                    id={item.id}
+                                                                    label={``}
+                                                                />
+                                                            </td>
+                                                            <td className="adminFontTable">{item.id}</td>
+                                                            <td className="adminFontTable">{item.article}</td>
+                                                            <td className="adminFontTable">
+                                                                <Image src="holder.js/171x180" thumbnail  />
+                                                            </td>
+                                                            <td className="adminFontTable">{item.name}</td>
+                                                            <td className="adminFontTable">{item.units}</td>
+                                                            <td className="adminFontTable">{item.cost}</td>
+                                                            <td className="adminFontTable">{item.price}</td>
+                                                            <td className="adminFontTable">{item.amount}</td>
+                                                            <td className="adminFontTable">{item.amountAll}</td>
+                                                            <td className="adminFontTable">{item.PriceList}</td>
+                                                            <td className="adminFontTable">{item.creator}</td>
+                                                            <td className="adminFontTable">{item.purveyor}</td>
+                                                            <td className="adminFontTable">{item.createdAt}</td>
+                                                            <td className="adminFontTable">{item.updatedAt}</td>
                                                             {/*<td className="adminFont">*/}
                                                             {/*    /!*<button className="btnm bg-info">edit</button>*!/*/}
                                                             {/*</td>*/}
                                                             <td>
-                                                                <button className="btnm bg-danger">delete</button>
+                                                                <button className="btnm bg-danger adminFontTable">delete</button>
                                                             </td>
                                                         </tr>
                                                     ))}
