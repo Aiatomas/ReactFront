@@ -16,6 +16,7 @@ import Sklad from "./crm/Sklad";
 import './adminStylesCrm.css';
 import SidebarAi from "./SidebarAi";
 import CrmHeader from "./crm/CrmHeader";
+import {TableStorage} from "./table/TableStorage";
 
 export const Admin = () => {
     const [whoPick, setWhoPick] = useState("devices");
@@ -82,7 +83,8 @@ export const Admin = () => {
                     <Desktop/>
                 }
                 {whoPick === "Склад" &&
-                    <Sklad/>
+                    // <Sklad/>
+                    <TableStorage name={whoPick}/>
                 }
 
 
