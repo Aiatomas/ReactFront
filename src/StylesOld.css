@@ -89,7 +89,7 @@
     height: 85vmin;
 }
 .logoImg {
-    height: 6vw;
+    height: 5vw;
 }
 @media (min-width: 1000px){
     .settingsContainer {
@@ -505,8 +505,8 @@ input[type="number"].inputCount::-webkit-outer-spin-button{
         width: 40vw;
     }
     .logoImg {
-        height: 20vw;
-        min-height: 20vw;
+        height: 5vw;
+        min-height: 5vw;
     }
     .btn {
         font-weight: 400;
