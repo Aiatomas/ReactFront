@@ -27,7 +27,6 @@ const CrmHeader = ({whoPick}) => {
                                 Something else here
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Modal2222/>
                         {/*<Nav.Link href="#" disabled>*/}
                         {/*    Link*/}
                         {/*</Nav.Link>*/}

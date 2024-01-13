@@ -13,6 +13,7 @@ import {
     MDBTableHead
 } from "mdb-react-ui-kit";
 import {Form} from "react-bootstrap";
+import Modal2222 from "../Modal2222";
 
 export const TableStorage = ({name}) => {
     const [data, setData] = useState(null);
@@ -94,111 +95,25 @@ export const TableStorage = ({name}) => {
     }, []);
 
     if (data) {
-        if (addNew) {
-            return (
-                <MDBContainer fluid>
-                    <MDBRow className='justify-content-center'>
-                        <MDBCol md='12'>
-                            <section>
-                                <MDBCard>
-                                    <MDBCardHeader className='py-3'>
-                                        <MDBRow>
-                                            <MDBCol size='6'>
-                                                <p className='text-uppercase small mb-2'>
-                                                    <strong>{name} {data.count}</strong>
-                                                </p>
-                                                <Pagination name={name}
-                                                            data={data}
-                                                            setData={setData}
-                                                            inPageCount={inPageCount}
-                                                            setInPageCount={setInPageCount}
-                                                            currentPage={currentPage}
-                                                            setCurrentPage={setCurrentPage}
-                                                            pageCount={pageCount}
-                                                            setPageCount={setPageCount}
-                                                />
-                                            </MDBCol>
-                                            <MDBCol size='6' className='text-end'>
-                                                <button onClick={closeAll} className='btn btnm'>
-                                                    close
-                                                </button>
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCardHeader>
-                                    <MDBCardBody>
-                                        <MDBRow>
-                                            <MDBCol md='12' className='mb-3'>
-                                                <MDBTable hover>
-                                                    <MDBTableHead>
-                                                        <tr className="text-bg-light">
-                                                            <th>id</th>
-                                                            <th>session</th>
-                                                            <th>userid</th>
-                                                            <th>userAgent</th>
-                                                            <th>ip</th>
-                                                            <th></th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </MDBTableHead>
-                                                    <MDBTableBody>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td><Form.Control value={namee} className="" type="text" onChange={setNameeF} placeholder="name" /></td>
-                                                            <td><Form.Control value={type} className="" type="text" onChange={setTypeF} placeholder="type" /></td>
-                                                            <td><Form.Control value={units} className="" type="text" onChange={setUnitsF} placeholder="units" /></td>
-                                                            <td><Form.Control value={price} className="" type="text" onChange={setPriceF} placeholder="price" /></td>
-                                                            <td>
-                                                                <button onClick={saveAll} className="btn btnm btn-success">save</button>
-                                                            </td>
-                                                            <td>
-                                                                <button onClick={closeAll} className="btn btnm btn-danger">close</button>
-                                                            </td>
-                                                        </tr>
-                                                    </MDBTableBody>
-                                                </MDBTable>
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCardBody>
-                                </MDBCard>
-                            </section>
-                        </MDBCol>
-                    </MDBRow>
-                </MDBContainer>
-            )
-        }
         return (
             <MDBContainer fluid>
                 <MDBRow className='justify-content-center'>
                     <MDBCol md='12'>
                         <section>
                             <MDBCard>
-                                {/*<MDBCardHeader className='py-3'>*/}
-                                {/*    <MDBRow>*/}
-                                {/*        <MDBCol size='6'>*/}
-                                {/*            <p className='text-uppercase small mb-2'>*/}
-                                {/*                <strong>{name} {data.count}</strong>*/}
-                                {/*            </p>*/}
-                                {/*            <Pagination name={name}*/}
-                                {/*                        data={data}*/}
-                                {/*                        setData={setData}*/}
-                                {/*                        inPageCount={inPageCount}*/}
-                                {/*                        setInPageCount={setInPageCount}*/}
-                                {/*                        currentPage={currentPage}*/}
-                                {/*                        setCurrentPage={setCurrentPage}*/}
-                                {/*                        pageCount={pageCount}*/}
-                                {/*                        setPageCount={setPageCount}*/}
-                                {/*            />*/}
-                                {/*        </MDBCol>*/}
-                                {/*        <MDBCol size='6' className='text-end'>*/}
-                                {/*            /!*<button onClick={setAddNewF} className='btn btnm'>*!/*/}
-                                {/*            /!*    add new*!/*/}
-                                {/*            /!*</button>*!/*/}
-                                {/*        </MDBCol>*/}
-                                {/*    </MDBRow>*/}
-                                {/*</MDBCardHeader>*/}
                                 <MDBCardBody>
                                     <MDBRow>
                                         <MDBCol md='12' className='mb-4'>
+                                            <Modal2222 namem={name}
+                                                       data={data}
+                                                       setData={setData}
+                                                       inPageCount={inPageCount}
+                                                       setInPageCount={setInPageCount}
+                                                       currentPage={currentPage}
+                                                       setCurrentPage={setCurrentPage}
+                                                       pageCount={pageCount}
+                                                       setPageCount={setPageCount}
+                                            />
                                             <MDBTable hover className="">
                                                 <MDBTableHead>
                                                     <tr className="bg-light">
@@ -238,10 +153,10 @@ export const TableStorage = ({name}) => {
                                                                 />
                                                             </td>
                                                             <td className="adminFontTable">{item.id}</td>
-                                                            <td className="adminFontTable">{item.article}</td>
                                                             <td className="adminFontTable">
-                                                                <Image src="holder.js/171x180" thumbnail  />
+                                                                <Image src="" thumbnail/>
                                                             </td>
+                                                            <td className="adminFontTable">{item.article}</td>
                                                             <td className="adminFontTable">{item.name}</td>
                                                             <td className="adminFontTable">{item.units}</td>
                                                             <td className="adminFontTable">{item.cost}</td>
@@ -257,14 +172,16 @@ export const TableStorage = ({name}) => {
                                                             {/*    /!*<button className="btnm bg-info">edit</button>*!/*/}
                                                             {/*</td>*/}
                                                             <td>
-                                                                <button className="btnm bg-danger adminFontTable">delete</button>
+                                                                <button
+                                                                    className="btnm bg-danger adminFontTable">delete
+                                                                </button>
                                                             </td>
                                                         </tr>
                                                     ))}
                                                 </MDBTableBody>
                                             </MDBTable>
 
-                                                        <Pagination name={name}
+                                            <Pagination name={name}
                                                                     data={data}
                                                                     setData={setData}
                                                                     inPageCount={inPageCount}
