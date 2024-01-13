@@ -1,6 +1,7 @@
 import React from 'react';
-import {Container, Navbar, Nav, NavDropdown, Button} from 'react-bootstrap';
+import {Container, Navbar, Nav, NavDropdown, Button, Modal} from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
+import Modal2222 from "../Modal2222";
 
 const CrmHeader = ({whoPick}) => {
     return (
@@ -26,6 +27,7 @@ const CrmHeader = ({whoPick}) => {
                                 Something else here
                             </NavDropdown.Item>
                         </NavDropdown>
+                        <Modal2222/>
                         {/*<Nav.Link href="#" disabled>*/}
                         {/*    Link*/}
                         {/*</Nav.Link>*/}

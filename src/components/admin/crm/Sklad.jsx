@@ -1,5 +1,7 @@
 import React from 'react';
 import {MDBTable, MDBTableBody, MDBTableHead} from "mdb-react-ui-kit";
+import {Modal} from "react-bootstrap";
+import Modal2222 from "../Modal2222";
 
 
 const styles = {
@@ -34,6 +36,7 @@ const Sklad = ({ data }) => {
                         <th className="adminFont">Постачальник</th>
                         <th className="adminFont"></th>
                         <th className="adminFont"></th>
+                        <Modal2222/>
                     </tr>
                     </thead>
                     <tbody>
