@@ -75,7 +75,7 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
 
     return (
         <>
-            <Button className="" style={{ borderRadius: '2vw' }} variant="outline-danger" onClick={handleShow}>
+            <Button className="" style={{ borderRadius: '3vw' }} variant="danger" onClick={handleShow}>
                 +
             </Button>
 
@@ -142,7 +142,7 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
                             aria-label="В наявності"
                             aria-describedby="basic-addon1"
                             type="number"
-                            value={amountAll}
+                            value={amount}
                             onChange={(event) => setAmount(event.target.value)}
                         />
                         <InputGroup.Text id="basic-addon1">В наявності</InputGroup.Text>
