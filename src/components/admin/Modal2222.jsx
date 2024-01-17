@@ -75,7 +75,7 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
 
     return (
         <>
-            <Button className="" style={{ borderRadius: '3vw' }} variant="danger" onClick={handleShow}>
+            <Button className="adminButtonAdd" variant="danger" onClick={handleShow}>
                 +
             </Button>
 

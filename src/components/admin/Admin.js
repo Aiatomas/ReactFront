@@ -86,6 +86,10 @@ export const Admin = () => {
                     // <Sklad/>
                     <TableStorage name={whoPick}/>
                 }
+                {whoPick === "Каса" &&
+                    // <Sklad/>
+                    <TableStorage name={whoPick}/>
+                }
 
 
                 {whoPick === "devices" &&

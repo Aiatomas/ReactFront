@@ -11,3 +11,19 @@
 .adminFontTable {
     font-size: 0.7vw;
 }
+.adminButtonAdd {
+    position: fixed;
+    bottom: 5vh;
+    right: 5vh;
+    z-index: 9999;
+    /*background-color: red;*/
+    border-radius: 50%;
+    width: 5vh;
+    height: 5vh;
+    color: white;
+    text-align: center;
+    /*line-height: 50px;*/
+}
+.adminButtonAdd:before {
+    content: "";
+}
