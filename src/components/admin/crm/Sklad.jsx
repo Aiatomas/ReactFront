@@ -1,19 +1,14 @@
 import React from 'react';
-import {MDBTable, MDBTableBody, MDBTableHead} from "mdb-react-ui-kit";
-import {Modal} from "react-bootstrap";
 import Modal2222 from "../Modal2222";
 
 
 const styles = {
     tableContainer: {
         padding: '20px',
-        // Добавьте дополнительные стили
     },
     image: {
         width: '50px', // Регулируйте размер как необходимо
-        // Добавьте дополнительные стили для изображения
     },
-    // Добавьте дополнительные стили
 };
 const Sklad = ({ data }) => {
     return (

@@ -17,65 +17,9 @@ import Modal2222 from "../Modal2222";
 
 export const TableStorage = ({name}) => {
     const [data, setData] = useState(null);
-    const [addNew, setAddNew] = useState(false);
-    let setAddNewF = () => {
-        setAddNew(true)
-    }
     const [inPageCount, setInPageCount] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(null);
-
-    //save-adit-----------------------------------------------------------
-    const [namee, setNamee] = useState();
-    const [type, setType] = useState();
-    const [units, setUnits] = useState();
-    const [price, setPrice] = useState();
-    let setNameeF = (event) => {
-        setNamee(event.target.value)
-    }
-    let setTypeF = (event) => {
-        setType(event.target.value)
-    }
-    let setUnitsF = (event) => {
-        setUnits(event.target.value)
-    }
-    let setPriceF = (event) => {
-        setPrice(event.target.value)
-    }
-    let saveAll = (event) => {
-        let data = {
-            tableName: name,
-            name: namee,
-            type: type,
-            units: units,
-            price: price,
-            inPageCount: inPageCount,
-            currentPage: currentPage,
-        }
-        axios.post(`admin/addtotable`, data)
-            .then(response => {
-                // console.log(response.data);
-                setData(response.data)
-                setPageCount(Math.ceil(response.data.count / inPageCount))
-                setNamee("")
-                setType("")
-                setUnits("")
-                setPrice("")
-                setAddNew(false)
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    }
-    let closeAll = () => {
-        setAddNew(false)
-        setNamee("")
-        setType("")
-        setUnits("")
-        setPrice("")
-    }
-    //--------------------------------------------------------------------
-
 
     useEffect(() => {
         let data = {
@@ -119,7 +63,7 @@ export const TableStorage = ({name}) => {
                                                     <tr className="bg-light">
                                                         <th className="adminFontTable">
                                                             <Form.Check // prettier-ignore
-                                                                type={type}
+                                                                type={"checkbox"}
                                                                 id={`all`}
                                                                 label={``}
                                                             />
@@ -147,7 +91,7 @@ export const TableStorage = ({name}) => {
                                                             <td className="adminFontTable">
                                                                 <Form.Check // prettier-ignore
                                                                     // className="adminFontTable"
-                                                                    type={type}
+                                                                    type={"checkbox"}
                                                                     id={item.id}
                                                                     label={``}
                                                                 />
@@ -180,7 +124,6 @@ export const TableStorage = ({name}) => {
                                                     ))}
                                                 </MDBTableBody>
                                             </MDBTable>
-
                                             <Pagination name={name}
                                                                     data={data}
                                                                     setData={setData}
@@ -191,7 +134,6 @@ export const TableStorage = ({name}) => {
                                                                     pageCount={pageCount}
                                                                     setPageCount={setPageCount}
                                                         />
-
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCardBody>
@@ -205,7 +147,6 @@ export const TableStorage = ({name}) => {
 
     return (
         <h1 className="d-flex justify-content-center align-items-center">
-            {/*{name}*/}
             <Loader/>
         </h1>
     )
