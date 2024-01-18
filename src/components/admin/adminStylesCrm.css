@@ -1,15 +1,16 @@
 .adminFont {
-    font-size: 0.8vw;
+    font-size: 1.4vh;
     font-weight: normal;
 }
 .adminBackGround {
     background: #dcd9ce;
+    min-height: 85vh;
 }
 .adminNavBackGround {
     background: #ffffff;
 }
 .adminFontTable {
-    font-size: 0.7vw;
+    font-size: 1.3vh;
 }
 .adminButtonAdd {
     position: fixed;
@@ -26,4 +27,20 @@
 }
 .adminButtonAdd:before {
     content: "";
+}
+.adminTable{
+    min-height: 70vh;
+}
+.adminPagination{
+    /*background: #ffffff;*/
+}
+.pagButton{
+    border-radius: 50%;
+    /*height: 2vh;*/
+}
+.whiteBG{
+    background: #ffffff;
+}
+.adminButtonAdd:hover{
+    cursor: pointer;
 }

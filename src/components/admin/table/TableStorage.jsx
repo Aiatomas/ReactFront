@@ -40,14 +40,14 @@ export const TableStorage = ({name}) => {
 
     if (data) {
         return (
-            <MDBContainer fluid>
+            <MDBContainer fluid >
                 <MDBRow className='justify-content-center'>
                     <MDBCol md='12'>
                         <section>
                             <MDBCard>
-                                <MDBCardBody>
+                                <MDBCardBody className="adminTable">
                                     <MDBRow>
-                                        <MDBCol md='12' className='mb-4'>
+                                        <MDBCol md='12' className='mb-4' >
                                             <Modal2222 namem={name}
                                                        data={data}
                                                        setData={setData}
@@ -58,7 +58,7 @@ export const TableStorage = ({name}) => {
                                                        pageCount={pageCount}
                                                        setPageCount={setPageCount}
                                             />
-                                            <MDBTable hover className="">
+                                            <MDBTable hover>
                                                 <MDBTableHead>
                                                     <tr className="bg-light">
                                                         <th className="adminFontTable">
@@ -124,19 +124,19 @@ export const TableStorage = ({name}) => {
                                                     ))}
                                                 </MDBTableBody>
                                             </MDBTable>
-                                            <Pagination name={name}
-                                                                    data={data}
-                                                                    setData={setData}
-                                                                    inPageCount={inPageCount}
-                                                                    setInPageCount={setInPageCount}
-                                                                    currentPage={currentPage}
-                                                                    setCurrentPage={setCurrentPage}
-                                                                    pageCount={pageCount}
-                                                                    setPageCount={setPageCount}
-                                                        />
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCardBody>
+                                <Pagination name={name}
+                                            data={data}
+                                            setData={setData}
+                                            inPageCount={inPageCount}
+                                            setInPageCount={setInPageCount}
+                                            currentPage={currentPage}
+                                            setCurrentPage={setCurrentPage}
+                                            pageCount={pageCount}
+                                            setPageCount={setPageCount}
+                                />
                             </MDBCard>
                         </section>
                     </MDBCol>

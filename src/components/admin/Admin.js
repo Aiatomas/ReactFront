@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import Pagination from "./pagination/Pagination";
-import Form from 'react-bootstrap/Form';
 import {TableDevices} from "./table/TableDevices";
 import {TableMaterials} from "./table/TableMaterials";
 import {TableServices} from "./table/TableServices";
@@ -9,14 +7,12 @@ import {TableUsers} from "./table/TableUsers";
 import {TableFiles} from "./table/TableFiles";
 import {TableOrders} from "./table/TableOrders";
 import {TableActions} from "./table/TableActions";
-import {Button, Collapse} from "react-bootstrap";
 import {CollapseAi} from "./CollapseAi";
 import Desktop from "./crm/Desktop/Desktop";
-import Sklad from "./crm/Sklad";
 import './adminStylesCrm.css';
-import SidebarAi from "./SidebarAi";
 import CrmHeader from "./crm/CrmHeader";
 import {TableStorage} from "./table/TableStorage";
+import CrmCash from "./crm/CrmCash/CrmCash";
 
 export const Admin = () => {
     const [whoPick, setWhoPick] = useState("devices");
@@ -88,7 +84,7 @@ export const Admin = () => {
                 }
                 {whoPick === "Каса" &&
                     // <Sklad/>
-                    <TableStorage name={whoPick}/>
+                    <CrmCash name={whoPick}/>
                 }
 
 

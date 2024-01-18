@@ -140,20 +140,20 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
 
 
     return (
-        <div>
-            <div>Кількість айтемів у сторінці:
-                <Form.Select name="pagination" onChange={setPageCountF} value={inPageCount}>
-                    <option value="1">1</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="250">250</option>
-                    <option value="500">500</option>
+        <div className="d-flex adminPagination">
+            <div className="adminFontTable">Кількість айтемів у сторінці:
+                <Form.Select className="adminFontTable" name="pagination" onChange={setPageCountF} value={inPageCount}>
+                    <option className="adminFontTable" value="1">1</option>
+                    <option className="adminFontTable" value="20">20</option>
+                    <option className="adminFontTable" value="30">30</option>
+                    <option className="adminFontTable" value="50">50</option>
+                    <option className="adminFontTable" value="100">100</option>
+                    <option className="adminFontTable" value="250">250</option>
+                    <option className="adminFontTable" value="500">500</option>
                 </Form.Select>
             </div>
             {pag.map((item) => (
-                <button onClick={clickFunc} className={item === currentPage ? 'btn btnm fileActive' : 'btn btnm'} toclick={item} key={item}>{item}</button>
+                <button onClick={clickFunc} className={item === currentPage ? 'btn btnm adminFontTable pagButton fileActive' : 'btn btnm adminFontTable pagButton'} toclick={item} key={item}>{item}</button>
             ))}
         </div>
     );
