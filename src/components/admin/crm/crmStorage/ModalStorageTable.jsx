@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from "axios";
 
-function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount}) {
+function ModalStorageTable({namem, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount}) {
     const [show, setShow] = useState(false);
 
     const [article, setArticle] = useState("");
@@ -13,7 +13,10 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
     const [name, setName] = useState("");
     const [units, setUnits] = useState("");
     const [cost, setCost] = useState(0);
-    const [price, setPrice] = useState(0);
+    const [price1, setPrice1] = useState(0);
+    const [price2, setPrice2] = useState(0);
+    const [price3, setPrice3] = useState(0);
+    const [price4, setPrice4] = useState(0);
     const [amount, setAmount] = useState(0);
     const [amountAll, setAmountAll] = useState(0);
     const [priceList, setPriceList] = useState("");
@@ -26,7 +29,10 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
         setName("")
         setUnits("")
         setCost(0)
-        setPrice(0)
+        setPrice1(0)
+        setPrice2(0)
+        setPrice3(0)
+        setPrice4(0)
         setAmount(0)
         setAmountAll(0)
         setPriceList(0)
@@ -42,7 +48,10 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
             name: name,
             units: units,
             cost: cost,
-            price: price,
+            price1: price1,
+            price2: price2,
+            price3: price3,
+            price4: price4,
             amount: amount,
             amountAll: amountAll,
             priceList: priceList,
@@ -62,7 +71,10 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
                 setName("")
                 setUnits("")
                 setCost(0)
-                setPrice(0)
+                setPrice1(0)
+                setPrice2(0)
+                setPrice3(0)
+                setPrice4(0)
                 setAmount(0)
                 setAmountAll(0)
                 setPurveyor("")
@@ -93,6 +105,16 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
                             onChange={(event) => setArticle(event.target.value)}
                         />
                         <InputGroup.Text id="basic-addon1">Артикул</InputGroup.Text>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="type"
+                            aria-label="type"
+                            aria-describedby="basic-addon1"
+                            value={type}
+                            onChange={(event) => setType(event.target.value)}
+                        />
+                        <InputGroup.Text id="basic-addon1">type</InputGroup.Text>
                     </InputGroup>
                     <InputGroup className="mb-3">
                         <Form.Control
@@ -127,14 +149,47 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
                     </InputGroup>
                     <InputGroup className="mb-3">
                         <Form.Control
-                            placeholder="Ціна"
-                            aria-label="Ціна"
+                            placeholder="Ціна(1-10)"
+                            aria-label="Ціна(1-10)"
                             aria-describedby="basic-addon1"
                             type="number"
-                            value={price}
-                            onChange={(event) => setPrice(event.target.value)}
+                            value={price1}
+                            onChange={(event) => setPrice1(event.target.value)}
                         />
-                        <InputGroup.Text id="basic-addon1">Ціна</InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1">Ціна(1-10)</InputGroup.Text>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="Ціна(11-50)"
+                            aria-label="Ціна(11-50)"
+                            aria-describedby="basic-addon1"
+                            type="number"
+                            value={price2}
+                            onChange={(event) => setPrice2(event.target.value)}
+                        />
+                        <InputGroup.Text id="basic-addon1">Ціна(11-50)</InputGroup.Text>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="Ціна(51-100)"
+                            aria-label="Ціна(51-100)"
+                            aria-describedby="basic-addon1"
+                            type="number"
+                            value={price3}
+                            onChange={(event) => setPrice3(event.target.value)}
+                        />
+                        <InputGroup.Text id="basic-addon1">Ціна(51-100)</InputGroup.Text>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="Ціна(101-0)"
+                            aria-label="Ціна(101-0)"
+                            aria-describedby="basic-addon1"
+                            type="number"
+                            value={price4}
+                            onChange={(event) => setPrice4(event.target.value)}
+                        />
+                        <InputGroup.Text id="basic-addon1">Ціна(101-0)</InputGroup.Text>
                     </InputGroup>
                     <InputGroup className="mb-3">
                         <Form.Control
@@ -189,4 +244,4 @@ function Modal2222({namem, data, setData, inPageCount, setInPageCount, currentPa
     );
 }
 
-export default Modal2222;
+export default ModalStorageTable;

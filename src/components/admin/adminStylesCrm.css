@@ -10,7 +10,8 @@
     background: #ffffff;
 }
 .adminFontTable {
-    font-size: 1.3vh;
+    font-size: 1.2vh;
+    font-weight: lighter;
 }
 .adminButtonAdd {
     position: fixed;

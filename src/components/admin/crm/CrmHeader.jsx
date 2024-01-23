@@ -2,11 +2,11 @@ import React from 'react';
 import {Container, Navbar, Nav, NavDropdown, Button, Modal} from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
 
-const CrmHeader = ({whoPick}) => {
+const CrmHeader = ({whoPick, data}) => {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
-                <Navbar.Brand href="#">{whoPick}</Navbar.Brand>
+                <Navbar.Brand href="#">{whoPick} {data.count}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

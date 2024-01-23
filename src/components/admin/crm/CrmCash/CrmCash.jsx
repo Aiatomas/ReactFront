@@ -3,10 +3,11 @@ import { Carousel, Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import classnames from 'classnames';
+import {MDBCard, MDBContainer} from "mdb-react-ui-kit";
 
 const CrmCash = () => {
   const [orders, setOrders] = useState([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
   const [selectedOrder, setSelectedOrder] = useState({
     orderDetails: {},
     options: {},
@@ -26,9 +27,9 @@ const CrmCash = () => {
   };
 
   return (
-      <Container>
+      <div>
         <p className="text-center">{orders.length} orders</p>
-        <Carousel className={classnames('mb-4')}>
+        <Carousel className={classnames('mb-3')}>
           {orders.map((order, index) => (
               <Carousel.Item key={index}>
                 <h5>Order: {order.id}</h5>
@@ -47,7 +48,7 @@ const CrmCash = () => {
             <h4>Product List</h4>
             <ul>
               {products.map((product, index) => (
-                  <li key={index}>{product.name} - {product.price}</li>
+                  <li key={index}>{product.id} - {product.price}</li>
               ))}
             </ul>
           </Col>
@@ -61,7 +62,7 @@ const CrmCash = () => {
             <Link to={`/options/${selectedOrder.options.id}`}>View Options</Link>
           </Col>
         </Row>
-      </Container>
+      </div>
   );
 }
 

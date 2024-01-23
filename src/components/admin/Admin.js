@@ -11,11 +11,13 @@ import {CollapseAi} from "./CollapseAi";
 import Desktop from "./crm/Desktop/Desktop";
 import './adminStylesCrm.css';
 import CrmHeader from "./crm/CrmHeader";
-import {TableStorage} from "./table/TableStorage";
+import {TableStorage} from "./crm/crmStorage/TableStorage";
 import CrmCash from "./crm/CrmCash/CrmCash";
+import {CrmSettings} from "./crm/Settings/CrmSettings";
+import Products from "./crm/Products/Products";
 
 export const Admin = () => {
-    const [whoPick, setWhoPick] = useState("devices");
+    const [whoPick, setWhoPick] = useState("Робочий стіл");
     let buttons = [];
     // buttons.push("devices")
     // buttons.push("materials")
@@ -67,10 +69,10 @@ export const Admin = () => {
                 <button onClick={pickFunc} className={"Статистика" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Статистика"}>{"Статистика"}</button>
                 <button onClick={pickFunc} className={"Налаштування" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Налаштування"}>{"Налаштування"}</button>
                 <button onClick={pickFunc} className={"sessions" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"sessions"}>{"sessions"}</button>
+                <button onClick={pickFunc} className={"Продукти" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Продукти"}>{"Продукти"}</button>
             </div>
 
             <div className="d-flex flex-column flex-grow-1 adminBackGround">
-                <CrmHeader whoPick={whoPick}/>
 
                 {/*<SidebarAi/>*/}
 
@@ -79,12 +81,16 @@ export const Admin = () => {
                     <Desktop/>
                 }
                 {whoPick === "Склад" &&
-                    // <Sklad/>
                     <TableStorage name={whoPick}/>
                 }
                 {whoPick === "Каса" &&
-                    // <Sklad/>
                     <CrmCash name={whoPick}/>
+                }
+                {whoPick === "Налаштування" &&
+                    <CrmSettings name={whoPick}/>
+                }
+                {whoPick === "Продукти" &&
+                    <Products name={whoPick}/>
                 }
 
 

@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from "react";
-import Loader from "../../calc/Loader";
-import Pagination from "../pagination/Pagination";
+import Loader from "../../../calc/Loader";
+import Pagination from "../../pagination/Pagination";
 import Image from 'react-bootstrap/Image';
 import axios from "axios";
 import {
     MDBCard,
-    MDBCardBody, MDBCardFooter,
-    MDBCardHeader,
+    MDBCardBody,
     MDBCol, MDBContainer,
     MDBRow,
     MDBTable, MDBTableBody,
     MDBTableHead
 } from "mdb-react-ui-kit";
 import {Form} from "react-bootstrap";
-import Modal2222 from "../Modal2222";
+import CrmHeader from "../CrmHeader";
+import ModalStorageTable from "./ModalStorageTable";
+import ModalDeleteInStorage from "./ModalDeleteInStorage";
 
 export const TableStorage = ({name}) => {
     const [data, setData] = useState(null);
@@ -41,6 +42,7 @@ export const TableStorage = ({name}) => {
     if (data) {
         return (
             <MDBContainer fluid >
+                <CrmHeader whoPick={name} data={data}/>
                 <MDBRow className='justify-content-center'>
                     <MDBCol md='12'>
                         <section>
@@ -48,7 +50,7 @@ export const TableStorage = ({name}) => {
                                 <MDBCardBody className="adminTable">
                                     <MDBRow>
                                         <MDBCol md='12' className='mb-4' >
-                                            <Modal2222 namem={name}
+                                            <ModalStorageTable namem={name}
                                                        data={data}
                                                        setData={setData}
                                                        inPageCount={inPageCount}
@@ -70,11 +72,15 @@ export const TableStorage = ({name}) => {
                                                         </th>
                                                         <th className="adminFontTable">id</th>
                                                         <th className="adminFontTable">Фото</th>
+                                                        <th className="adminFontTable">type</th>
                                                         <th className="adminFontTable">Артикул</th>
                                                         <th className="adminFontTable">Назва</th>
                                                         <th className="adminFontTable">Од. виміру</th>
                                                         <th className="adminFontTable">Собівартість</th>
-                                                        <th className="adminFontTable">Ціна</th>
+                                                        <th className="adminFontTable">Ціна(1-10)</th>
+                                                        <th className="adminFontTable">Ціна(11-50)</th>
+                                                        <th className="adminFontTable">Ціна(51-100)</th>
+                                                        <th className="adminFontTable">Ціна(101-0)</th>
                                                         <th className="adminFontTable">В наявності</th>
                                                         <th className="adminFontTable">Всього</th>
                                                         <th className="adminFontTable">Прайс-лист</th>
@@ -100,11 +106,15 @@ export const TableStorage = ({name}) => {
                                                             <td className="adminFontTable">
                                                                 <Image src="" thumbnail/>
                                                             </td>
+                                                            <td className="adminFontTable">{item.type}</td>
                                                             <td className="adminFontTable">{item.article}</td>
                                                             <td className="adminFontTable">{item.name}</td>
                                                             <td className="adminFontTable">{item.units}</td>
                                                             <td className="adminFontTable">{item.cost}</td>
-                                                            <td className="adminFontTable">{item.price}</td>
+                                                            <td className="adminFontTable">{item.price1}</td>
+                                                            <td className="adminFontTable">{item.price2}</td>
+                                                            <td className="adminFontTable">{item.price3}</td>
+                                                            <td className="adminFontTable">{item.price4}</td>
                                                             <td className="adminFontTable">{item.amount}</td>
                                                             <td className="adminFontTable">{item.amountAll}</td>
                                                             <td className="adminFontTable">{item.PriceList}</td>
@@ -116,9 +126,17 @@ export const TableStorage = ({name}) => {
                                                             {/*    /!*<button className="btnm bg-info">edit</button>*!/*/}
                                                             {/*</td>*/}
                                                             <td>
-                                                                <button
-                                                                    className="btnm bg-danger adminFontTable">delete
-                                                                </button>
+                                                                <ModalDeleteInStorage namem={name}
+                                                                                      data={data}
+                                                                                      setData={setData}
+                                                                                      inPageCount={inPageCount}
+                                                                                      setInPageCount={setInPageCount}
+                                                                                      currentPage={currentPage}
+                                                                                      setCurrentPage={setCurrentPage}
+                                                                                      pageCount={pageCount}
+                                                                                      setPageCount={setPageCount}
+                                                                                      item={item}
+                                                                />
                                                             </td>
                                                         </tr>
                                                     ))}
