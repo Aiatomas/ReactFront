@@ -96,18 +96,97 @@ export const TableStorage = ({name}) => {
                             <td className="adminFontTable">{item.type}</td>
                             <td className="adminFontTable">{item.article}</td>
                             {/*<td className="adminFontTable">{item.name}</td>*/}
-                            <td className="adminFontTable"><ModalStorageRed itemData={item.name}/></td>
-                            <td className="adminFontTable">{item.units}</td>
-                            <td className="adminFontTable">{item.cost}</td>
-                            <td className="adminFontTable">{item.price1}</td>
-                            <td className="adminFontTable">{item.price2}</td>
-                            <td className="adminFontTable">{item.price3}</td>
-                            <td className="adminFontTable">{item.price4}</td>
-                            <td className="adminFontTable">{item.amount}</td>
-                            <td className="adminFontTable">{item.amountAll}</td>
-                            <td className="adminFontTable">{item.PriceList}</td>
+                            <ModalStorageRed dataTypeInTable={"string"} tableName={name}
+                                data={data}
+                                setData={setData}
+                                inPageCount={inPageCount}
+                                setInPageCount={setInPageCount}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                pageCount={pageCount}
+                                setPageCount={setPageCount} itemData={item.name} item={item} tablPosition="name"/>
+                            <ModalStorageRed dataTypeInTable={"string"} tableName={name}
+                                data={data}
+                                setData={setData}
+                                inPageCount={inPageCount}
+                                setInPageCount={setInPageCount}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                pageCount={pageCount}
+                                setPageCount={setPageCount} itemData={item.units} item={item} tablPosition="units"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.cost} item={item} tablPosition="cost"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.price1} item={item} tablPosition="price1"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.price2} item={item} tablPosition="price2"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.price3} item={item} tablPosition="price3"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.price4} item={item} tablPosition="price4"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.amount} item={item} tablPosition="amount"/>
+                            <ModalStorageRed dataTypeInTable={"number"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.amountAll} item={item} tablPosition="amountAll"/>
+                            <ModalStorageRed dataTypeInTable={"string"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.PriceList} item={item} tablPosition="PriceList"/>
                             <td className="adminFontTable">{item.creator}</td>
-                            <td className="adminFontTable">{item.purveyor}</td>
+                            <ModalStorageRed dataTypeInTable={"string"} tableName={name} data={data}
+                                             setData={setData}
+                                             inPageCount={inPageCount}
+                                             setInPageCount={setInPageCount}
+                                             currentPage={currentPage}
+                                             setCurrentPage={setCurrentPage}
+                                             pageCount={pageCount}
+                                             setPageCount={setPageCount} itemData={item.purveyor} item={item} tablPosition="purveyor"/>
                             <td className="adminFontTable">{item.createdAt}</td>
                             <td className="adminFontTable">{item.updatedAt}</td>
                             {/*<td className="adminFont">*/}

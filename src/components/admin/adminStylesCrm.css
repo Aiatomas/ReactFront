@@ -45,3 +45,18 @@
 .adminButtonAdd:hover{
     cursor: pointer;
 }
+.redStorageItem:hover {
+    color: #0a53be;
+    cursor: pointer;
+}
+.redIcon{
+    width: 1.2vh;
+    visibility: hidden;
+}
+/*.redStorageItem.redIcon {*/
+/*    display: none;*/
+/*    visibility: hidden;*/
+/*}*/
+.redStorageItem:hover .redIcon {
+    visibility: visible;
+}
