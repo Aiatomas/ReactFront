@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import {Pagination} from "react-bootstrap";
 
-const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount}) => {
+const PaginationMy = ({name, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount}) => {
     const [pag, setPag] = useState([]);
     const setPageCountF = (value) => {
         setInPageCount(parseInt(value.target.value));
@@ -141,7 +142,7 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
 
     return (
         <div className="d-flex adminPagination">
-            <div className="adminFontTable">Кількість айтемів у сторінці:
+            <div className="adminFontTable">
                 <Form.Select className="adminFontTable" name="pagination" onChange={setPageCountF} value={inPageCount}>
                     <option className="adminFontTable" value="1">1</option>
                     <option className="adminFontTable" value="20">20</option>
@@ -152,11 +153,18 @@ const Pagination = ({name, data, setData, inPageCount, setInPageCount, currentPa
                     <option className="adminFontTable" value="500">500</option>
                 </Form.Select>
             </div>
-            {pag.map((item) => (
-                <button onClick={clickFunc} className={item === currentPage ? 'btn btnm adminFontTable pagButton fileActive' : 'btn btnm adminFontTable pagButton'} toclick={item} key={item}>{item}</button>
-            ))}
+            <Pagination size="sm">
+                {pag.map((item) => (
+                    <Pagination.Item className="adminFontTable pagButton" onClick={clickFunc} toclick={item} key={item} active={item === currentPage}>
+                        {item}
+                    </Pagination.Item>
+                ))}
+            </Pagination>
+            {/*{pag.map((item) => (*/}
+            {/*    <button onClick={clickFunc} className={item === currentPage ? 'btn btnm adminFontTable pagButton fileActive' : 'btn btnm adminFontTable pagButton'} toclick={item} key={item}>{item}</button>*/}
+            {/*))}*/}
         </div>
     );
 };
 
-export default Pagination;
+export default PaginationMy;

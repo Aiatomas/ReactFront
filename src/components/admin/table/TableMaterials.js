@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Loader from "../../calc/Loader";
-import Pagination from "../pagination/Pagination";
+import PaginationMy from "../pagination/PaginationMy";
 import axios from "axios";
 import {
     MDBCard,
@@ -109,15 +109,15 @@ export const TableMaterials = ({name}) => {
                                                 <p className='text-uppercase small mb-2'>
                                                     <strong>{name} {data.count}</strong>
                                                 </p>
-                                                <Pagination name={name}
-                                                            data={data}
-                                                            setData={setData}
-                                                            inPageCount={inPageCount}
-                                                            setInPageCount={setInPageCount}
-                                                            currentPage={currentPage}
-                                                            setCurrentPage={setCurrentPage}
-                                                            pageCount={pageCount}
-                                                            setPageCount={setPageCount}
+                                                <PaginationMy name={name}
+                                                              data={data}
+                                                              setData={setData}
+                                                              inPageCount={inPageCount}
+                                                              setInPageCount={setInPageCount}
+                                                              currentPage={currentPage}
+                                                              setCurrentPage={setCurrentPage}
+                                                              pageCount={pageCount}
+                                                              setPageCount={setPageCount}
                                                 />
                                             </MDBCol>
                                             <MDBCol size='6' className='text-end'>
@@ -180,15 +180,15 @@ export const TableMaterials = ({name}) => {
                                             <p className='text-uppercase small mb-2'>
                                                 <strong>{name} {data.count}</strong>
                                             </p>
-                                            <Pagination name={name}
-                                                        data={data}
-                                                        setData={setData}
-                                                        inPageCount={inPageCount}
-                                                        setInPageCount={setInPageCount}
-                                                        currentPage={currentPage}
-                                                        setCurrentPage={setCurrentPage}
-                                                        pageCount={pageCount}
-                                                        setPageCount={setPageCount}
+                                            <PaginationMy name={name}
+                                                          data={data}
+                                                          setData={setData}
+                                                          inPageCount={inPageCount}
+                                                          setInPageCount={setInPageCount}
+                                                          currentPage={currentPage}
+                                                          setCurrentPage={setCurrentPage}
+                                                          pageCount={pageCount}
+                                                          setPageCount={setPageCount}
                                             />
                                         </MDBCol>
                                         <MDBCol size='6' className='text-end'>
