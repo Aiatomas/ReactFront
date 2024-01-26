@@ -138,16 +138,16 @@ export const View = () => {
                                     <MDBInput className="input-group-text gray inputs inputFormat"
                                               onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
                                               type='number' value={1}/>
-                                    <button className="input-group-text gray d-none">{imgWidth}</button>
-                                    <button className="input-group-text gray d-none">{imgHeight}</button>
-                                    {/*<button className="btn btn-sm input-group-text gray m-2">*/}
-                                    {/*    <MDBFile*/}
-                                    {/*        label=''*/}
-                                    {/*        id='oneFile'*/}
-                                    {/*        className="btn btn-sm"*/}
-                                    {/*        onChange={loadFile}*/}
-                                    {/*    />*/}
-                                    {/*</button>*/}
+                                    <button className="input-group-text gray">{imgWidth}</button>
+                                    <button className="input-group-text gray">{imgHeight}</button>
+                                    <button className="btn btn-sm input-group-text gray m-2">
+                                        <MDBFile
+                                            label=''
+                                            id='oneFile'
+                                            className=""
+                                            onChange={loadFile}
+                                        />
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -47,6 +47,7 @@ function Products({name}) {
                         ))}
                     </Row>
                     {/*{data.rows.map((item) => (*/}
+                    {/*"proxy": "http://127.0.0.1:3000",*/}
                     {/*    <CardProduct key={item.id} name={name} data={data} setData={setData} item={item}/>*/}
                     {/*))}*/}
                 </MDBContainer>
