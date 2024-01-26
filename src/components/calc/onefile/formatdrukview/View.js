@@ -31,9 +31,9 @@ export const View = () => {
         )
     }
 
-    const setPage = (value) => {
-
-    }
+    // const setPage = (value) => {
+    //
+    // }
 
     const loadFile = (e) => {
         if(e.target.value){

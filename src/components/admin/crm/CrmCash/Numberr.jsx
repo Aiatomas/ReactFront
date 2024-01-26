@@ -37,9 +37,9 @@ class Numberr extends React.Component {
             });
     }
 
-    clickFunc = (item) => {
-        // Your function logic
-    }
+    // clickFunc = (item) => {
+    //     // Your function logic
+    // }
 
     render() {
         return (

@@ -4,8 +4,6 @@ import axios from "axios";
 import Loader from "../../../calc/Loader";
 import CrmHeader from "../CrmHeader";
 import {MDBContainer} from "mdb-react-ui-kit";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import ProductModalAdd from "./ProductModalAdd";
 import {Col, Row} from "react-bootstrap";
 
