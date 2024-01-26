@@ -136,7 +136,7 @@ export const View = () => {
                                     <button id="page_count" className="input-group-text gray">Загалом:</button>
                                     <button className="input-group-text gray">{thisFile.countInFile} стр.</button>
                                     <MDBInput className="input-group-text gray inputs inputFormat"
-                                              onChange={(e) => setPage(e.currentTarget.value)} label='' id='typeNumber'
+                                              label='' id='typeNumber'
                                               type='number' value={1}/>
                                     <button className="input-group-text gray">{imgWidth}</button>
                                     <button className="input-group-text gray">{imgHeight}</button>

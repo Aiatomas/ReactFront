@@ -13,7 +13,7 @@ export const FormatDrukView = () => {
             <div className="d-flex formatAndDruk">
                 <Format/>
                 <Druk/>
-                <View/>
+                {/*<View/>*/}
             </div>
         );
     }
@@ -21,7 +21,7 @@ export const FormatDrukView = () => {
         return (
             <div className="d-flex formatAndDruk">
                 <Format/>
-                <View/>
+                {/*<View/>*/}
             </div>
         );
     }
