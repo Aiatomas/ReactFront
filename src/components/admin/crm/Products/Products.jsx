@@ -7,6 +7,7 @@ import {MDBContainer} from "mdb-react-ui-kit";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ProductModalAdd from "./ProductModalAdd";
+import {Col, Row} from "react-bootstrap";
 
 
 function Products({name}) {
@@ -32,18 +33,22 @@ function Products({name}) {
             <>
                 <CrmHeader whoPick={name} data={data}/>
                 <MDBContainer fluid className="">
-                    <CardProduct name={name} data={data} setData={setData}/>
-                    <CardProduct name={name} data={data} setData={setData}/>
-                    <CardProduct name={name} data={data} setData={setData}/>
-                    <CardProduct name={name} data={data} setData={setData}/>
-                    <ProductModalAdd
-                        namem={name}
-                        data={data}
-                        setData={setData}
-                    />
-                    {data.rows.map((item) => (
-                        <CardProduct key={item.id} name={name} data={data} setData={setData} item={item}/>
-                    ))}
+                    <Row xs={1} md={4} className="g-4">
+                        <ProductModalAdd
+                            namem={name}
+                            data={data}
+                            setData={setData}
+                            className="adminFont"
+                        />
+                        {data.rows.map((item, idx) => (
+                            <Col key={idx}>
+                                <CardProduct key={item.id} name={name} data={data} setData={setData} item={item}/>
+                            </Col>
+                        ))}
+                    </Row>
+                    {/*{data.rows.map((item) => (*/}
+                    {/*    <CardProduct key={item.id} name={name} data={data} setData={setData} item={item}/>*/}
+                    {/*))}*/}
                 </MDBContainer>
             </>
         )

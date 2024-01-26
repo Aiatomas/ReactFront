@@ -1,69 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel, Container, Row, Col, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import classnames from 'classnames';
-import {MDBCard, MDBContainer} from "mdb-react-ui-kit";
 
 const CrmCash = () => {
-  const [orders, setOrders] = useState([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
-  const [products, setProducts] = useState([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
-  const [selectedOrder, setSelectedOrder] = useState({
-    orderDetails: {},
-    options: {},
-  });
+  const [number, setNumber] = useState(0);
+  const [coefficient, setCoefficient] = useState(0);
 
-  // useEffect(() => {
-  //   //API calls to get orders and products list. Replace it with your own API end points
-  //   axios.get('/api/orders')
-  //     .then(res => setOrders(res.data));
-  //
-  //   axios.get('/api/products')
-  //     .then(res => setProducts(res.data));
-  // }, []);
+  useEffect(() => {
+    calculateCoefficient(number);
+  }, [number]);
 
-  const handleOrderSelect = (order) => {
-    setSelectedOrder(order);
+  const calculateCoefficient = (num) => {
+    let newCoefficient = num > 0 ? 1 / num : 0;
+    setCoefficient(newCoefficient);
   };
 
+    const multiplyNumbersInRange = function(numbers, multiplicand) {
+        return numbers.map(num => {
+            if (num >= 1 && num <= 10) return num * multiplicand;
+            if (num >= 11 && num <= 50) return num * multiplicand;
+            if (num >= 51 && num <= 100) return num * multiplicand;
+            if (num >= 101 && num <= 99999) return num * multiplicand;
+            return num;
+        });
+    }
+    const numbers = [5, 20, 60, 200, 1000];
+    const multiplicand = 2;
+    const output = multiplyNumbersInRange(numbers, multiplicand);
+    console.log(output);
+
   return (
-      <div>
-        <p className="text-center">{orders.length} orders</p>
-        <Carousel className={classnames('mb-3')}>
-          {orders.map((order, index) => (
-              <Carousel.Item key={index}>
-                <h5>Order: {order.id}</h5>
-                <Button variant="primary" onClick={() => handleOrderSelect(order)}>
-                  {order.id}
-                </Button>
-                <Button variant="primary" onClick={() => handleOrderSelect(order)}>
-                  Тут типа инфа??
-                </Button>
-              </Carousel.Item>
-          ))}
-        </Carousel>
-
-        <Row>
-          <Col md={6} className="whiteBG">
-            <h4>Product List</h4>
-            <ul>
-              {products.map((product, index) => (
-                  <li key={index}>{product.id} - {product.price}</li>
-              ))}
-            </ul>
-          </Col>
-          <Col md={6} className="whiteBG">
-            <h4>Order Details</h4>
-            <p>Order Id: {selectedOrder.orderDetails.id}</p>
-            <p>Total price: {selectedOrder.orderDetails.totalPrice}</p>
-
-            <h4>Options</h4>
-            {/* Link to options page, replace with your actual path */}
-            <Link to={`/options/${selectedOrder.options.id}`}>View Options</Link>
-          </Col>
-        </Row>
-      </div>
+    <div>
+      <label>Enter a number:</label>
+      <input
+        type="number"
+        onChange={(e) => setNumber(e.target.value)}
+      />
+      <p>Coefficient: {coefficient}</p>
+    </div>
   );
-}
+};
 
 export default CrmCash;

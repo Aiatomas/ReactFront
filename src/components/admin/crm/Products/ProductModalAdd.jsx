@@ -1,98 +1,172 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import axios from "axios";
 import Card from "react-bootstrap/Card";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Form from "react-bootstrap/Form";
+import {Button, Modal} from "react-bootstrap";
+import axios from "axios";
+import SearchForm from "../SearchForm";
 
-function ModalStorageTable({namem, data, setData}) {
+function ProductModalAdd({namem, data, setData}) {
     const [show, setShow] = useState(false);
+    const [forms, setForms] = useState([]);
+    const [productName, setProductName] = useState("");
+    const [load, setLoad] = useState(false);
 
     const handleClose = () => {
         setShow(false);
     }
     const handleShow = () => setShow(true);
 
-    const [fields, setFields] = useState([{ value: '' }]);
-
-    // Додати нове поле до стану форми
-    const addField = () => {
-        setFields([...fields, { value: '' }]);
-    };
-    const removeField = (index) => {
-        const updatedFields = [...fields];
-        updatedFields.splice(index, 1);
-        setFields(updatedFields);
+    // Додати нову форму з двома текстовими полями та одним полем типу "checkbox"
+    const addForm = () => {
+        setForms([...forms, { unitName: '', unitType: '', checkbox: false }]);
     };
 
-    // Оновити значення поля в стані форми
-    const handleChange = (index, event) => {
-        const updatedFields = [...fields];
-        updatedFields[index].value = event.target.value;
-        setFields(updatedFields);
+    // Оновити значення текстових полів
+    const handleTextChange = (formIndex, fieldName, event) => {
+        const updatedForms = [...forms];
+        updatedForms[formIndex][fieldName] = event.target.value;
+        setForms(updatedForms);
+    };
+
+    // Delete form
+    const deleteForm = (formIndex) => {
+        const updatedForms = [...forms];
+        updatedForms.splice(formIndex, 1);
+        setForms(updatedForms);
+    };
+
+    // Оновити значення поля типу "checkbox"
+    const handleCheckboxChange = (formIndex, event) => {
+        const updatedForms = [...forms];
+        updatedForms[formIndex].checkbox = event.target.checked;
+        setForms(updatedForms);
     };
 
     // Відправити дані форми
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Обробка введених даних
-        console.log(fields);
-    };
-
-    let saveAll = (event) => {
-        let data = {
-            tableName: namem
+        let dataToSend = {
+            method: "addNew",
+            productName: productName,
+            productUnits: forms
         }
-        console.log(data);
-        axios.post(`admin/addtotable`, data)
+        console.log(dataToSend);
+
+        setLoad(true)
+        axios.post(`admin/api/products`, dataToSend)
             .then(response => {
                 console.log(response.data);
                 setData(response.data)
+                setLoad(false)
                 handleClose()
             })
             .catch(error => {
                 console.log(error.message);
             })
-    }
+    };
 
     return (
-        <>
+        <div>
             <Card onClick={handleShow} style={{ width: '18rem' }}>
                 <Card.Body>
-                    <Card.Title>+</Card.Title>
+                    <Card.Title className="adminFont">+</Card.Title>
                 </Card.Body>
             </Card>
 
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Новий щось</Offcanvas.Title>
+                    <Offcanvas.Title>Новий товар</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <form onSubmit={handleSubmit}>
-                        {fields.map((field, index) => (
-                            <div key={index}>
-                                <input
-                                    type="text"
-                                    value={field.value}
-                                    onChange={(event) => handleChange(index, event)}
-                                />
-                                <button type="button" onClick={() => removeField(index)}>
-                                    Видалити
-                                </button>
-                            </div>
-                        ))}
-                        <button type="button" onClick={addField}>
-                        Додати поле
-                        </button>
-                        <button type="submit">Зберегти</button>
-                    </form>
-
-
+                    <div>
+                        <Form.Control
+                            type="text"
+                            placeholder="Назва товару"
+                            value={productName}
+                            className=""
+                            onChange={(event) => setProductName(event.target.value)}
+                        />
+                        <div>
+                            Зіставні елементи:
+                        </div>
+                        <Form onSubmit={handleSubmit}>
+                            {forms.map((form, formIndex) => (
+                                <div key={formIndex} className="adminFont border-1">
+                                    {formIndex + 1}
+                                    <Form.Group>
+                                        <Form.Label className="adminFont">Назва у товарі</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Назва у товарі"
+                                            value={form.unitName}
+                                            className="adminFont"
+                                            onChange={(event) => handleTextChange(formIndex, 'unitName', event)}
+                                        />
+                                        {/*<SearchForm*/}
+                                        {/*    props={["1", "2", "3", "11", "112"]}*/}
+                                        {/*    value={form.unitName}*/}
+                                        {/*    onChangeFunc={handleTextChange}*/}
+                                        {/*    handledField={'unitName'}*/}
+                                        {/*    formIndex={formIndex}*/}
+                                        {/*/>*/}
+                                        <Form.Text className="adminFont text-muted">
+                                            Назва
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label className="adminFont">Тип</Form.Label>
+                                        {/*<Form.Control*/}
+                                        {/*    type="text"*/}
+                                        {/*    placeholder="Тип"*/}
+                                        {/*    value={form.text2}*/}
+                                        {/*    className="adminFont"*/}
+                                        {/*    onChange={(event) => handleTextChange(formIndex, 'text2', event)}*/}
+                                        <Form.Select
+                                            value={form.unitType}
+                                            className="adminFont"
+                                            onChange={(event) => handleTextChange(formIndex, 'unitType', event)}
+                                        >
+                                            <option className="adminFont">Тип</option>
+                                            <option className="adminFont" value="Бумага">Бумага</option>
+                                            <option className="adminFont" value="Друк">Друк</option>
+                                            <option className="adminFont" value="Перепліт">Перепліт</option>
+                                            <option className="adminFont" value="Ламінація">Ламінація</option>
+                                        </Form.Select>
+                                        <Form.Text className="adminFont text-muted">
+                                            Тип матеріала/роботи що буде витрачено/зроблено при виготовленні
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label className="adminFont">Email address</Form.Label>
+                                        <Form.Check
+                                            type="checkbox"
+                                            checked={form.checkbox}
+                                            className="adminFont"
+                                            onChange={(event) => handleCheckboxChange(formIndex, event)}
+                                        />
+                                        <Form.Text className="adminFont text-muted">
+                                            We'll never share your email with anyone else.
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <div>
+                                        <Button type="button" className="adminFont" variant="outline-danger"
+                                                onClick={() => deleteForm(formIndex)}>Видалити</Button>
+                                    </div>
+                                </div>
+                            ))}
+                        </Form>
+                        <Button type="button" className="adminFont" variant="outline-success" onClick={addForm}>
+                            Додати елемент
+                        </Button>
+                    </div>
+                    <div>
+                        <Button type="submit" className="adminFont" variant="success" onClick={(event) => handleSubmit(event)}>Відправити</Button>
+                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
-        </>
+        </div>
     );
 }
 
-export default ModalStorageTable;
+export default ProductModalAdd;

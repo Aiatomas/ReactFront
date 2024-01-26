@@ -60,3 +60,6 @@
 .redStorageItem:hover .redIcon {
     visibility: visible;
 }
+.modalProductAdd{
+    width: 90vw;
+}

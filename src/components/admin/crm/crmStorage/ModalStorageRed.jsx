@@ -72,29 +72,22 @@ const ModalStorageRed = ({dataTypeInTable, tableName, itemData, item, tablPositi
 
         // Додати обробник подій при відновленні компонента
         if(showModal){
-            document.addEventListener("click", handleClickOutside);
+            document.addEventListener("mousedown", handleClickOutside);
         }
 
         // Видалити обробник подій при знищенні компонента
-        return () => document.removeEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [showModal]);
 
     return (
-        <td className="adminFontTable redStorageItem" onClick={handleOpenModal}>
-            {/*<div className="adminFontTable redStorageItem" onClick={handleOpenModal}>*/}
-            {/*    /!*{!itemData && (*!/*/}
-            {/*    /!*    <p className="adminFontTable redStorageItem">""</p>*!/*/}
-            {/*    /!*    )}*!/*/}
-            {/*    {itemData}*/}
-            {/*    <img src={redIcon} alt="red" className="redIcon"/>*/}
-            {/*</div>*/}
+        <td className="adminFontTable redStorageItem" onMouseDown={handleOpenModal}>
             {itemData}
             <img src={redIcon} alt="red" className="redIcon"/>
             {showModal && (
                 <div
                     // className="modal"
                     style={modalStyle}
-                    onClick={stopPropagation}
+                    onMouseDown={stopPropagation}
                 >
                     <Modal.Dialog>
                         {/*<Modal.Header closeButton>*/}
@@ -114,12 +107,12 @@ const ModalStorageRed = ({dataTypeInTable, tableName, itemData, item, tablPositi
                         </Modal.Body>
 
                         <Modal.Footer>
-                            <Button variant="outline-secondary" className="adminFontTable" onClick={handleCloseModal}>Закрити</Button>
+                            <Button variant="outline-secondary" className="adminFontTable" onMouseDown={handleCloseModal}>Закрити</Button>
                             {load && (
                                 <Button disabled variant="outline-success" className="adminFontTable">Збереження змін</Button>
                             )}
                             {!load && (
-                                <Button variant="outline-success" className="adminFontTable" onClick={saveThis}>Зберегти зміни</Button>
+                                <Button variant="outline-success" className="adminFontTable" onMouseDown={saveThis}>Зберегти зміни</Button>
                             )}
                         </Modal.Footer>
                     </Modal.Dialog>
