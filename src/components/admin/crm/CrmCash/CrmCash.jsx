@@ -3,42 +3,54 @@ import ChartComponent from "./ChartsMy";
 
 const CrmCash = () => {
     const [price, setPrice] = useState(1);
-    const [coefficient, setCoefficient] = useState(1);
-    const [endElement, setEndElement] = useState(1);
-    const [quantity, setQuantity] = useState(1);
+    const [coefficient, setCoefficient] = useState(3);
+    const [reducerCoef, setReducerCoef] = useState(1);
+    const [quantity, setQuantity] = useState(1000);
     const [totalPrice, setTotalPrice] = useState(0);
     const [dataForCharts, setDataForCharts] = useState([]);
 
     useEffect(() => {
         let dataForChars = []
         let impactCoef = coefficient
+        let reducedCoef = reducerCoef / 100;
         for (let i = 0; i < quantity; i++) {
             let priceForThisUnit = price * impactCoef
-            let reducedCoef = endElement / 100;
+
+
+            reducedCoef = reducerCoef / 100;
             impactCoef = Math.max(impactCoef * (1 - reducedCoef), 1);
+
+            // console.log(`impactCoef: ${impactCoef}, reducedCoef: ${reducedCoef}`);
             let unitCharts = {price: priceForThisUnit, count: i+1}
             dataForChars.push(unitCharts)
         }
         setDataForCharts(dataForChars)
-    }, [price, endElement, coefficient, quantity]);
+    }, [price, reducerCoef, coefficient, quantity]);
 
     return (
         <div>
-            <div>
-                <input type="number" onChange={(e) => setPrice(parseFloat(e.target.value))} value={price}/>
-                <label>-Ціна</label>
+            <div className="d-flex">
+                <div>
+                    <input type="number" onChange={(e) => setPrice(parseFloat(e.target.value))} value={price}/>
+                    <label>-Ціна</label>
+                </div>
+                <div>
+                    <input type="number" step="1" onChange={(e) => setQuantity(parseFloat(e.target.value))}
+                           value={quantity}/>
+                    <label>-Кількість</label>
+                </div>
             </div>
-            <div>
-                <input type="number" step="0.01" onChange={(e) => setCoefficient(parseFloat(e.target.value))} value={coefficient}/>
-                <label>-Коєфіцієнт</label>
-            </div>
-            <div>
-                <input type="number" step="0.01" onChange={(e) => setQuantity(parseFloat(e.target.value))} value={quantity}/>
-                <label>-Кількість</label>
-            </div>
-            <div>
-                <input type="number" step="0.01" onChange={(e) => setEndElement(parseFloat(e.target.value))} value={endElement}/>
-                <label>-% зниження єффекту коєфіцієнта за одиницю кількості</label>
+            <div className="d-flex">
+                <div>
+                    <input type="number" step="0.01" onChange={(e) => setCoefficient(parseFloat(e.target.value))}
+                           value={coefficient}/>
+                    <label>-Коєфіцієнт</label>
+                </div>
+                <div>
+                    <input type="number" step="0.01" onChange={(e) => setReducerCoef(parseFloat(e.target.value))}
+                           value={reducerCoef}/>
+                    <label>-% зниження єффекту коєфіцієнта за одиницю кількості</label>
+                </div>
             </div>
             <p>Total Price: {totalPrice}</p>
 
