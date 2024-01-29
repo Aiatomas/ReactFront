@@ -20,20 +20,6 @@ const CrmCash = () => {
             dataForChars.push(unitCharts)
         }
         setDataForCharts(dataForChars)
-
-
-        // let overallImpact = 0;
-        // let impact = 1;
-        // const dampingFactor = endElement;
-        //
-        // for (let i = 0; i < quantity; i++) {
-        //     let thisImpact = impact * coefficient;
-        //     overallImpact += thisImpact;
-        //     impact /= dampingFactor;
-        // }
-        // let totalPrice = price * overallImpact / influenceCurve;
-        // // let toTotalPrice = totalPrice * quantity
-        //     setTotalPrice(totalPrice);
     }, [price, endElement, coefficient, quantity]);
 
     return (
