@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChartComponent from "./ChartsMy";
 
-const CoefTestt = () => {
+const CoefTest = () => {
     const [price, setPrice] = useState(1);
     const [coefficient, setCoefficient] = useState(3);
     const [reducerCoef, setReducerCoef] = useState(1);
@@ -20,7 +20,6 @@ const CoefTestt = () => {
             reducedCoef = reducerCoef / 100;
             impactCoef = Math.max(impactCoef * (1 - reducedCoef), 1);
 
-            // console.log(`impactCoef: ${impactCoef}, reducedCoef: ${reducedCoef}`);
             let unitCharts = {price: priceForThisUnit, count: i+1}
             dataForChars.push(unitCharts)
         }
@@ -61,4 +60,4 @@ const CoefTestt = () => {
     );
 };
 
-export default CoefTestt;
+export default CoefTest;
