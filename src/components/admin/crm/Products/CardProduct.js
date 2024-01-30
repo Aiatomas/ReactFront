@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
+import InputGroup from 'react-bootstrap/InputGroup';
 
 function CardProduct({name, data, setData, item}) {
     const [show, setShow] = useState(false);
@@ -36,23 +37,25 @@ function CardProduct({name, data, setData, item}) {
             <Card.Body>
                 <Card.Title className="adminFont">{item.name}</Card.Title>
                 <Card.Text>
-                    {item.productunits.map((unitItem) => (
+                    {item.productunits.map((unitItem, iter) => (
                         <div key={unitItem.id} className="d-flex adminFontTable border-1">
-                            <div></div>
-                            <Form.Control
-                                type="text"
-                                placeholder="Назва у товарі"
-                                value={unitItem.name}
-                                className="adminFontTable"
-                                disabled
-                            />
-                            <Form.Control
-                                type="text"
-                                placeholder="Назва у товарі"
-                                value={unitItem.type}
-                                className="adminFontTable"
-                                disabled
-                            />
+                            <InputGroup className="adminFontTable">
+                                <InputGroup.Text className="adminFontTable">{iter+1}</InputGroup.Text>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Назва у товарі"
+                                    value={unitItem.name}
+                                    className="adminFontTable"
+                                    disabled
+                                />
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Тип"
+                                    value={unitItem.type}
+                                    className="adminFontTable"
+                                    disabled
+                                />
+                            </InputGroup>
                         </div>
                     ))}
                 </Card.Text>
