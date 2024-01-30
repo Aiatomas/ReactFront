@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChartComponent from "./ChartsMy";
 
-const CoefTest = () => {
+const CoefTestt = () => {
     const [price, setPrice] = useState(1);
     const [coefficient, setCoefficient] = useState(3);
     const [reducerCoef, setReducerCoef] = useState(1);
@@ -61,4 +61,4 @@ const CoefTest = () => {
     );
 };
 
-export default CoefTest;
+export default CoefTestt;
