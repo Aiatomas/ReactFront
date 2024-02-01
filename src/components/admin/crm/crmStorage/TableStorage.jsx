@@ -67,10 +67,10 @@ export const TableStorage = ({name}) => {
                         <th className="adminFontTable">Ціна(1-10)</th>
                         <th className="adminFontTable">Ціна(11-50)</th>
                         <th className="adminFontTable">Ціна(51-100)</th>
-                        <th className="adminFontTable">Ціна(101-0)</th>
+                        <th className="adminFontTable">Ціна(101-0)(main)</th>
                         <th className="adminFontTable">В наявності</th>
                         <th className="adminFontTable">Всього</th>
-                        <th className="adminFontTable">Прайс-лист</th>
+                        <th className="adminFontTable">Коєф ціни(від main)</th>
                         <th className="adminFontTable">Створив</th>
                         <th className="adminFontTable">Постачальник</th>
                         <th className="adminFontTable">createdAt</th>

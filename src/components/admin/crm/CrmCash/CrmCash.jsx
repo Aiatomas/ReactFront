@@ -5,8 +5,9 @@ const CrmCash = () => {
     const [price, setPrice] = useState(1);
 
     return (
-        <div>
-
+        <div className="d-flex">
+            <div></div>
+            <div></div>
         </div>
     );
 };
