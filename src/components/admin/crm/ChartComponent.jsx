@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 const ChartComponent = ({ aapl }) => {
     const svgRef = useRef();
     const [dimensions, setDimensions] = useState({ width: 928, height: 500 });
+    const tooltipRef = useRef();
 
     useEffect(() => {
         function handleResize() {
@@ -30,8 +31,8 @@ const ChartComponent = ({ aapl }) => {
         const marginBottom = 30;
         const marginLeft = 40;
 
-        const xScale = d3.scaleLinear(d3.extent(aapl, d => d.count), [marginLeft, width - marginRight]);
-        const yScale = d3.scaleLinear([0, d3.max(aapl, d => d.price)], [height - marginBottom, marginTop]);
+        const xScale = d3.scaleLinear().domain(d3.extent(aapl, d => d.count)).range([marginLeft, width - marginRight]);
+        const yScale = d3.scaleLinear().domain([0, d3.max(aapl, d => d.price)]).range([height - marginBottom, marginTop]);
 
         const xAxis = d3.axisBottom(xScale);
         svg.select('.xAxis').call(xAxis);
@@ -46,6 +47,34 @@ const ChartComponent = ({ aapl }) => {
         svg.select('.line')
             .datum(aapl)
             .attr('d', line);
+
+        const focus = svg.append('g').style('display', 'none');
+
+        focus.append('circle')
+            .attr('r', 4.5);
+
+        focus.append('text')
+            .attr('x', 9)
+            .attr('dy', ".35em");
+
+        svg.append('rect')
+            .style('fill', 'none')
+            .style('pointer-events', 'all')
+            .attr('width', width)
+            .attr('height', height)
+            .on('mouseover', () => focus.style('display', null))
+            .on('mouseout', () => focus.style('display', 'none'))
+            .on('mousemove', function(event) {
+                const pointer = d3.pointer(event);
+                const x0 = xScale.invert(pointer[0]);
+                let i = d3.bisect(aapl, x0, 1);
+                let d0 = aapl[i - 1];
+                let d1 = aapl[i];
+                let d = x0 - d0.count > d1.count - x0 ? d1 : d0;
+
+                focus.attr('transform', `translate(${xScale(d.count)},${yScale(d.price)})`);
+                focus.select('text').text(`x:${d.count}, y:${d.price}`);
+            });
     }, [aapl, dimensions]);
 
     return (
@@ -53,6 +82,7 @@ const ChartComponent = ({ aapl }) => {
             <path className="line" fill="none" stroke="steelblue" strokeWidth="1.5" />
             <g className="xAxis" transform={`translate(0, ${dimensions.height - 30})`} />
             <g className="yAxis" transform={`translate(${40},0)`} />
+            <div ref={tooltipRef} style={{position: 'absolute', visibility: 'hidden', padding: '10px', background: 'white', border: '1px solid black'}}></div>
         </svg>
     );
 };
