@@ -17,6 +17,7 @@ import {CrmSettings} from "./crm/Settings/CrmSettings";
 import Products from "./crm/Products/Products";
 import CoefTest from "./crm/CoefTest";
 import FallingCircle from "./FallingCircle";
+import CalcNew from "../calcnew/CalcNew";
 
 export const Admin = () => {
     const [whoPick, setWhoPick] = useState("Робочий стіл");
@@ -72,6 +73,7 @@ export const Admin = () => {
                 <button onClick={pickFunc} className={"Налаштування" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Налаштування"}>{"Налаштування"}</button>
                 <button onClick={pickFunc} className={"sessions" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"sessions"}>{"sessions"}</button>
                 <button onClick={pickFunc} className={"Продукти" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Продукти"}>{"Продукти"}</button>
+                <button onClick={pickFunc} className={"Считалочка" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Считалочка"}>{"Считалочка"}</button>
                 <button onClick={pickFunc} className={"КоєфТест" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"КоєфТест"}>{"КоєфТест"}</button>
             </div>
 
@@ -95,8 +97,11 @@ export const Admin = () => {
                 {whoPick === "Продукти" &&
                     <Products name={whoPick}/>
                 }
+                {whoPick === "Считалочка" &&
+                    <CalcNew name={whoPick}/>
+                }
                 {whoPick === "КоєфТест" &&
-                    <FallingCircle name={whoPick}/>
+                    <CoefTest name={whoPick}/>
                 }
 
 

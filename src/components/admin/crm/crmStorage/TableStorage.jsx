@@ -83,7 +83,7 @@ export const TableStorage = ({name}) => {
                             <th className="adminFontTable">{item}</th>
 
                         ))}
-                        <th className="adminFontTable"></th>
+                        {/*<th className="adminFontTable"></th>*/}
 
                     </tr>
                     </thead>

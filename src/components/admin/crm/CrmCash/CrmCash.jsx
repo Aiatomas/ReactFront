@@ -37,6 +37,9 @@ const CrmCash = () => {
     return (
         <div className="d-flex justify-content-space-between">
             <div className="card">
+                <div>
+
+                </div>
                 {things.map((thing, index) => (
                     <p key={index} onClick={() => handleThingClick(thing)} className="thing">
                         {thing.name}
@@ -45,10 +48,10 @@ const CrmCash = () => {
             </div>
             <div className="card">
                 {selectedThings.map((thing, index) => (
-                    <div key={index} className="d-flex">
-                        <p className="thing">{thing.name}</p>
-                        <button onClick={() => handleThingClick2(thing)} className="thing">remove</button>
-                        <button className="thing">-</button>
+                    <div key={index} className="d-flex thing">
+                        <p className="">{thing.name}</p>
+                        <button onClick={() => handleThingClick2(thing)} className="">remove</button>
+                        <button className="">-</button>
                         <Form.Control
                             type="number"
                             placeholder=""
@@ -56,7 +59,7 @@ const CrmCash = () => {
                             className=""
                             // onChange={(event) => setProductName(event.target.value)}
                         />
-                        <button className="thing">+</button>
+                        <button className="">+</button>
                     </div>
                 ))}
             </div>

@@ -36,7 +36,8 @@ function CardProduct({name, data, setData, item}) {
         <Card>
             <Card.Body>
                 <Card.Title className="adminFont">{item.name}</Card.Title>
-                <Card.Text>
+                <Card.Text className="adminFont">
+                    Складається з:
                     {item.productunits.map((unitItem, iter) => (
                         <div key={unitItem.id} className="d-flex adminFontTable border-1">
                             <InputGroup className="adminFontTable">
