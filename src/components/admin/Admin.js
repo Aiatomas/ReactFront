@@ -16,6 +16,7 @@ import CrmCash from "./crm/CrmCash/CrmCash";
 import {CrmSettings} from "./crm/Settings/CrmSettings";
 import Products from "./crm/Products/Products";
 import CoefTest from "./crm/CoefTest";
+import FallingCircle from "./FallingCircle";
 
 export const Admin = () => {
     const [whoPick, setWhoPick] = useState("Робочий стіл");
@@ -95,7 +96,7 @@ export const Admin = () => {
                     <Products name={whoPick}/>
                 }
                 {whoPick === "КоєфТест" &&
-                    <CoefTest name={whoPick}/>
+                    <FallingCircle name={whoPick}/>
                 }
 
 

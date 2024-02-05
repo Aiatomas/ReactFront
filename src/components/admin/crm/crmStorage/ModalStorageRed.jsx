@@ -80,7 +80,7 @@ const ModalStorageRed = ({dataTypeInTable, tableName, itemData, item, tablPositi
     }, [showModal]);
 
     return (
-        <td className="adminFontTable redStorageItem" onMouseDown={handleOpenModal}>
+        <th className="adminFontTable redStorageItem" onMouseDown={handleOpenModal}>
             {itemData}
             <img src={redIcon} alt="red" className="redIcon"/>
             {showModal && (
@@ -118,7 +118,7 @@ const ModalStorageRed = ({dataTypeInTable, tableName, itemData, item, tablPositi
                     </Modal.Dialog>
                 </div>
             )}
-        </td>
+        </th>
     );
 };
 

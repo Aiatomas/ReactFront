@@ -96,6 +96,8 @@ function ModalStorageTable({namem, data, setData, inPageCount, setInPageCount, c
                     <Offcanvas.Title>Новий щось</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
+
+
                     <InputGroup className="mb-3">
                         <Form.Control
                             placeholder="Артикул"

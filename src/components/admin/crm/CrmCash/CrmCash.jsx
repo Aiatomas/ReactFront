@@ -1,19 +1,67 @@
-import React, { useState, useEffect } from 'react';
-
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import './CrmCash.css';
+import Form from "react-bootstrap/Form";
 
 const CrmCash = () => {
     const [price, setPrice] = useState(1);
+    const [things, setThings] = useState([]);
+    const [selectedThings, setSelectedThings] = useState([]);
+
+    const handleThingClick = (thing) => {
+        setThings(things.filter((t) => t !== thing));
+        setSelectedThings([...selectedThings, thing]);
+    };
+
+    const handleThingClick2 = (thing) => {
+      setSelectedThings(selectedThings.filter((t) => t !== thing));
+      setThings([...things, thing]);
+    };
+
+    useEffect(() => {
+        let data = {
+            name: "Склад",
+            inPageCount: 99999,
+            currentPage: 1,
+        };
+        axios.post(`admin/gettable`, data)
+            .then(response => {
+                console.log(response.data);
+                setThings(response.data.rows)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }, []);
 
     return (
-        <div className="d-flex">
-            <div></div>
-            <div></div>
+        <div className="d-flex justify-content-space-between">
+            <div className="card">
+                {things.map((thing, index) => (
+                    <p key={index} onClick={() => handleThingClick(thing)} className="thing">
+                        {thing.name}
+                    </p>
+                ))}
+            </div>
+            <div className="card">
+                {selectedThings.map((thing, index) => (
+                    <div key={index} className="d-flex">
+                        <p className="thing">{thing.name}</p>
+                        <button onClick={() => handleThingClick2(thing)} className="thing">remove</button>
+                        <button className="thing">-</button>
+                        <Form.Control
+                            type="number"
+                            placeholder=""
+                            // value={productName}
+                            className=""
+                            // onChange={(event) => setProductName(event.target.value)}
+                        />
+                        <button className="thing">+</button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
 
 export default CrmCash;
-
-// в первом поле будет число используемое для цени, второе число показівающее конечній елемент прогрессии коєфициента,
-//     3 число сам коєфициент применяемій по отношению к 1 числу в зависимости от 4 числа олицетворяющего колличество
-// сложений 1 числа, 5 число - переменная влияющая на изгиб спада силі влияния коєфициента на число с ростом его колличества
