@@ -9,6 +9,7 @@ import {Login} from "../login/Login";
 import {CurrentUser} from "../usersettings/CurrentUser";
 import {Admin} from "../admin/Admin";
 import Main from "../newcalc/Main";
+import NewCalcMain from "../newcalc/NewCalcMain";
 
 const AfterNav = () => {
     const pricesIsLoading = useSelector(state => state.prices.pricesIsLoading);
@@ -49,9 +50,11 @@ const AfterNav = () => {
                 <Route path="/files" element={<Files/>} />
                 <Route path="/createOrder" element={<CreateOrder/>} />
                 <Route path="/login" element={<Login/>} />
-                <Route path="/test" element={<Main/>} />
+                <Route path="/products" element={<Main/>} />
                 <Route path="/admin" element={<Admin/>} />
                 <Route path="/currentUser" element={<CurrentUser/>} />
+
+                <Route path="/products/*" element={<NewCalcMain/>} />
             </Routes>
         </div>
     );

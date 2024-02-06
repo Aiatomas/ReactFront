@@ -7,7 +7,7 @@ import Loader from "../calc/Loader";
 import CardProduct from "../admin/crm/Products/CardProduct";
 
 
-function Products({name}) {
+function CalcNew({name}) {
     const [data, setData] = useState(null);
 
 
@@ -53,4 +53,4 @@ function Products({name}) {
     );
 }
 
-export default Products;
+export default CalcNew;

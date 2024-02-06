@@ -106,9 +106,9 @@ const Nav = () => {
                                         <button className={basicActive === "/files" ? 'btn btnm activeChose' : 'btn btnm'}>Мої файли</button>
                                     </Link>
                                 </MDBNavbarItem>
-                                <MDBNavbarItem onClick={() => handleBasicClick('/test')}>
-                                    <Link to="/test">
-                                        <button className={basicActive === "/test" ? 'btn btnm activeChose' : 'btn btnm'}>TEST</button>
+                                <MDBNavbarItem onClick={() => handleBasicClick('/products')}>
+                                    <Link to="/products">
+                                        <button className={basicActive === "/products" ? 'btn btnm activeChose' : 'btn btnm'}>Продукти</button>
                                     </Link>
                                 </MDBNavbarItem>
                                 {/*<MDBNavbarItem disabled onClick={() => handleBasicClick('/createOrder')}>*/}

@@ -48,7 +48,7 @@ const ChartComponent = ({ aapl }) => {
             .datum(aapl)
             .attr('d', line);
 
-        const focus = svg.append('g').style('display', 'none');
+        const focus = svg.append('g').style('display', null); // Changed from 'none' to null
 
         focus.append('circle')
             .attr('r', 4.5);
@@ -62,12 +62,10 @@ const ChartComponent = ({ aapl }) => {
             .style('pointer-events', 'all')
             .attr('width', width)
             .attr('height', height)
-            .on('mouseover', () => focus.style('display', null))
-            .on('mouseout', () => focus.style('display', 'none'))
             .on('mousemove', function(event) {
                 const pointer = d3.pointer(event);
                 const x0 = xScale.invert(pointer[0]);
-                let i = d3.bisect(aapl, x0, 1);
+                let i = d3.bisect(aapl, x0, 1, 999);
                 let d0 = aapl[i - 1];
                 let d1 = aapl[i];
                 let d = x0 - d0.count > d1.count - x0 ? d1 : d0;

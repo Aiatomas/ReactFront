@@ -89,7 +89,7 @@
     height: 85vmin;
 }
 .logoImg {
-    height: 5vw;
+    height: 3vw;
 }
 @media (min-width: 1000px){
     .settingsContainer {
