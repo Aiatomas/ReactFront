@@ -10,10 +10,12 @@ import Form from "react-bootstrap/Form";
 import {number} from "../editor/lib";
 import InputGroup from "react-bootstrap/InputGroup";
 
-const NewCalcMain = ({size, setSize}) => {
+const ModalSize = ({size, setSize}) => {
     const [show, setShow] = useState(false);
     const [x, setX] = useState(size[0]);
     const [y, setY] = useState(size[1]);
+    const [xVal, setXVal] = useState(false);
+    const [yVal, setYVal] = useState(false);
 
     const handleClose = () => {
         setShow(false);
@@ -23,8 +25,22 @@ const NewCalcMain = ({size, setSize}) => {
     }
 
     let deleteThisRowF = (e) => {
-        setSize([x, y])
-        setShow(false);
+        let validX = true;
+        let validY = true;
+        setXVal(false)
+        setYVal(false)
+        if(x < 45 || x > 445){
+            validX = false
+            setXVal(true)
+        }
+        if(y < 45 || y > 445){
+            validY = false
+            setYVal(true)
+        }
+        if(validX && validY){
+            setSize([x, y])
+            setShow(false);
+        }
     }
 
     return (
@@ -49,9 +65,15 @@ const NewCalcMain = ({size, setSize}) => {
                             aria-describedby="modRed"
                             type="number"
                             value={x}
+                            min={45}
+                            max={445}
                             // className="adminFontTable"
                             onChange={(event) => setX(event.target.value)}
+                            isInvalid={xVal}
                         />
+                        <Form.Control.Feedback type="invalid">
+                            Будь-ласка введіть розмір від 45 до 445.
+                        </Form.Control.Feedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1">y</InputGroup.Text>
@@ -59,9 +81,15 @@ const NewCalcMain = ({size, setSize}) => {
                             aria-describedby="modRed"
                             type="number"
                             value={y}
+                            min={45}
+                            max={445}
                             // className="adminFontTable"
                             onChange={(event) => setY(event.target.value)}
+                            isInvalid={yVal}
                         />
+                        <Form.Control.Feedback type="invalid">
+                            Будь-ласка введіть розмір від 45 до 445.
+                        </Form.Control.Feedback>
                     </InputGroup>
                 </Modal.Body>
                 <Modal.Footer>
@@ -77,4 +105,4 @@ const NewCalcMain = ({size, setSize}) => {
     );
 };
 
-export default NewCalcMain;
+export default ModalSize;
