@@ -7,6 +7,11 @@ const ModalLamination = ({lamination, setLamination}) => {
     const [show, setShow] = useState(false);
     const [mat1, setMat1] = useState("1");
 
+    let mat2 = [
+        "з глянцевим ламінуванням",
+        "з матовим ламінуванням",
+        "з ламінуванням Soft Touch",
+    ]
 
     const handleClose = () => {
         setShow(false);
@@ -21,7 +26,7 @@ const ModalLamination = ({lamination, setLamination}) => {
     }
 
     let save = (e) => {
-        setLamination(mat1)
+        setLamination([mat1, "", ""])
         setShow(false);
     }
 
@@ -44,14 +49,25 @@ const ModalLamination = ({lamination, setLamination}) => {
                     <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}}>
                         {/* Много элементов */}
                         <div style={{padding: '10px'}}>
-                            {Array.from({length: 50}, (_, i) => (
+                            {/*{Array.from({length: 50}, (_, i) => (*/}
+                            {/*    <div*/}
+                            {/*        key={i}*/}
+                            {/*        toclick={i}*/}
+                            {/*        className={i.toString() === mat1 ? 'bg-info' : ''}*/}
+                            {/*        onClick={handleClick}*/}
+                            {/*    >*/}
+                            {/*        Элемент {i}*/}
+                            {/*    </div>*/}
+                            {/*))}*/}
+
+                            {mat2.map((item, iter) => (
                                 <div
-                                    key={i}
-                                    toclick={i}
-                                    className={i.toString() === mat1 ? 'bg-info' : ''}
+                                    key={item}
+                                    toclick={item}
+                                    className={item.toString() === mat1 ? 'bg-info' : ''}
                                     onClick={handleClick}
                                 >
-                                    Элемент {i}
+                                    {item}
                                 </div>
                             ))}
                         </div>

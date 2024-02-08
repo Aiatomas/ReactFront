@@ -1,4 +1,3 @@
-
 import {MDBContainer} from "mdb-react-ui-kit";
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
@@ -7,7 +6,7 @@ import ModalSize from "./ModalSize";
 import ModalMaterial from "./ModalMaterial";
 import ModalColor from "./ModalColor";
 import ModalLamination from "./ModalLamination";
-import {View} from "../calc/onefile/formatdrukview/View";
+import {View2} from "./View2";
 
 const NewCalcMain = () => {
     const [show, setShow] = useState(false);
@@ -58,7 +57,15 @@ const NewCalcMain = () => {
                 {/*    <CardProduct key={item.id} name={name} data={data} setData={setData} item={item}/>*/}
                 {/*))}*/}
             </MDBContainer>
-            <div style={{width: '50vw'}}>View elem</div>
+            <div style={{width: '50vw'}}>
+                {/*<View2*/}
+                {/*    size={size}*/}
+                {/*    material={material}*/}
+                {/*    color={color}*/}
+                {/*    lamination={lamination}*/}
+                {/*/>*/}
+                View
+            </div>
         </div>
     )
 };
