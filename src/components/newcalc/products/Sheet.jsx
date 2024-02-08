@@ -2,13 +2,13 @@ import {MDBContainer} from "mdb-react-ui-kit";
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import React, {useState} from "react";
-import ModalSize from "./ModalSize";
-import ModalMaterial from "./ModalMaterial";
-import ModalColor from "./ModalColor";
-import ModalLamination from "./ModalLamination";
-import {View2} from "./View2";
+import ModalSize from "../modals/ModalSize";
+import ModalMaterial from "../modals/ModalMaterial";
+import ModalColor from "../modals/ModalColor";
+import ModalLamination from "../modals/ModalLamination";
+import {View2} from "../View2";
 
-const NewCalcMain = () => {
+const Sheet = () => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState({
         x: 45,
@@ -80,4 +80,4 @@ const NewCalcMain = () => {
     )
 };
 
-export default NewCalcMain;
+export default Sheet;

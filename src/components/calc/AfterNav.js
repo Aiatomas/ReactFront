@@ -9,7 +9,7 @@ import {Login} from "../login/Login";
 import {CurrentUser} from "../usersettings/CurrentUser";
 import {Admin} from "../admin/Admin";
 import Main from "../newcalc/Main";
-import NewCalcMain from "../newcalc/NewCalcMain";
+import Sheet from "../newcalc/products/Sheet";
 
 const AfterNav = () => {
     const pricesIsLoading = useSelector(state => state.prices.pricesIsLoading);
@@ -54,7 +54,7 @@ const AfterNav = () => {
                 <Route path="/admin" element={<Admin/>} />
                 <Route path="/currentUser" element={<CurrentUser/>} />
 
-                <Route path="/products/*" element={<NewCalcMain/>} />
+                <Route path="/products/*" element={<Sheet/>} />
             </Routes>
         </div>
     );
