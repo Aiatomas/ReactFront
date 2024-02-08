@@ -12,8 +12,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 const ModalSize = ({size, setSize}) => {
     const [show, setShow] = useState(false);
-    const [x, setX] = useState(size[0]);
-    const [y, setY] = useState(size[1]);
+    const [x, setX] = useState(size.x);
+    const [y, setY] = useState(size.y);
     const [xVal, setXVal] = useState(false);
     const [yVal, setYVal] = useState(false);
 
@@ -38,7 +38,10 @@ const ModalSize = ({size, setSize}) => {
             setYVal(true)
         }
         if(validX && validY){
-            setSize([x, y])
+            setSize({
+                x: x,
+                y: y
+            })
             setShow(false);
         }
     }
@@ -49,7 +52,7 @@ const ModalSize = ({size, setSize}) => {
                 <Card.Body>
                     <Card.Title className="adminFont">Розмір виробу</Card.Title>
                     <Card.Text className="adminFont">
-                        {size[0]}x{size[1]} мм
+                        {size.x}x{size.y} мм
                     </Card.Text>
                 </Card.Body>
             </Card>

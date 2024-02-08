@@ -10,7 +10,10 @@ import {View2} from "./View2";
 
 const NewCalcMain = () => {
     const [show, setShow] = useState(false);
-    const [size, setSize] = useState([45, 45]);
+    const [size, setSize] = useState({
+        x: 45,
+        y: 45
+    });
     const [material, setMaterial] = useState({
         type: "",
         material: ""
