@@ -5,9 +5,10 @@ import Button from "react-bootstrap/Button";
 
 const ModalLamination = ({lamination, setLamination}) => {
     const [show, setShow] = useState(false);
-    const [mat1, setMat1] = useState("1");
+    const [mat1, setMat1] = useState("Не потрібно");
 
     let mat2 = [
+        "Не потрібно",
         "з глянцевим ламінуванням",
         "з матовим ламінуванням",
         "з ламінуванням Soft Touch",

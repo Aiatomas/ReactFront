@@ -11,8 +11,15 @@ import {View2} from "./View2";
 const NewCalcMain = () => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState([45, 45]);
-    const [material, setMaterial] = useState([null, null]);
-    const [color, setColor] = useState([null, null, null]);
+    const [material, setMaterial] = useState({
+        type: "",
+        material: ""
+    });
+    const [color, setColor] = useState({
+        sides: "без друку",
+        one: "",
+        two: "",
+    });
     const [lamination, setLamination] = useState([null, null, null]);
 
     return (

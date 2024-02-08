@@ -5,9 +5,21 @@ import Button from "react-bootstrap/Button";
 
 const ModalMaterial = ({material, setMaterial}) => {
     const [show, setShow] = useState(false);
-    const [mat1, setMat1] = useState("1");
+    const [mat1, setMat1] = useState(material.type);
+    const [mat2, setMat2] = useState(material.material);
 
-    let mat2 = [
+    let materialsTypesData = [
+        "Папір крейдований МАТОВИЙ",
+        "Папір крейдований ГЛЯНЦЕВИЙ",
+        "Папір без покриття (офсетний)",
+        "Папір без покриття MONDI",
+        "Самоклейка",
+        "Дизайнерський папір",
+        "Картон одностороннього крейдування",
+        "Свій матеріал",
+    ]
+
+    let materialsData = [
         "Офісний папір / 80-90 г/м2",
         "Офісний папір Premium / 90-100 г/м2",
         "DNS папір / 150-170 г/м2",
@@ -41,12 +53,18 @@ const ModalMaterial = ({material, setMaterial}) => {
     }
 
     let handleClick = (e) => {
-        console.log(e);
         setMat1(e.target.getAttribute("toClick"))
     }
 
+    let handleClick2 = (e) => {
+        setMat2(e.target.getAttribute("toClick"))
+    }
+
     let save = (e) => {
-        setMaterial([mat1, ""])
+        setMaterial({
+            type: mat1,
+            material: mat2
+        })
         setShow(false);
     }
 
@@ -56,36 +74,39 @@ const ModalMaterial = ({material, setMaterial}) => {
                 <Card.Body>
                     <Card.Title className="adminFont">Тип матеріалу</Card.Title>
                     <Card.Text className="adminFont">
-                        {material[0]} {material[1]}
+                        {material.type} {material.material}
                     </Card.Text>
                 </Card.Body>
             </Card>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} dialogClassName="modal-60w"
+                    onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Тип матеріалу</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}}>
-                        {/* Много элементов */}
+                <Modal.Body className="d-flex">
+                    <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}} className="m-3">
                         <div style={{padding: '10px'}}>
-                            {/*{Array.from({length: 50}, (_, i) => (*/}
-                            {/*    <div*/}
-                            {/*        key={i}*/}
-                            {/*        toclick={i}*/}
-                            {/*        className={i.toString() === mat1 ? 'bg-info' : ''}*/}
-                            {/*        onClick={handleClick}*/}
-                            {/*    >*/}
-                            {/*        Элемент {i}*/}
-                            {/*    </div>*/}
-                            {/*))}*/}
-
-                            {mat2.map((item, iter) => (
+                            {materialsTypesData.map((item, iter) => (
                                 <div
                                     key={item}
                                     toclick={item}
                                     className={item.toString() === mat1 ? 'bg-info' : ''}
                                     onClick={handleClick}
+                                >
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}} className="m-3">
+                        <div style={{padding: '10px'}}>
+                            {materialsData.map((item, iter) => (
+                                <div
+                                    key={item}
+                                    toclick={item}
+                                    className={item.toString() === mat2 ? 'bg-info' : ''}
+                                    onClick={handleClick2}
                                 >
                                     {item}
                                 </div>
