@@ -19,7 +19,7 @@ const Main = () => {
                 <MDBContainer fluid className="">
                     <Row xs={1} md={3} className="g-2">
                         <Col>
-                            <Link to="/products/Sheet" className="colorBlack">
+                            <Link to="/Orders/Sheet" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Друк аркушів</Card.Title>
@@ -31,7 +31,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Sheetcut" className="colorBlack">
+                            <Link to="/Orders/Sheetcut" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Друк з порізкою</Card.Title>
@@ -43,7 +43,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Sticker" className="colorBlack">
+                            <Link to="/Orders/Sticker" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Наклейки</Card.Title>
@@ -55,7 +55,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Curvedcut" className="colorBlack">
+                            <Link to="/Orders/Curvedcut" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Фігурні вироби</Card.Title>
@@ -67,7 +67,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Magnet" className="colorBlack">
+                            <Link to="/Orders/Magnet" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Магніти</Card.Title>
@@ -79,7 +79,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Vizitki" className="colorBlack">
+                            <Link to="/Orders/Vizitki" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Візитівки</Card.Title>
@@ -91,7 +91,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Poster" className="colorBlack">
+                            <Link to="/Orders/Poster" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Плакати</Card.Title>
@@ -103,7 +103,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Listovki" className="colorBlack">
+                            <Link to="/Orders/Listovki" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Листівки</Card.Title>
@@ -115,7 +115,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Flyer" className="colorBlack">
+                            <Link to="/Orders/Flyer" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Флаєри</Card.Title>
@@ -127,7 +127,7 @@ const Main = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to="/products/Envelope" className="colorBlack">
+                            <Link to="/Orders/Envelope" className="colorBlack">
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Конверти</Card.Title>

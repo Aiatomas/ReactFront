@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {DownloadImgAction, errorDownloadImg, successDownloadImg} from "../../actions/fileAction";
 import {Spinner} from "react-bootstrap";
 import PdfViewer from "../../modules/pdf/PdfViewer";
@@ -7,12 +7,17 @@ import {useDispatch, useSelector} from "react-redux";
 import * as pdfjsLib from "pdfjs-dist";
 
 export const View2 = ({size, material, color, lamination}) => {
-    const thisFile = useSelector(state => state.files.thisFile);
-    const thisFileUrl = useSelector(state => state.files.thisFile.url.url);
-    useSelector(state => state.files.allFiles);
-    const img = useSelector(state => state.files.img);
-    const imgIsLoading = useSelector(state => state.files.imgIsLoading);
-    const imgError = useSelector(state => state.files.imgError);
+    // const thisFile = useSelector(state => state.files.thisFile);
+    // const thisFileUrl = useSelector(state => state.files.thisFile.url.url);
+    // useSelector(state => state.files.allFiles);
+    // const img = useSelector(state => state.files.img);
+    // const imgIsLoading = useSelector(state => state.files.imgIsLoading);
+    // const imgError = useSelector(state => state.files.imgError);
+    const [thisFile, setThisFile] = useState(null);
+    const [thisFileUrl, setThisFileUrl] = useState("/files/data/notfile2.png");
+    const [img, setImg] = useState(null);
+    const [imgIsLoading, setImgIsLoading] = useState(false);
+    const [imgError, setImgError] = useState(null);
     const dispatch = useDispatch();
 
 
