@@ -21,9 +21,9 @@ export const View2 = ({size, material, color, lamination}) => {
     const dispatch = useDispatch();
 
 
-    useEffect(() => {
-        dispatch(DownloadImgAction(thisFile))
-    }, [thisFileUrl]);
+    // useEffect(() => {
+    //     dispatch(DownloadImgAction(thisFile))
+    // }, [thisFileUrl]);
 
 
     if(imgIsLoading){
@@ -67,7 +67,7 @@ export const View2 = ({size, material, color, lamination}) => {
         let imgWidth = img.width;
         let imgHeight = img.height;
         let src = img.src;
-        if (thisFile.x > 0 && thisFile.y > 0) {
+        if (size[0] > 0 && size[1] > 0) {
             console.log("render!!!");
             let x = size[0];
             let y = size[1];

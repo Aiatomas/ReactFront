@@ -100,9 +100,9 @@ export const Admin = () => {
                 {whoPick === "Считалочка" &&
                     <CalcNew name={whoPick}/>
                 }
-                {whoPick === "КоєфТест" &&
-                    <CoefTest name={whoPick}/>
-                }
+                {/*{whoPick === "КоєфТест" &&*/}
+                {/*    // <CoefTest name={whoPick}/>*/}
+                {/*}*/}
 
 
                 {whoPick === "devices" &&

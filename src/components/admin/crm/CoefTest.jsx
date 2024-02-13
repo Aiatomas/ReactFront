@@ -67,3 +67,42 @@ const CoefTest = () => {
 };
 
 export default CoefTest;
+
+
+// import React from 'react';
+// import { Line } from 'react-chartjs-2';
+// import someMember from '@kurkle/color';
+// import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+//
+// ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+//
+// function App() {
+//     const data = {
+//         labels: Array.from({ length: 100 }, (_, i) => i + 1),
+//         datasets: [
+//             {
+//                 label: 'k_n = 1/n',
+//                 data: Array.from({ length: 100 }, (_, i) => 1 / (i + 1)),
+//                 borderColor: 'blue',
+//                 backgroundColor: 'rgba(0, 0, 255, 0.5)',
+//             }
+//         ]
+//     };
+//
+//     const options = {
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         },
+//         elements: {
+//             line: {
+//                 tension: 0.1 // Встановлює гладкість лінії
+//             }
+//         }
+//     };
+//
+//     return <Line data={data} options={options} />;
+// }
+//
+// export default App

@@ -3,48 +3,12 @@ import Card from "react-bootstrap/Card";
 import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
 
-const ModalMaterial = ({material, setMaterial}) => {
+const ModalMaterial = ({material, setMaterial, prices}) => {
     const [show, setShow] = useState(false);
     const [mat1, setMat1] = useState(material.type);
     const [mat2, setMat2] = useState(material.material);
 
-    let materialsTypesData = [
-        "Папір крейдований МАТОВИЙ",
-        "Папір крейдований ГЛЯНЦЕВИЙ",
-        "Папір без покриття (офсетний)",
-        "Папір без покриття MONDI",
-        "Самоклейка",
-        "Дизайнерський папір",
-        "Картон одностороннього крейдування",
-        "Свій матеріал",
-    ]
-
-    let materialsData = [
-        "Офісний папір / 80-90 г/м2",
-        "Офісний папір Premium / 90-100 г/м2",
-        "DNS папір / 150-170 г/м2",
-        "DNS 200gsm",
-        "DNS 300gsm",
-        "DNS картон / 300-350 г/м2",
-        "Дизайнерський картон / 250-350 г/м2",
-        "Дизайнерський папір / 120-170 г/м2",
-        "Крейдований папір / 100-170 г/м2",
-        "UPM 200gsm",
-        "UPM 250gsm",
-        "Крейдований картон / 300-350 г/м2",
-        "UPM 350gsm",
-        "BIO_TOP_3 300gsm",
-        "Білий самоклеючий папір",
-        "Самоклеючий папір Toxic",
-        "Винний самоклеючий папір",
-        "Біла самоклеюча плівка",
-        "плівці глянцевій Premium",
-        "Прозора самоклеюча плівка",
-        "Плівка прозора Xerox Transparency",
-        "Самоклеючий папір Craft",
-
-    ]
-
+    console.log(prices[0]);
     const handleClose = () => {
         setShow(false);
     }
@@ -85,30 +49,30 @@ const ModalMaterial = ({material, setMaterial}) => {
                     <Modal.Title>Тип матеріалу</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="d-flex">
+                    {/*<div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}} className="m-3">*/}
+                    {/*    <div style={{padding: '10px'}}>*/}
+                    {/*        {materialsTypesData.map((item, iter) => (*/}
+                    {/*            <div*/}
+                    {/*                key={item}*/}
+                    {/*                toclick={item}*/}
+                    {/*                className={item.toString() === mat1 ? 'bg-info' : ''}*/}
+                    {/*                onClick={handleClick}*/}
+                    {/*            >*/}
+                    {/*                {item}*/}
+                    {/*            </div>*/}
+                    {/*        ))}*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}} className="m-3">
                         <div style={{padding: '10px'}}>
-                            {materialsTypesData.map((item, iter) => (
+                            {prices[1].variants.map((item, iter) => (
                                 <div
-                                    key={item}
-                                    toclick={item}
-                                    className={item.toString() === mat1 ? 'bg-info' : ''}
-                                    onClick={handleClick}
-                                >
-                                    {item}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}} className="m-3">
-                        <div style={{padding: '10px'}}>
-                            {materialsData.map((item, iter) => (
-                                <div
-                                    key={item}
-                                    toclick={item}
-                                    className={item.toString() === mat2 ? 'bg-info' : ''}
+                                    key={item[0]}
+                                    toclick={item[0]}
+                                    className={item[0].toString() === mat2 ? 'bg-info' : ''}
                                     onClick={handleClick2}
                                 >
-                                    {item}
+                                    {item[0]}
                                 </div>
                             ))}
                         </div>
