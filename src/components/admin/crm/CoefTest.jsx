@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ChartComponent from "./ChartComponent";
 import ChartStoled2 from "./ChartStoled2";
 import ChartStoled from "./ChartsStoled";
+import NewChartMy from "../../NewChartMy";
 
 const CoefTest = () => {
     const [price, setPrice] = useState(1);
@@ -17,6 +18,10 @@ const CoefTest = () => {
         let reducedCoef = reducerCoef / 100;
         for (let i = 0; i < quantity; i++) {
             let priceForThisUnit = price * impactCoef
+
+            // if (i!==0 && ((price * impactCoef) > price)) {
+            //     priceForThisUnit = priceForThisUnit / (i);
+            // }
 
 
             reducedCoef = reducerCoef / 100;
@@ -56,7 +61,8 @@ const CoefTest = () => {
             <p>Total Price: {totalPrice}</p>
 
             <div>
-                <ChartComponent aapl={dataForCharts}/>
+                <NewChartMy data={dataForCharts}/>
+                {/*<ChartComponent aapl={dataForCharts}/>*/}
             </div>
 
             {/*<div>*/}

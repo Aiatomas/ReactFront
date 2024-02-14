@@ -24,7 +24,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Друк аркушів</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -36,7 +36,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Друк з порізкою</Card.Title>
                                         <Card.Text>
-
+                                            Візитки, флаєри, листівки та інша продукція з прямокутною порізкою. Доступні всі післядрукарські послуги крім плотерної порізки і зшивання.
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -48,7 +48,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Наклейки</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -60,7 +60,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Фігурні вироби</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -72,7 +72,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Магніти</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -84,7 +84,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Візитівки</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -96,7 +96,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Плакати</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -108,7 +108,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Листівки</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -120,7 +120,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Флаєри</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -132,7 +132,7 @@ const Main = () => {
                                     <Card.Body>
                                         <Card.Title>Конверти</Card.Title>
                                         <Card.Text>
-
+                                            Тимчасово логіка роботи кожного - Друк с порізкою, потім додамо продуктів
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>

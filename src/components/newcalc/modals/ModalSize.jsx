@@ -60,15 +60,15 @@ const ModalSize = ({size, setSize}) => {
 
     let formats = [
         // {name:"300х500 мм", x: 300, y: 500},
-        {name:"310x310 мм", x: 310, y: 310},
+        // {name:"310x310 мм", x: 310, y: 310},
         // {name:"300х630 мм", x: 300, y: 630},
-        {name:"314х324 мм", x: 314, y: 324},
+        // {name:"314х324 мм", x: 314, y: 324},
         {name:"А6 (105 х 148 мм)", x: 105, y: 148},
         {name:"A5 (148 х 210 мм)", x: 148, y: 210},
         {name:"A4 (210 x 297 мм)", x: 210, y: 297},
         {name:"А3 (297 х 420 мм)", x: 297, y: 420},
-        {name:"300х430 мм", x: 300, y: 430},
-        {name:"314х648 мм", x: 314, y: 648},
+        // {name:"300х430 мм", x: 300, y: 430},
+        // {name:"314х648 мм", x: 314, y: 648},
         {name:"90х50 мм", x: 90, y: 50},
         {name:"85x55 мм", x: 85, y: 55},
         {name:"90х55 мм", x: 90, y: 55},
@@ -80,7 +80,7 @@ const ModalSize = ({size, setSize}) => {
         {name:"200х200 мм", x: 200, y: 200},
         {name:"88х50 мм", x: 88, y: 50},
         {name:"85х54 мм", x: 85, y: 54},
-        {name:"300х300 мм", x: 300, y: 300},
+        // {name:"300х300 мм", x: 300, y: 300},
         // {name:"314х474 мм", x: 314, y: 474},
         // {name:"314х685 мм", x: 314, y: 685},
     ]
@@ -106,7 +106,7 @@ const ModalSize = ({size, setSize}) => {
                         onChange={handleSelectOption}
                         className="mb-3"
                     >
-                        <option disabled>Оберіть значення</option>
+                        <option disabled selected>Оберіть значення</option>
                         <option>Задати свій розмір</option>
                         {formats.map((item, iter) => (
                             <option

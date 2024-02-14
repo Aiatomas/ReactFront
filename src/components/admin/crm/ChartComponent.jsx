@@ -62,17 +62,17 @@ const ChartComponent = ({ aapl }) => {
             .style('pointer-events', 'all')
             .attr('width', width)
             .attr('height', height)
-            .on('mousemove', function(event) {
-                const pointer = d3.pointer(event);
-                const x0 = xScale.invert(pointer[0]);
-                let i = d3.bisect(aapl, x0, 1, 999);
-                let d0 = aapl[i - 1];
-                let d1 = aapl[i];
-                let d = x0 - d0.count > d1.count - x0 ? d1 : d0;
-
-                focus.attr('transform', `translate(${xScale(d.count)},${yScale(d.price)})`);
-                focus.select('text').text(`x:${d.count}, y:${d.price}`);
-            });
+            // .on('mousemove', function(event) {
+            //     const pointer = d3.pointer(event);
+            //     const x0 = xScale.invert(pointer[0]);
+            //     let i = d3.bisect(aapl, x0, 1, 999);
+            //     let d0 = aapl[i - 1];
+            //     let d1 = aapl[i];
+            //     let d = x0 - d0.count > d1.count - x0 ? d1 : d0;
+            //
+            //     focus.attr('transform', `translate(${xScale(d.count)},${yScale(d.price)})`);
+            //     focus.select('text').text(`x:${d.count}, y:${d.price}`);
+            // });
     }, [aapl, dimensions]);
 
     return (
