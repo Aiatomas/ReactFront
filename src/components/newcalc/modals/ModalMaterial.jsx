@@ -8,7 +8,7 @@ const ModalMaterial = ({material, setMaterial, prices}) => {
     const [mat1, setMat1] = useState(material.type);
     const [mat2, setMat2] = useState(material.material);
 
-    console.log(prices[0]);
+    // console.log(prices[0]);
     const handleClose = () => {
         setShow(false);
     }

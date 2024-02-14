@@ -16,6 +16,7 @@ const ModalSize = ({size, setSize}) => {
     const [y, setY] = useState(size.y);
     const [xVal, setXVal] = useState(false);
     const [yVal, setYVal] = useState(false);
+    const [isCustom, setIsCustom] = useState(false);
 
     const handleClose = () => {
         setShow(false);
@@ -51,15 +52,16 @@ const ModalSize = ({size, setSize}) => {
         if(selectedFormat){
             setX(selectedFormat.x);
             setY(selectedFormat.y);
+            setIsCustom(false)
         } else {
-
+            setIsCustom(true)
         }
     }
 
     let formats = [
-        {name:"300х500 мм", x: 300, y: 500},
+        // {name:"300х500 мм", x: 300, y: 500},
         {name:"310x310 мм", x: 310, y: 310},
-        {name:"300х630 мм", x: 300, y: 630},
+        // {name:"300х630 мм", x: 300, y: 630},
         {name:"314х324 мм", x: 314, y: 324},
         {name:"А6 (105 х 148 мм)", x: 105, y: 148},
         {name:"A5 (148 х 210 мм)", x: 148, y: 210},
@@ -79,8 +81,8 @@ const ModalSize = ({size, setSize}) => {
         {name:"88х50 мм", x: 88, y: 50},
         {name:"85х54 мм", x: 85, y: 54},
         {name:"300х300 мм", x: 300, y: 300},
-        {name:"314х474 мм", x: 314, y: 474},
-        {name:"314х685 мм", x: 314, y: 685},
+        // {name:"314х474 мм", x: 314, y: 474},
+        // {name:"314х685 мм", x: 314, y: 685},
     ]
 
     return (
@@ -99,10 +101,12 @@ const ModalSize = ({size, setSize}) => {
                     <Modal.Title>Розмір</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Select aria-label="Default select example"
-                    onChange={handleSelectOption}
+                    <Form.Select
+                        aria-label="Default select example"
+                        onChange={handleSelectOption}
+                        className="mb-3"
                     >
-                        <option>Оберіть значення</option>
+                        <option disabled>Оберіть значення</option>
                         <option>Задати свій розмір</option>
                         {formats.map((item, iter) => (
                             <option
@@ -115,32 +119,56 @@ const ModalSize = ({size, setSize}) => {
 
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1">x</InputGroup.Text>
-                        <Form.Control
-                            aria-describedby="modRed"
-                            type="number"
-                            value={x}
-                            min={45}
-                            max={445}
-                            // className="adminFontTable"
-                            onChange={(event) => setX(event.target.value)}
-                            isInvalid={xVal}
-                        />
+                        {isCustom === true ? (
+                            <Form.Control
+                                aria-describedby="modRed"
+                                type="number"
+                                value={x}
+                                min={45}
+                                max={445}
+                                onChange={(event) => setX(event.target.value)}
+                                isInvalid={xVal}
+                            />
+                        ) : (
+                            <Form.Control
+                                aria-describedby="modRed"
+                                type="number"
+                                value={x}
+                                min={45}
+                                max={445}
+                                disabled
+                                onChange={(event) => setX(event.target.value)}
+                                isInvalid={xVal}
+                            />
+                        )}
                         <Form.Control.Feedback type="invalid">
                             Будь-ласка введіть розмір від 45 до 445.
                         </Form.Control.Feedback>
                     </InputGroup>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1">y</InputGroup.Text>
-                        <Form.Control
-                            aria-describedby="modRed"
-                            type="number"
-                            value={y}
-                            min={45}
-                            max={445}
-                            // className="adminFontTable"
-                            onChange={(event) => setY(event.target.value)}
-                            isInvalid={yVal}
-                        />
+                        {isCustom === true ? (
+                            <Form.Control
+                                aria-describedby="modRed"
+                                type="number"
+                                value={y}
+                                min={45}
+                                max={445}
+                                onChange={(event) => setY(event.target.value)}
+                                isInvalid={yVal}
+                            />
+                        ) : (
+                            <Form.Control
+                                aria-describedby="modRed"
+                                type="number"
+                                value={y}
+                                min={45}
+                                max={445}
+                                disabled
+                                onChange={(event) => setY(event.target.value)}
+                                isInvalid={yVal}
+                            />
+                        )}
                         <Form.Control.Feedback type="invalid">
                             Будь-ласка введіть розмір від 45 до 445.
                         </Form.Control.Feedback>
