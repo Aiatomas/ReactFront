@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 const NewChartMy = ({ data }) => {
     const [points, setPoints] = useState('');
     const [currentPrice, setCurrentPrice] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(null);
     const maxValue = Math.max(...data.map(item => item.price));
     const chartWidth = 900;
     const chartHeight = 500;  // resized chart for y-axis scale
-    const yScale = chartHeight / maxValue;  // scale for y-axis
-    const xScale = chartWidth / (data.length - 1);  // scale for x-axis
+    const yScale = chartHeight / maxValue;  // Scale for y-axis
+    const xScale = chartWidth / (data.length - 1);  // Scale for x-axis
 
     const yStep = maxValue > 10 ? Math.floor(maxValue / 10) : 1;  // step for y-axis
     const xStep = data.length > 10 ? Math.floor(data.length / 10) : 1;  // step for x-axis
@@ -23,9 +24,10 @@ const NewChartMy = ({ data }) => {
 
     const handleMouseMove = (e) => {
         const rect = e.target.getBoundingClientRect();
-        const x = e.clientX - rect.left; //x position within the element.
+        const x = e.clientX - rect.left; // x position within the element.
         const index = Math.round(x / xScale);
         setCurrentPrice(data[index] ? data[index].price : null);
+        setCurrentIndex(index);
     }
 
     return (
@@ -37,11 +39,14 @@ const NewChartMy = ({ data }) => {
                 points={points}
             />
             {currentPrice && <text x={10} y={30}>{`Price: ${currentPrice}`}</text>}
-            // Modified scale for y-axis
-            {/*{[new Array(Math.floor(maxValue / yStep) + 1).keys()].map(i => (*/}
-            {/*    <text x={0} y={chartHeight - i * yScale * yStep}>{i * yStep}</text>*/}
-            {/*))}*/}
-            // Modified scale for x-axis
+            {currentIndex != null &&
+                <circle
+                    cx={xScale * currentIndex}
+                    cy={(1 - data[currentIndex].price / maxValue) * chartHeight}
+                    r="5"
+                    fill="red"
+                />
+            }
             {data.filter((_, i) => i % xStep === 0).map((value, i) => (
                 <text x={i * xScale * xStep} y={chartHeight}>{i * xStep}</text>
             ))}
