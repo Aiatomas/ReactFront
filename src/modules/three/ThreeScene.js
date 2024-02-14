@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import { Canvas, useFrame } from "@react-three/fiber"
 import {
     useGLTF,
@@ -7,7 +7,7 @@ import {
     OrbitControls,
     Bvh,
     ArcballControls,
-    TrackballControls, PointerLockControls, PresentationControls
+    TrackballControls, PointerLockControls, PresentationControls, PerspectiveCamera
 } from "@react-three/drei"
 import {MyMugModel} from "./MyMugModel";
 
@@ -38,15 +38,27 @@ const ThreeScene = ({photo}) => {
             <directionalLight intenysity={1} position={[10, 10, 5]} />
             {/*<directionalLight intenysity={1} position={[5, 10, 5]} />*/}
 
-            {/*<OrbitControls/>*/}
-            <PresentationControls
-                enabled={true} // the controls can be disabled by setting this to false
-                global={false}
-                cursor={true}
-                polar={[-1, Math.PI / 2]}
-            >
-                <MyMugModel  />
-            </PresentationControls>
+            {/*/!*<OrbitControls/>*!/*/}
+            {/*<PresentationControls*/}
+            {/*    enabled={true} // the controls can be disabled by setting this to false*/}
+            {/*    global={false}*/}
+            {/*    cursor={true}*/}
+            {/*    polar={[-1, Math.PI / 2]}*/}
+            {/*>*/}
+            {/*    <MyMugModel  />*/}
+            {/*</PresentationControls>*/}
+
+            <PerspectiveCamera
+                makeDefault
+                position={[0, 0, 10]} // Положення камери
+            />
+            <OrbitControls
+                enableRotate
+                enableZoom
+            />
+            <Suspense fallback={null}>
+                <MyMugModel/>
+            </Suspense>
 
         </Canvas>
 

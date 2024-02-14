@@ -3,6 +3,8 @@ import ChartComponent from "./ChartComponent";
 import ChartStoled2 from "./ChartStoled2";
 import ChartStoled from "./ChartsStoled";
 import NewChartMy from "../../NewChartMy";
+import NewChartMy2 from "../../NewChartMy2";
+import DataToModelAndRender from "../../newcalc/DataToModelAndRender";
 
 const CoefTest = () => {
     const [price, setPrice] = useState(1);
@@ -61,7 +63,8 @@ const CoefTest = () => {
             <p>Total Price: {totalPrice}</p>
 
             <div>
-                <NewChartMy data={dataForCharts}/>
+                {/*<NewChartMy2 data={dataForCharts}/>*/}
+                <DataToModelAndRender aapl={dataForCharts}/>
                 {/*<ChartComponent aapl={dataForCharts}/>*/}
             </div>
 
