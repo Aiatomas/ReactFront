@@ -47,6 +47,11 @@ const NewChartMy = ({ data }) => {
                     fill="red"
                 />
             }
+
+            { /* Y scale */ }
+            {Array.from({ length: Math.floor(maxValue / yStep) + 1 }, (_, i) => i * yStep).map((val, i) => (
+                <text x={0} y={chartHeight - val * yScale}>{val}</text>
+            ))}
             {data.filter((_, i) => i % xStep === 0).map((value, i) => (
                 <text x={i * xScale * xStep} y={chartHeight}>{i * xStep}</text>
             ))}
