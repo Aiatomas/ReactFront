@@ -75,6 +75,7 @@ export const Admin = () => {
                 <button onClick={pickFunc} className={"Продукти" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Продукти"}>{"Продукти"}</button>
                 <button onClick={pickFunc} className={"Считалочка" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Считалочка"}>{"Считалочка"}</button>
                 <button onClick={pickFunc} className={"КоєфТест" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"КоєфТест"}>{"КоєфТест"}</button>
+                <button onClick={pickFunc} className={"Лічиньники" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Лічиньники"}>{"Лічиньники"}</button>
             </div>
 
             <div className="d-flex flex-column flex-grow-1 adminBackGround">
@@ -101,6 +102,9 @@ export const Admin = () => {
                     <CalcNew name={whoPick}/>
                 }
                 {whoPick === "КоєфТест" &&
+                    <CoefTest name={whoPick}/>
+                }
+                {whoPick === "Лічиньники" &&
                     <CoefTest name={whoPick}/>
                 }
 
