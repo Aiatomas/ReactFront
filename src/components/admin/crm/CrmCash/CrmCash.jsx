@@ -9,7 +9,7 @@ const CrmCash = () => {
     const [selectedThings, setSelectedThings] = useState([]);
 
     const handleThingClick = (thing) => {
-        setThings(things.filter((t) => t !== thing));
+        // setThings(things.filter((t) => t !== thing));
         setSelectedThings([...selectedThings, thing]);
     };
 

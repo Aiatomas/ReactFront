@@ -10,6 +10,7 @@ import {Col, Row} from "react-bootstrap";
 
 function Products({name}) {
     const [data, setData] = useState(null);
+    const [data1, setData1] = useState(null);
 
 
     useEffect(() => {
@@ -26,6 +27,22 @@ function Products({name}) {
             })
     }, []);
 
+    useEffect(() => {
+        let data = {
+            name: "Склад",
+            inPageCount: 99999,
+            currentPage: 1,
+        }
+        axios.post(`admin/gettable`, data)
+            .then(response => {
+                console.log(response.data);
+                setData1(response.data)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }, [data]);
+
     if(data){
         return (
             <>
@@ -35,6 +52,7 @@ function Products({name}) {
                         <ProductModalAdd
                             namem={name}
                             data={data}
+                            data1={data1}
                             setData={setData}
                             className="adminFont"
                         />

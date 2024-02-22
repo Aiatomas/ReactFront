@@ -14,6 +14,7 @@ import {Link} from "react-router-dom";
 import Loader from "../../calc/Loader";
 import ChartComponent from "../../admin/crm/ChartComponent";
 import NewChartMy from "../../NewChartMy";
+import NewChartMy2 from "../../NewChartMy2";
 
 const Sheet = () => {
     const [show, setShow] = useState(false);
@@ -129,7 +130,7 @@ const Sheet = () => {
                 ) : (
                     <div style={{width: '50vw'}}>
                         {/*<ChartComponent aapl={pricesThis}/>*/}
-                        <NewChartMy data={pricesThis}/>
+                        <NewChartMy2 data={pricesThis}/>
                     </div>
                 )}
             </div>

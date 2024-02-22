@@ -63,8 +63,8 @@ const CoefTest = () => {
             <p>Total Price: {totalPrice}</p>
 
             <div>
-                {/*<NewChartMy2 data={dataForCharts}/>*/}
-                <DataToModelAndRender aapl={dataForCharts}/>
+                <NewChartMy2 data={dataForCharts}/>
+                {/*<DataToModelAndRender aapl={dataForCharts}/>*/}
                 {/*<ChartComponent aapl={dataForCharts}/>*/}
             </div>
 

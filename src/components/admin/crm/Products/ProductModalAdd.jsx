@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import Card from "react-bootstrap/Card";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Col, Modal} from "react-bootstrap";
 import axios from "axios";
 import SearchForm from "../SearchForm";
+import CardProduct from "./CardProduct";
 
-function ProductModalAdd({namem, data, setData}) {
+function ProductModalAdd({namem, data, setData, data1}) {
     const [show, setShow] = useState(false);
     const [forms, setForms] = useState([]);
     const [productName, setProductName] = useState("");
     const [load, setLoad] = useState(false);
-
+    console.log(data1);
     const handleClose = () => {
         setShow(false);
     }
@@ -95,10 +96,11 @@ function ProductModalAdd({namem, data, setData}) {
                                 <div key={formIndex} className="adminFont border-1">
                                     {formIndex + 1}
                                     <Form.Group>
-                                        <Form.Label className="adminFont">Назва у товарі</Form.Label>
+                                        <Form.Label className="adminFont">Кількість</Form.Label>
                                         <Form.Control
-                                            type="text"
-                                            placeholder="Назва у товарі"
+                                            type="number"
+                                            placeholder="0"
+                                            min={1}
                                             value={form.unitName}
                                             className="adminFont"
                                             onChange={(event) => handleTextChange(formIndex, 'unitName', event)}
@@ -127,11 +129,14 @@ function ProductModalAdd({namem, data, setData}) {
                                             className="adminFont"
                                             onChange={(event) => handleTextChange(formIndex, 'unitType', event)}
                                         >
-                                            <option className="adminFont">Тип</option>
-                                            <option className="adminFont" value="Бумага">Бумага</option>
-                                            <option className="adminFont" value="Друк">Друк</option>
-                                            <option className="adminFont" value="Перепліт">Перепліт</option>
-                                            <option className="adminFont" value="Ламінація">Ламінація</option>
+                                            {/*<option className="adminFont">Тип</option>*/}
+                                            {/*<option className="adminFont" value="Бумага">Бумага</option>*/}
+                                            {/*<option className="adminFont" value="Друк">Друк</option>*/}
+                                            {/*<option className="adminFont" value="Перепліт">Перепліт</option>*/}
+                                            {/*<option className="adminFont" value="Ламінація">Ламінація</option>*/}
+                                            {data1.rows.map((item, idx) => (
+                                                <option className="adminFont" key={item.id}>{item.name}</option>
+                                            ))}
                                         </Form.Select>
                                         <Form.Text className="adminFont text-muted">
                                             Тип матеріала/роботи що буде витрачено/зроблено при виготовленні
