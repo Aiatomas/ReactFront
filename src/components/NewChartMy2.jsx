@@ -38,7 +38,7 @@ const NewChartMy2 = ({ data }) => {
                 strokeWidth="2"
                 points={points}
             />
-            {currentPrice && <text x={10} y={30}>{`Кількість: ${currentIndex} Ціна за одну шт: ${currentPrice} Ціна: ${currentPrice*currentIndex}`}</text>}
+            {currentPrice && <text x={10} y={30}>{`Кількість: ${currentIndex} Ціна за одну шт: ${currentPrice.toFixed(2)} Ціна: ${currentPrice.toFixed(2)*currentIndex.toFixed(2)}`}</text>}
             {currentIndex != null &&
                 <circle
                     cx={xScale * currentIndex}

@@ -19,8 +19,8 @@ import NewChartMy2 from "../../NewChartMy2";
 const Sheet = () => {
     const [show, setShow] = useState(false);
     const [size, setSize] = useState({
-        x: 45,
-        y: 45
+        x: 297,
+        y: 420
     });
     const [material, setMaterial] = useState({
         type: "",

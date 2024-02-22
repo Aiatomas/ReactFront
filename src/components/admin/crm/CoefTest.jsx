@@ -9,7 +9,7 @@ import DataToModelAndRender from "../../newcalc/DataToModelAndRender";
 const CoefTest = () => {
     const [price, setPrice] = useState(1);
     const [coefficient, setCoefficient] = useState(3);
-    const [reducerCoef, setReducerCoef] = useState(1);
+    const [reducerCoef, setReducerCoef] = useState(0.2);
     const [quantity, setQuantity] = useState(1000);
     const [totalPrice, setTotalPrice] = useState(0);
     const [dataForCharts, setDataForCharts] = useState([]);
@@ -27,7 +27,7 @@ const CoefTest = () => {
 
 
             reducedCoef = reducerCoef / 100;
-            impactCoef = Math.max(impactCoef * (1 - reducedCoef));
+            impactCoef = Math.max(impactCoef * (1 - reducedCoef), 1);
 
             let unitCharts = {price: priceForThisUnit, count: i+1}
             dataForChars.push(unitCharts)
