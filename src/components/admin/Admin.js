@@ -105,7 +105,7 @@ export const Admin = () => {
                     <CoefTest name={whoPick}/>
                 }
                 {whoPick === "Лічиньники" &&
-                    <CoefTest name={whoPick}/>
+                    <TableStorage name={whoPick}/>
                 }
 
 

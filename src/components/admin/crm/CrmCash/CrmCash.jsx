@@ -4,12 +4,16 @@ import './CrmCash.css';
 import Form from "react-bootstrap/Form";
 import NewChartMy2 from "../../../NewChartMy2";
 import Loader from "../../../calc/Loader";
+import CardProduct from "../Products/CardProduct";
+import SelectedProduct from "./products/SelectedProduct";
+import Button from "react-bootstrap/Button";
 
 const CrmCash = () => {
     const [price, setPrice] = useState(1);
     const [things, setThings] = useState([]);
     const [products, setProducts] = useState(null);
     const [selectedThings, setSelectedThings] = useState([]);
+    const [summ, setSumm] = useState(0);
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
@@ -51,10 +55,25 @@ const CrmCash = () => {
             })
     }, [things]);
 
+    useEffect(() => {
+        let dataToSend = {
+            method: "calculate",
+            selectedThings: selectedThings
+        }
+        axios.post(`api/pricing`, dataToSend)
+            .then(response => {
+                console.log(response.data);
+                setSumm(response.data.summ)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }, [selectedThings]);
+
     return (
         <div className="d-flex justify-content-space-between">
             <div className="card">
-                <div>склад
+                <div style={{width: '50.5vw'}}>склад
                     <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}}
                          className="m-3">
                         <div style={{padding: '10px'}}>
@@ -92,22 +111,45 @@ const CrmCash = () => {
                 {/*    </p>*/}
                 {/*))}*/}
             </div>
-            <div className="card">
+            <div className="card" style={{width: '40.5vw'}}>
                 {selectedThings.map((thing, index) => (
                     <div key={index} className="d-flex thing">
-                        <p className="">{thing.name}</p>
-                        <button onClick={() => handleThingClick2(thing)} className="">remove</button>
-                        {/*<button className="">-</button>*/}
-                        <Form.Control
-                            type="number"
-                            placeholder="1"
-                            // value={productName}
-                            className=""
-                            // onChange={(event) => setProductName(event.target.value)}
-                        />
-                        {/*<button className="">+</button>*/}
+                        {thing.productunits ? (
+                            <div>
+                                <SelectedProduct key={thing.id} name={"Продукти"} data={products} setData={setProducts}
+                                                 item={thing}/>
+                                <Button variant="danger" onClick={() => handleThingClick2(thing)}
+                                        className="adminFont">Видалити</Button>
+                                <Form.Control
+                                    type="number"
+                                    placeholder={1}
+                                    min={1}
+                                    // value={productName}
+                                    className=""
+                                    // onChange={(event) => setProductName(event.target.value)}
+                                />
+                            </div>
+                        ) : (
+                            <div>
+                                <p className="">{thing.name}</p>
+                                <Button variant="danger" onClick={() => handleThingClick2(thing)}
+                                        className="adminFont">Видалити</Button>
+                                <Form.Control
+                                    type="number"
+                                    placeholder={1}
+                                    min={1}
+                                    // value={productName}
+                                    className=""
+                                    // onChange={(event) => setProductName(event.target.value)}
+                                />
+                            </div>
+                        )}
                     </div>
                 ))}
+                <div>
+                    <Button variant="light" disabled className="adminFont">Сумма</Button>
+                    <Button variant="light" disabled className="adminFont">{summ}</Button>
+                </div>
             </div>
         </div>
     );
