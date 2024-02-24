@@ -16,6 +16,7 @@ function SelectedProduct({name, data, setData, item}) {
         console.log(item);
         setShow(true);
     }
+
     const handleSubmit = (event) => {
         let dataToSend = {
             method: "deleteOne",

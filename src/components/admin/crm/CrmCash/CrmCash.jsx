@@ -17,12 +17,18 @@ const CrmCash = () => {
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
-        setSelectedThings([...selectedThings, thing]);
+        setSelectedThings([...selectedThings, {...thing, amount: 1}]);
     };
 
     const handleThingClick2 = (thing) => {
       setSelectedThings(selectedThings.filter((t) => t !== thing));
       // setThings([...things, thing]);
+    };
+
+    const handleAmountChange = (selectedThingIndex, fieldName, event) => {
+        const updatedSelectedThings = [...selectedThings];
+        updatedSelectedThings[selectedThingIndex][fieldName] = event.target.value;
+        setSelectedThings(updatedSelectedThings);
     };
 
     useEffect(() => {
@@ -58,12 +64,12 @@ const CrmCash = () => {
     useEffect(() => {
         let dataToSend = {
             method: "calculate",
-            selectedThings: selectedThings
+            data: selectedThings
         }
         axios.post(`api/pricing`, dataToSend)
             .then(response => {
                 console.log(response.data);
-                setSumm(response.data.summ)
+                setSumm(response.data[0].price)
             })
             .catch(error => {
                 console.log(error.message);
@@ -124,9 +130,9 @@ const CrmCash = () => {
                                     type="number"
                                     placeholder={1}
                                     min={1}
-                                    // value={productName}
+                                    value={thing.amount}
                                     className=""
-                                    // onChange={(event) => setProductName(event.target.value)}
+                                    onChange={(event) => handleAmountChange(index, 'amount', event)}
                                 />
                             </div>
                         ) : (
@@ -138,9 +144,9 @@ const CrmCash = () => {
                                     type="number"
                                     placeholder={1}
                                     min={1}
-                                    // value={productName}
+                                    value={thing.amount}
                                     className=""
-                                    // onChange={(event) => setProductName(event.target.value)}
+                                    onChange={(event) => handleAmountChange(index, 'amount', event)}
                                 />
                             </div>
                         )}
