@@ -14,6 +14,8 @@ const CrmCash = () => {
     const [products, setProducts] = useState(null);
     const [selectedThings, setSelectedThings] = useState([]);
     const [summ, setSumm] = useState(0);
+    const [isLoad, setIsLoad] = useState(false);
+    const [thisOrder, setThisOrder] = useState(null);
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
@@ -29,6 +31,20 @@ const CrmCash = () => {
         const updatedSelectedThings = [...selectedThings];
         updatedSelectedThings[selectedThingIndex][fieldName] = event.target.value;
         setSelectedThings(updatedSelectedThings);
+    };
+
+    const handleSaveOrder = () => {
+        let dataToSend = {
+            orderUnits: selectedThings
+        }
+        axios.post(`/api/order/create`, dataToSend)
+            .then(response => {
+                console.log(response.data);
+                setThisOrder(response.data)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     };
 
     useEffect(() => {
@@ -62,6 +78,7 @@ const CrmCash = () => {
     }, [things]);
 
     useEffect(() => {
+        setIsLoad(true)
         let dataToSend = {
             method: "calculate",
             data: selectedThings
@@ -70,6 +87,7 @@ const CrmCash = () => {
             .then(response => {
                 console.log(response.data);
                 setSumm(response.data[0].price)
+                setIsLoad(false)
             })
             .catch(error => {
                 console.log(error.message);
@@ -137,7 +155,7 @@ const CrmCash = () => {
                             </div>
                         ) : (
                             <div>
-                                <p className="">{thing.name}</p>
+                                <p className="adminFont">{thing.name}</p>
                                 <Button variant="danger" onClick={() => handleThingClick2(thing)}
                                         className="adminFont">Видалити</Button>
                                 <Form.Control
@@ -154,7 +172,23 @@ const CrmCash = () => {
                 ))}
                 <div>
                     <Button variant="light" disabled className="adminFont">Сумма</Button>
-                    <Button variant="light" disabled className="adminFont">{summ}</Button>
+                    {isLoad ? (
+                        <Button variant="light" disabled className="adminFont"><Loader/></Button>
+                    ) : (
+                        <div>
+                            <Button variant="light" disabled className="adminFont">{summ}</Button>
+                            <Button variant="light" className="adminFont"
+                                    onClick={handleSaveOrder}
+                            >Зберегти</Button>
+                        </div>
+                    )}
+                    {thisOrder ? (
+                        <Button variant="light" disabled className="adminFont">{thisOrder.id}</Button>
+                    ) : (
+                        <div>
+                            <Button variant="light" disabled className="adminFont">Тут буде номер заказу.</Button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

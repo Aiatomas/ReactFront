@@ -38,7 +38,9 @@ function SelectedProduct({name, data, setData, item}) {
             <Card.Body>
                 <Card.Title className="adminFont">{item.name}</Card.Title>
                 <Card.Text className="adminFont">
-                    Складається з:
+                    <p>
+                        Складається з
+                    </p>
                     {item.productunits.map((unitItem, iter) => (
                         <div key={unitItem.id} className="d-flex adminFontTable border-1">
                             <InputGroup className="adminFontTable">
@@ -53,7 +55,7 @@ function SelectedProduct({name, data, setData, item}) {
                                 <Form.Control
                                     type="text"
                                     placeholder="Тип"
-                                    value={unitItem.type}
+                                    value={unitItem.quantity}
                                     className="adminFontTable"
                                     disabled
                                 />

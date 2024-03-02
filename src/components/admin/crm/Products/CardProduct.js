@@ -52,7 +52,7 @@ function CardProduct({name, data, setData, item}) {
                                 <Form.Control
                                     type="text"
                                     placeholder="Тип"
-                                    value={unitItem.type}
+                                    value={unitItem.quantity}
                                     className="adminFontTable"
                                     disabled
                                 />

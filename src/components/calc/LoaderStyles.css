@@ -1,0 +1,65 @@
+.система {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform: rotateX(10deg);
+}
+
+.шар {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: blue;
+    animation: обертання 10s infinite linear;
+}
+
+#шар1 { animation-duration: 8s; }
+#шар2 { animation-duration: 10s; }
+#шар3 { animation-duration: 12s; }
+
+@keyframes обертання {
+    0% {
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translateX(100px) scale(0.5) rotate(180deg);
+    }
+    100% {
+        transform: translateX(0) scale(1) rotate(360deg);
+    }
+}
+
+
+/*.система {*/
+/*    position: relative;*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    transform: rotateX(10deg);*/
+/*}*/
+
+/*.шар {*/
+/*    position: absolute;*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    border-radius: 50%;*/
+/*    background-color: blue;*/
+/*    animation: обертання 10s infinite linear;*/
+/*    transform-origin: 100% 100%;*/
+/*}*/
+
+/*#шар1 { animation-duration: 8s; }*/
+/*#шар2 { animation-duration: 10s; }*/
+/*#шар3 { animation-duration: 12s; }*/
+
+/*@keyframes обертання {*/
+/*    0% {*/
+/*        transform: translateX(0) rotate(0deg);*/
+/*    }*/
+/*    50% {*/
+/*        transform: translateX(100px) rotate(180deg);*/
+/*    }*/
+/*    100% {*/
+/*        transform: translateX(0) rotate(360deg);*/
+/*    }*/
+/*}*/

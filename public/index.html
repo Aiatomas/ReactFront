@@ -41,4 +41,22 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+
+  <script>
+    // Ініціалізація масиву dataLayer, якщо він ще не був створений
+    window.dataLayer = window.dataLayer || [];
+
+    // Анонімна функція для додавання скрипта Google Tag Manager (GTM) на сторінку
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); // Додає об'єкт з часом початку та подією 'gtm.js' до dataLayer
+      var f=d.getElementsByTagName(s)[0], // Знаходить перший тег <script> на сторінці
+              j=d.createElement(s), // Створює новий тег <script>
+              dl=l!='dataLayer'?'&l='+l:''; // Додає параметр l до URL, якщо l не є 'dataLayer'
+      j.async=true; // Встановлює асинхронне завантаження скрипта
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; // Встановлює URL для завантаження GTM скрипта з вашим ID
+      f.parentNode.insertBefore(j,f); // Вставляє новий скрипт перед першим скриптом на сторінці
+      console.log(w[l]);
+    })(window,document,'script','dataLayer','GTM-WNJJ98ZQ'); // Викликає функцію з параметрами
+  </script>
 </html>

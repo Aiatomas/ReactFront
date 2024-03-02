@@ -6,6 +6,7 @@ import CrmHeader from "../CrmHeader";
 import {MDBContainer} from "mdb-react-ui-kit";
 import ProductModalAdd from "./ProductModalAdd";
 import {Col, Row} from "react-bootstrap";
+import Loader2 from "../../../calc/Loader2";
 
 
 function Products({name}) {
@@ -73,7 +74,7 @@ function Products({name}) {
     return (
         <h1 className="">
             <CrmHeader whoPick={name} data={{count: "(Завантаження)"}}/>
-            <Loader/>
+            <Loader2/>
         </h1>
     );
 }

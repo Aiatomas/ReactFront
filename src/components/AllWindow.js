@@ -6,6 +6,7 @@ import {fetchPrices, fetchPrices2} from "../actions/pricesAction";
 import {useDispatch} from "react-redux";
 import Footer from "./footer/Footer";
 import PhotoLayoutEditor from "./editor";
+import Gravity from "./Gravity";
 
 function AllWindow() {
     const dispatch = useDispatch();

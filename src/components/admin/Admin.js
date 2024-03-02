@@ -18,6 +18,8 @@ import Products from "./crm/Products/Products";
 import CoefTest from "./crm/CoefTest";
 import FallingCircle from "./FallingCircle";
 import CalcNew from "../calcnew/CalcNew";
+import TelegrammBot from "./crm/chats/TelegramBot";
+import Loader2 from "../calc/Loader2";
 
 export const Admin = () => {
     const [whoPick, setWhoPick] = useState("Робочий стіл");
@@ -61,6 +63,7 @@ export const Admin = () => {
                 {/*<button onClick={pickFunc} className={"Чати" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Чати"}>{"Чати"}</button>*/}
                 {/*<button onClick={pickFunc} className={"Доставка" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Доставка"}>{"Доставка"}</button>*/}
                 <button onClick={pickFunc} className={"Завдання" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Завдання"}>{"Завдання"}</button>
+                <button onClick={pickFunc} className={"Спілкування" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Спілкування"}>{"Спілкування"}</button>
                 <button onClick={pickFunc} className={"Угоди" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Угоди"}>{"Угоди"}</button>
                 <button onClick={pickFunc} className={"Каса" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Каса"}>{"Каса"}</button>
                 {/*<button onClick={pickFunc} className={"Записи" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Записи"}>{"Записи"}</button>*/}
@@ -76,6 +79,7 @@ export const Admin = () => {
                 <button onClick={pickFunc} className={"Считалочка" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Считалочка"}>{"Считалочка"}</button>
                 <button onClick={pickFunc} className={"КоєфТест" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"КоєфТест"}>{"КоєфТест"}</button>
                 <button onClick={pickFunc} className={"Лічиньники" === whoPick ? 'btn btnm adminFont fileActive' : 'btn btnm adminFont'} toclick={"Лічиньники"}>{"Лічиньники"}</button>
+                <Loader2/>
             </div>
 
             <div className="d-flex flex-column flex-grow-1 adminBackGround">
@@ -106,6 +110,9 @@ export const Admin = () => {
                 }
                 {whoPick === "Лічиньники" &&
                     <TableStorage name={whoPick}/>
+                }
+                {whoPick === "Спілкування" &&
+                    <TelegrammBot/>
                 }
 
 

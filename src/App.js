@@ -7,13 +7,19 @@ import store from "./stores/store";
 import {BrowserRouter as Router} from 'react-router-dom'
 import React from "react";
 import AllWindow from "./components/AllWindow";
+import AnimatedComponent from "./AnimatedComponent";
+import Gravity from "./components/Gravity";
 
 function App() {
     console.log("App");
+
+
     return (
       <Provider store={store}>
           <Router>
               <AllWindow/>
+              {/*<AnimatedComponent/>*/}
+              {/*<Gravity/>*/}
           </Router>
       </Provider>
   );

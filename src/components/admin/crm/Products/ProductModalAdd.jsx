@@ -20,7 +20,7 @@ function ProductModalAdd({namem, data, setData, data1}) {
 
     // Додати нову форму з двома текстовими полями та одним полем типу "checkbox"
     const addForm = () => {
-        setForms([...forms, { unitName: '', unitType: '', checkbox: false }]);
+        setForms([...forms, { unitName: '', unitQuantity: '', checkbox: false }]);
     };
 
     // Оновити значення текстових полів
@@ -101,9 +101,9 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             type="number"
                                             placeholder="0"
                                             min={1}
-                                            value={form.unitName}
+                                            value={form.unitQuantity}
                                             className="adminFont"
-                                            onChange={(event) => handleTextChange(formIndex, 'unitName', event)}
+                                            onChange={(event) => handleTextChange(formIndex, 'unitQuantity', event)}
                                         />
                                         {/*<SearchForm*/}
                                         {/*    props={["1", "2", "3", "11", "112"]}*/}
@@ -113,7 +113,7 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                         {/*    formIndex={formIndex}*/}
                                         {/*/>*/}
                                         <Form.Text className="adminFont text-muted">
-                                            Назва
+                                            Введіть Кількість
                                         </Form.Text>
                                     </Form.Group>
                                     <Form.Group>
@@ -125,9 +125,9 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                         {/*    className="adminFont"*/}
                                         {/*    onChange={(event) => handleTextChange(formIndex, 'text2', event)}*/}
                                         <Form.Select
-                                            value={form.unitType}
+                                            value={form.unitName}
                                             className="adminFont"
-                                            onChange={(event) => handleTextChange(formIndex, 'unitType', event)}
+                                            onChange={(event) => handleTextChange(formIndex, 'unitName', event)}
                                         >
                                             {/*<option className="adminFont">Тип</option>*/}
                                             {/*<option className="adminFont" value="Бумага">Бумага</option>*/}
@@ -142,18 +142,18 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             Тип матеріала/роботи що буде витрачено/зроблено при виготовленні
                                         </Form.Text>
                                     </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label className="adminFont">Email address</Form.Label>
-                                        <Form.Check
-                                            type="checkbox"
-                                            checked={form.checkbox}
-                                            className="adminFont"
-                                            onChange={(event) => handleCheckboxChange(formIndex, event)}
-                                        />
-                                        <Form.Text className="adminFont text-muted">
-                                            We'll never share your email with anyone else.
-                                        </Form.Text>
-                                    </Form.Group>
+                                    {/*<Form.Group>*/}
+                                    {/*    <Form.Label className="adminFont">Email address</Form.Label>*/}
+                                    {/*    <Form.Check*/}
+                                    {/*        type="checkbox"*/}
+                                    {/*        checked={form.checkbox}*/}
+                                    {/*        className="adminFont"*/}
+                                    {/*        onChange={(event) => handleCheckboxChange(formIndex, event)}*/}
+                                    {/*    />*/}
+                                    {/*    <Form.Text className="adminFont text-muted">*/}
+                                    {/*        We'll never share your email with anyone else.*/}
+                                    {/*    </Form.Text>*/}
+                                    {/*</Form.Group>*/}
                                     <div>
                                         <Button type="button" className="adminFont" variant="outline-danger"
                                                 onClick={() => deleteForm(formIndex)}>Видалити</Button>
