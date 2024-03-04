@@ -7,6 +7,7 @@ import Loader from "../../../calc/Loader";
 import CardProduct from "../Products/CardProduct";
 import SelectedProduct from "./products/SelectedProduct";
 import Button from "react-bootstrap/Button";
+import OverlayGetResponseForAnswer from "../../../OverlayGetResponseForAnswer";
 
 const CrmCash = () => {
     const [price, setPrice] = useState(1);
@@ -177,16 +178,17 @@ const CrmCash = () => {
                     ) : (
                         <div>
                             <Button variant="light" disabled className="adminFont">{summ}</Button>
-                            <Button variant="light" className="adminFont"
-                                    onClick={handleSaveOrder}
-                            >Зберегти</Button>
                         </div>
                     )}
                     {thisOrder ? (
-                        <Button variant="light" disabled className="adminFont">{thisOrder.id}</Button>
+                        <div>
+                            <Button variant="light" disabled className="adminFont">Ви успішно зберегли замовлення та отримали відповідь БД про унікальний номер йому було призначено.</Button>
+                            <Button variant="light" disabled className="adminFont">Номер замовлення: {thisOrder.id}</Button>
+                        </div>
                     ) : (
                         <div>
-                            <Button variant="light" disabled className="adminFont">Тут буде номер заказу.</Button>
+                            <Button variant="light" disabled className="adminFont">Нажимаючи "Зберегти" ви активуете збереження заказу до БД та отримання відповіді БД який унікальний номер йому було призначено. Його буде видно після збереження.</Button>
+                            <Button variant="light" className="adminFont" onClick={handleSaveOrder}>Зберегти</Button>
                         </div>
                     )}
                 </div>
