@@ -20,13 +20,18 @@ function ProductModalAdd({namem, data, setData, data1}) {
 
     // Додати нову форму з двома текстовими полями та одним полем типу "checkbox"
     const addForm = () => {
-        setForms([...forms, { unitName: '', unitQuantity: '', checkbox: false }]);
+        setForms([...forms, { unitName: '', unitQuantity: '', idInStorageUnit: '' }]);
     };
 
     // Оновити значення текстових полів
     const handleTextChange = (formIndex, fieldName, event) => {
         const updatedForms = [...forms];
         updatedForms[formIndex][fieldName] = event.target.value;
+        // Update "idInStorageUnit" based on the "id" from the event.target
+        if(fieldName === 'unitName'){
+            updatedForms[formIndex]['idInStorageUnit'] = event.target.options[event.target.selectedIndex].getAttribute("tome");
+        }
+
         setForms(updatedForms);
     };
 
@@ -135,7 +140,7 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             {/*<option className="adminFont" value="Перепліт">Перепліт</option>*/}
                                             {/*<option className="adminFont" value="Ламінація">Ламінація</option>*/}
                                             {data1.rows.map((item, idx) => (
-                                                <option className="adminFont" key={item.id}>{item.name}</option>
+                                                <option className="adminFont" tome={item.id} key={item.id}>{item.name}</option>
                                             ))}
                                         </Form.Select>
                                         <Form.Text className="adminFont text-muted">
