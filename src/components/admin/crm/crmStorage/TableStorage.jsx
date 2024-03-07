@@ -51,40 +51,10 @@ export const TableStorage = ({name}) => {
                 <Table bordered hover variant="" size="sm">
                     <thead>
                     <tr className="">
-                        {/*<th className="adminFontTable">*/}
-                        {/*    <Form.Check // prettier-ignore*/}
-                        {/*        type={"checkbox"}*/}
-                        {/*        id={`all`}*/}
-                        {/*        label={``}*/}
-                        {/*    />*/}
-                        {/*</th>*/}
-                        {/*<th className="adminFontTable">id</th>*/}
-                        {/*<th className="adminFontTable">Фото</th>*/}
-                        {/*<th className="adminFontTable">type</th>*/}
-                        {/*<th className="adminFontTable">Артикул</th>*/}
-                        {/*<th className="adminFontTable">Назва</th>*/}
-                        {/*<th className="adminFontTable">Од. виміру</th>*/}
-                        {/*<th className="adminFontTable">Собівартість</th>*/}
-                        {/*<th className="adminFontTable">Ціна(1-10)</th>*/}
-                        {/*<th className="adminFontTable">Ціна(11-50)</th>*/}
-                        {/*<th className="adminFontTable">Ціна(51-100)</th>*/}
-                        {/*<th className="adminFontTable">Ціна(101-0)(main)</th>*/}
-                        {/*<th className="adminFontTable">Ціна(101-0)(main)</th>*/}
-                        {/*<th className="adminFontTable">В наявності</th>*/}
-                        {/*<th className="adminFontTable">Всього</th>*/}
-                        {/*<th className="adminFontTable">Коєф ціни(від main)</th>*/}
-                        {/*<th className="adminFontTable">Коєф число</th>*/}
-                        {/*<th className="adminFontTable">Створив</th>*/}
-                        {/*<th className="adminFontTable">Постачальник</th>*/}
-                        {/*<th className="adminFontTable">createdAt</th>*/}
-                        {/*<th className="adminFontTable">updatedAt</th>*/}
-                        {/*<th className="adminFontTable"></th>*/}
                         {data.metadata.map((item) => (
                             <th className="adminFontTable">{item}</th>
 
                         ))}
-                        {/*<th className="adminFontTable"></th>*/}
-
                     </tr>
                     </thead>
                     <tbody>

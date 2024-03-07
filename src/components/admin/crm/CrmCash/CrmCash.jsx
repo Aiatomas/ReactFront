@@ -136,7 +136,7 @@ const CrmCash = () => {
                 {/*    </p>*/}
                 {/*))}*/}
             </div>
-            <div className="card" style={{width: '40.5vw'}}>
+            <div className="card d-flex flex-column" style={{width: '40.5vw'}}>
                 {selectedThings.map((thing, index) => (
                     <div key={index} className="d-flex thing">
                         {thing.productunits ? (
@@ -171,26 +171,33 @@ const CrmCash = () => {
                         )}
                     </div>
                 ))}
-                <div>
-                    <Button variant="light" disabled className="adminFont">Сумма</Button>
-                    {isLoad ? (
-                        <Button variant="light" disabled className="adminFont"><Loader/></Button>
-                    ) : (
-                        <div>
-                            <Button variant="light" disabled className="adminFont">{summ}</Button>
-                        </div>
-                    )}
-                    {thisOrder ? (
-                        <div>
-                            <Button variant="light" disabled className="adminFont">Ви успішно зберегли замовлення та отримали відповідь БД про унікальний номер йому було призначено.</Button>
-                            <Button variant="light" disabled className="adminFont">Номер замовлення: {thisOrder.id}</Button>
-                        </div>
-                    ) : (
-                        <div>
-                            <Button variant="light" disabled className="adminFont">Нажимаючи "Зберегти" ви активуете збереження заказу до БД та отримання відповіді БД який унікальний номер йому було призначено. Його буде видно після збереження.</Button>
-                            <Button variant="light" className="adminFont" onClick={handleSaveOrder}>Зберегти</Button>
-                        </div>
-                    )}
+                <div style={{marginTop: 'auto'}}>
+                    <div>
+                        <Button variant="light" disabled className="adminFont">Сумма</Button>
+                        {isLoad ? (
+                            <Button variant="light" disabled className="adminFont"><Loader/></Button>
+                        ) : (
+                            <div>
+                                <Button variant="light" disabled className="adminFont">{summ}</Button>
+                            </div>
+                        )}
+                        {thisOrder ? (
+                            <div>
+                                <Button variant="light" disabled className="adminFont">Ви успішно зберегли замовлення та
+                                    отримали відповідь БД про унікальний номер йому було призначено.</Button>
+                                <Button variant="light" disabled className="adminFont">Номер
+                                    замовлення: {thisOrder.id}</Button>
+                            </div>
+                        ) : (
+                            <div>
+                                <Button variant="light" disabled className="adminFont">Нажимаючи "Зберегти" ви активуете
+                                    збереження заказу до БД та отримання відповіді БД який унікальний номер йому було
+                                    призначено. Його буде видно після збереження.</Button>
+                                <Button variant="light" className="adminFont"
+                                        onClick={handleSaveOrder}>Зберегти</Button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

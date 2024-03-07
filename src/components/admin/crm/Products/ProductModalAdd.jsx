@@ -140,7 +140,7 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             {/*<option className="adminFont" value="Перепліт">Перепліт</option>*/}
                                             {/*<option className="adminFont" value="Ламінація">Ламінація</option>*/}
                                             {data1.rows.map((item, idx) => (
-                                                <option className="adminFont" tome={item.id} key={item.id}>{item.name}</option>
+                                                <option className="adminFont" tome={item.id} key={item.id}>{item.name}, {item.price1},{item.price2},{item.price3},{item.price4},{item.price5}</option>
                                             ))}
                                         </Form.Select>
                                         <Form.Text className="adminFont text-muted">
