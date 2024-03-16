@@ -14,17 +14,20 @@ const CrmCash = () => {
     const [things, setThings] = useState([]);
     const [products, setProducts] = useState(null);
     const [selectedThings, setSelectedThings] = useState([]);
+    const [selectedThings2, setSelectedThings2] = useState(null);
     const [summ, setSumm] = useState(0);
     const [isLoad, setIsLoad] = useState(false);
     const [thisOrder, setThisOrder] = useState(null);
+    const [typeSelect, setTypeSelect] = useState("");
+    const [newData, setNewData] = useState("");
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
         setSelectedThings([...selectedThings, {...thing, amount: 1}]);
     };
 
-    const handleThingClick2 = (thing) => {
-      setSelectedThings(selectedThings.filter((t) => t !== thing));
+    const handleThingClickDelete2 = (thing) => {
+      setSelectedThings(selectedThings2.filter((t) => t !== thing));
       // setThings([...things, thing]);
     };
 
@@ -36,7 +39,7 @@ const CrmCash = () => {
 
     const handleSaveOrder = () => {
         let dataToSend = {
-            orderUnits: selectedThings
+            data: selectedThings
         }
         axios.post(`/api/order/create`, dataToSend)
             .then(response => {
@@ -53,6 +56,7 @@ const CrmCash = () => {
             name: "Склад",
             inPageCount: 99999,
             currentPage: 1,
+            search: typeSelect
         };
         axios.post(`admin/gettable`, data)
             .then(response => {
@@ -62,7 +66,7 @@ const CrmCash = () => {
             .catch(error => {
                 console.log(error.message);
             })
-    }, []);
+    }, [typeSelect]);
 
     useEffect(() => {
         let dataToSend = {
@@ -86,17 +90,33 @@ const CrmCash = () => {
         }
         axios.post(`api/pricing`, dataToSend)
             .then(response => {
+                console.log(`this is response.data pure`);
                 console.log(response.data);
-                setSumm(response.data[0].price)
+                setSumm(response.data.calcResponse[0].price)
                 setIsLoad(false)
+                setSelectedThings2(response.data.newDataWithPrices2)
             })
             .catch(error => {
                 console.log(error.message);
             })
     }, [selectedThings]);
 
+    console.log(selectedThings2);
     return (
         <div className="d-flex justify-content-space-between">
+
+            <div>
+                <Form.Control
+                    placeholder={"searchForm"}
+                    aria-label={"searchForm"}
+                    aria-describedby="searchForm"
+                    type={"String"}
+                    value={typeSelect}
+                    className="adminFontTable"
+                    onChange={(event) => setTypeSelect(event.target.value)}
+                />
+            </div>
+
             <div className="card">
                 <div style={{width: '50.5vw'}}>склад
                     <div style={{width: '24.5vw', height: '30vh', overflow: 'auto', border: '1px solid #ccc'}}
@@ -137,66 +157,143 @@ const CrmCash = () => {
                 {/*))}*/}
             </div>
             <div className="card d-flex flex-column" style={{width: '40.5vw'}}>
-                {selectedThings.map((thing, index) => (
-                    <div key={index} className="d-flex thing">
-                        {thing.productunits ? (
-                            <div>
-                                <SelectedProduct key={thing.id} name={"Продукти"} data={products} setData={setProducts}
-                                                 item={thing}/>
-                                <Button variant="danger" onClick={() => handleThingClick2(thing)}
-                                        className="adminFont">Видалити</Button>
-                                <Form.Control
-                                    type="number"
-                                    placeholder={1}
-                                    min={1}
-                                    value={thing.amount}
-                                    className=""
-                                    onChange={(event) => handleAmountChange(index, 'amount', event)}
-                                />
+
+
+                {selectedThings2 ? (
+                    <div>
+                        {selectedThings2.map((thing, index) => (
+                            <div key={index} className="d-flex thing">
+                                {thing.productunits ? (
+                                    <div>
+                                        <SelectedProduct key={thing.id} name={"Продукти"} data={selectedThings} setData={setSelectedThings}
+                                                         item={thing} index={index} isLoad={isLoad}
+                                        />
+                                        <Button variant="danger" onClick={() => handleThingClickDelete2(thing)}
+                                                className="adminFont">Видалити</Button>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder={1}
+                                            min={1}
+                                            value={thing.amount}
+                                            className=""
+                                            onChange={(event) => handleAmountChange(index, 'amount', event)}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p className="adminFont">{thing.name}</p>
+                                        <p className="adminFont">Ціна: {thing.priceForThis}</p>
+                                        <p>
+                                            за одиницю цієї хні: {thing.priceForThis/thing.amount}
+                                        </p>
+                                        <Button variant="danger" onClick={() => handleThingClickDelete2(thing)}
+                                                className="adminFont">Видалити</Button>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder={1}
+                                            min={1}
+                                            value={thing.amount}
+                                            className=""
+                                            onChange={(event) => handleAmountChange(index, 'amount', event)}
+                                        />
+                                    </div>
+                                )}
                             </div>
-                        ) : (
-                            <div>
-                                <p className="adminFont">{thing.name}</p>
-                                <Button variant="danger" onClick={() => handleThingClick2(thing)}
-                                        className="adminFont">Видалити</Button>
-                                <Form.Control
-                                    type="number"
-                                    placeholder={1}
-                                    min={1}
-                                    value={thing.amount}
-                                    className=""
-                                    onChange={(event) => handleAmountChange(index, 'amount', event)}
-                                />
-                            </div>
-                        )}
+                        ))}
                     </div>
-                ))}
+                ) : (
+                    <div>
+                        {selectedThings.map((thing, index) => (
+                            <div key={index} className="d-flex thing">
+                                {thing.productunits ? (
+                                    <div>
+                                        <SelectedProduct key={thing.id} name={"Продукти"} data={products} setData={setProducts}
+                                                         item={thing}
+                                        />
+                                        <Button variant="danger" onClick={() => handleThingClickDelete2(thing)}
+                                                className="adminFont">Видалити</Button>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder={1}
+                                            min={1}
+                                            value={thing.amount}
+                                            className=""
+                                            onChange={(event) => handleAmountChange(index, 'amount', event)}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p className="adminFont">{thing.name}</p>
+                                        <Button variant="danger" onClick={() => handleThingClickDelete2(thing)}
+                                                className="adminFont">Видалити</Button>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder={1}
+                                            min={1}
+                                            value={thing.amount}
+                                            className=""
+                                            onChange={(event) => handleAmountChange(index, 'amount', event)}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <div>
+                    <Button variant="light" disabled className="adminFont">Сумма</Button>
+                    <Button variant="light" disabled className="adminFont">{summ}</Button>
+                </div>
                 <div style={{marginTop: 'auto'}}>
                     <div>
-                        <Button variant="light" disabled className="adminFont">Сумма</Button>
-                        {isLoad ? (
-                            <Button variant="light" disabled className="adminFont"><Loader/></Button>
-                        ) : (
-                            <div>
-                                <Button variant="light" disabled className="adminFont">{summ}</Button>
+                        <div className="d-flex">
+                            <div className="d-flex flex-column">
+                                <p className="adminFont">Предоплата</p>
+                                <Button variant="outline-warning" disabled className="adminFont">0</Button>
                             </div>
-                        )}
-                        {thisOrder ? (
-                            <div>
-                                <Button variant="light" disabled className="adminFont">Ви успішно зберегли замовлення та
-                                    отримали відповідь БД про унікальний номер йому було призначено.</Button>
-                                <Button variant="light" disabled className="adminFont">Номер
-                                    замовлення: {thisOrder.id}</Button>
+                            <div className="d-flex flex-column">
+                                <p className="adminFont">Знижка</p>
+                                <Button variant="outline-warning" disabled className="adminFont">0</Button>
                             </div>
-                        ) : (
-                            <div>
-                                <Button variant="light" disabled className="adminFont">Нажимаючи "Зберегти" ви активуете
-                                    збереження заказу до БД та отримання відповіді БД який унікальний номер йому було
-                                    призначено. Його буде видно після збереження.</Button>
-                                <Button variant="light" className="adminFont"
-                                        onClick={handleSaveOrder}>Зберегти</Button>
+                            <div className="d-flex flex-column">
+                                <p className="adminFont">Всього</p>
+                                <Button variant="outline-warning" disabled className="adminFont">0</Button>
                             </div>
-                        )}
+
+                            <div className="d-flex flex-column">
+                                <p className="adminFont text-center">Оплата</p>
+                                <div className="d-flex">
+                                    <Button variant="outline-primary" className="adminFont">Готівка</Button>
+                                    <Button variant="outline-primary" className="adminFont">Безготівка</Button>
+                                </div>
+                            </div>
+                            {isLoad ? (
+                                <Button variant="light" disabled className="adminFont"><Loader/></Button>
+                            ) : (
+                                <div>
+                                    <Button variant="light" disabled className="adminFont">{summ}</Button>
+                                </div>
+                            )}
+                            {thisOrder ? (
+                                <div>
+                                    {/*<Button variant="light" disabled className="adminFont">Ви успішно зберегли*/}
+                                    {/*    замовлення та*/}
+                                    {/*    отримали відповідь БД про унікальний номер йому було призначено.</Button>*/}
+                                    <Button variant="light" disabled className="adminFont">Номер
+                                        замовлення: {thisOrder.id}</Button>
+                                </div>
+                            ) : (
+                                <div>
+                                    {/*<Button variant="light" disabled className="adminFont">Нажимаючи "Зберегти" ви*/}
+                                    {/*    активуете*/}
+                                    {/*    збереження заказу до БД та отримання відповіді БД який унікальний номер йому*/}
+                                    {/*    було*/}
+                                    {/*    призначено. Його буде видно після збереження.</Button>*/}
+                                    <Button variant="light" className="adminFont"
+                                            onClick={handleSaveOrder}>Зберегти</Button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

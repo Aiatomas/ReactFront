@@ -3,11 +3,9 @@ import Card from 'react-bootstrap/Card';
 import React, {useEffect, useState} from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import {Modal} from "react-bootstrap";
 import InputGroup from 'react-bootstrap/InputGroup';
-import Loader from "../../../../calc/Loader";
 
-function SelectedProduct({name, data, setData, item, index, isLoad}) {
+function OneProductInOrders({item}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
@@ -18,49 +16,41 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
         setShow(true);
     }
 
-    const handleProductInCashChange = (formIndex, fieldName, event, isCheckbox) => {
-        const updatedForms = [...data];
-        if(isCheckbox){
-            updatedForms[formIndex][fieldName] = !updatedForms[formIndex][fieldName]
-        } else {
-            updatedForms[formIndex][fieldName] = event.target.value;
-        }
-        // Update "idInStorageUnit" based on the "id" from the event.target
-        // if(fieldName === 'unitName'){
-        //     updatedForms[formIndex]['idInStorageUnit'] = event.target.options[event.target.selectedIndex].getAttribute("tome");
-        // }
+    // const handleProductInCashChange = (formIndex, fieldName, event, isCheckbox) => {
+    //     const updatedForms = [...data];
+    //     if(isCheckbox){
+    //         updatedForms[formIndex][fieldName] = !updatedForms[formIndex][fieldName]
+    //     } else {
+    //         updatedForms[formIndex][fieldName] = event.target.value;
+    //     }
+    //     // Update "idInStorageUnit" based on the "id" from the event.target
+    //     // if(fieldName === 'unitName'){
+    //     //     updatedForms[formIndex]['idInStorageUnit'] = event.target.options[event.target.selectedIndex].getAttribute("tome");
+    //     // }
+    //
+    //     setData(updatedForms);
+    // };
 
-        setData(updatedForms);
-    };
-
-    const handleSubmit = (event) => {
-        let dataToSend = {
-            method: "deleteOne",
-            id: item.id
-        }
-        axios.post(`admin/api/products`, dataToSend)
-            .then(response => {
-                console.log(response.data);
-                setData(response.data)
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    };
-
-    console.log("item");
+    // const handleSubmit = (event) => {
+    //     let dataToSend = {
+    //         method: "deleteOne",
+    //         id: item.id
+    //     }
+    //     axios.post(`admin/api/products`, dataToSend)
+    //         .then(response => {
+    //             console.log(response.data);
+    //             setData(response.data)
+    //         })
+    //         .catch(error => {
+    //             console.log(error.message);
+    //         })
+    // };
     console.log(item);
     return (
         <Card>
             <Card.Body>
                 <Card.Title className="adminFont">
-                    {isLoad ? (
-                        <div>
-                            Назва {item.name}
-                        </div>
-                    ) : (
-                        <div>Назва {item.name}</div>
-                    )}
+                    <div>Назва {item.name}</div>
                 </Card.Title>
                 <Card.Text className="adminFont">
                     <p>
@@ -73,7 +63,7 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
                                         placeholder="x"
                                         value={item.newField2}
                                         className="adminFontTable"
-                                        onChange={(event) => handleProductInCashChange(index, 'newField2', event)}
+                                        // onChange={(event) => handleProductInCashChange(index, 'newField2', event)}
                                     />
                                 </Form.Group>
                                 <Form.Group className="d-flex">
@@ -83,7 +73,7 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
                                         placeholder="y"
                                         value={item.newField3}
                                         className="adminFontTable"
-                                        onChange={(event) => handleProductInCashChange(index, 'newField3', event)}
+                                        // onChange={(event) => handleProductInCashChange(index, 'newField3', event)}
                                     />
                                 </Form.Group>
                             </div>
@@ -107,13 +97,7 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
                                 </Form.Group>
                             </div>
                         )}
-                        {isLoad ? (
-                            <div>
-                                Ціна ...
-                            </div>
-                        ) : (
-                            <div>Ціна {item.priceForThis} за шт., за все: {item.priceForThis*item.amountListForOne}</div>
-                        )}
+                        <div>Ціна {item.priceForThis} за шт., за все: {item.priceForThis * item.amountListForOne}</div>
 
                         <div>влізе на лист а3: {item.amountCanPushToOneList}шт.</div>
                         <div>Буде витрачено листів а3: {item.amountListForOne}шт.</div>
@@ -121,7 +105,7 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
                         {/*x={item.newField2}*/}
                         {/*y={item.newField3}*/}
                     </p>
-                    {item.productunits.map((unitItem, iter) => (
+                    {item.fullOrderProduct.productunits.map((unitItem, iter) => (
                         <div key={unitItem.id} className="d-flex adminFontTable border-1">
                             <InputGroup className="adminFontTable">
                                 <InputGroup.Text className="adminFontTable">{iter + 1}</InputGroup.Text>
@@ -155,22 +139,10 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
                                 {/*/>*/}
                             </InputGroup>
                             <p>
-                                {isLoad ? (
-                                    <div className="adminFontTable">
-                                        Ціна за це: ...
-                                    </div>
-                                ) : (
-                                    <div className="adminFontTable">Ціна за це: {unitItem.priceForThis}</div>
-                                )}
+                                <div className="adminFontTable">Ціна за це: {unitItem.priceForThis}</div>
                             </p>
                             <p>
-                                {isLoad ? (
-                                    <div className="adminFontTable">
-                                        за одиницю цієї хні: ...
-                                    </div>
-                                ) : (
-                                    <div className="adminFontTable">за одиницю цієї хні: {unitItem.priceForThis / unitItem.quantity}</div>
-                                )}
+                                <div className="adminFontTable">за одиницю цієї хні: {unitItem.priceForThis / unitItem.quantity}</div>
                             </p>
                         </div>
                     ))}
@@ -179,22 +151,22 @@ function SelectedProduct({name, data, setData, item, index, isLoad}) {
             </Card.Body>
 
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Видалення</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Видалити {item.name}?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Закрити
-                    </Button>
-                    <Button variant="danger" toclick={item.id} onClick={(event) => handleSubmit(event)}>
-                        Видалити
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {/*<Modal show={show} onHide={handleClose}>*/}
+            {/*    <Modal.Header closeButton>*/}
+            {/*        <Modal.Title>Видалення</Modal.Title>*/}
+            {/*    </Modal.Header>*/}
+            {/*    <Modal.Body>Видалити {item.name}?</Modal.Body>*/}
+            {/*    <Modal.Footer>*/}
+            {/*        <Button variant="secondary" onClick={handleClose}>*/}
+            {/*            Закрити*/}
+            {/*        </Button>*/}
+            {/*        <Button variant="danger" toclick={item.id} onClick={(event) => handleSubmit(event)}>*/}
+            {/*            Видалити*/}
+            {/*        </Button>*/}
+            {/*    </Modal.Footer>*/}
+            {/*</Modal>*/}
         </Card>
     );
 }
 
-export default SelectedProduct;
+export default OneProductInOrders;

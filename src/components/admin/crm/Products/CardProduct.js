@@ -37,25 +37,95 @@ function CardProduct({name, data, setData, item}) {
             <Card.Body>
                 <Card.Title className="adminFont">{item.name}</Card.Title>
                 <Card.Text className="adminFont">
+                    <div className="d-flex">
+                        <Form.Group className="d-flex">
+                            <Button variant="outline-dark" disabled className="adminFont">x</Button>
+                            <Form.Control
+                                type="text"
+                                placeholder="x"
+                                value={item.newField2}
+                                className="adminFontTable"
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group className="d-flex">
+                            <Button variant="outline-dark" disabled className="adminFont">y</Button>
+                            <Form.Control
+                                type="text"
+                                placeholder="y"
+                                value={item.newField3}
+                                className="adminFontTable"
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group className="d-flex">
+                            <Form.Label className="adminFont">Змінне?</Form.Label>
+                            {item.newField1 === "1" ? (
+                                <Form.Check
+                                    type="checkbox"
+                                    checked={true}
+                                    disabled
+                                />
+                            ) : (
+                                <Form.Check
+                                    type="checkbox"
+                                    checked={false}
+                                    disabled
+                                />
+                                )}
+                            {/*<Form.Text className="adminFont text-muted">*/}
+                            {/*    Можливість на кассі щось змінити*/}
+                            {/*</Form.Text>*/}
+                        </Form.Group>
+                    </div>
                     Складається з:
                     {item.productunits.map((unitItem, iter) => (
                         <div key={unitItem.id} className="d-flex adminFontTable border-1">
                             <InputGroup className="adminFontTable">
-                                <InputGroup.Text className="adminFontTable">{iter+1}</InputGroup.Text>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Назва у товарі"
-                                    value={unitItem.name}
-                                    className="adminFontTable"
-                                    disabled
-                                />
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Тип"
-                                    value={unitItem.quantity}
-                                    className="adminFontTable"
-                                    disabled
-                                />
+                                {/*<InputGroup.Text className="adminFontTable">{iter+1}</InputGroup.Text>*/}
+
+                                <div className="d-flex">
+                                    <Form.Group className="d-flex">
+                                        <Button variant="outline-dark" disabled className="adminFont">Назва</Button>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Назва у товарі"
+                                            value={unitItem.name}
+                                            className="adminFontTable"
+                                            disabled
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="d-flex">
+                                        <Button variant="outline-dark" disabled className="adminFont">quantity</Button>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Тип"
+                                            value={unitItem.quantity}
+                                            className="adminFontTable"
+                                            disabled
+                                        />
+                                    </Form.Group>
+                                    {/*<Form.Group className="d-flex">*/}
+                                    {/*    <Button variant="outline-warning" className="adminFont">x</Button>*/}
+                                    {/*    <Form.Control*/}
+                                    {/*        type="text"*/}
+                                    {/*        placeholder="x"*/}
+                                    {/*        value={unitItem.newField2}*/}
+                                    {/*        className="adminFontTable"*/}
+                                    {/*        disabled*/}
+                                    {/*    />*/}
+                                    {/*</Form.Group>*/}
+                                    {/*<Form.Group className="d-flex">*/}
+                                    {/*    <Button variant="outline-warning" className="adminFont">y</Button>*/}
+                                    {/*    <Form.Control*/}
+                                    {/*        type="text"*/}
+                                    {/*        placeholder="y"*/}
+                                    {/*        value={unitItem.newField3}*/}
+                                    {/*        className="adminFontTable"*/}
+                                    {/*        disabled*/}
+                                    {/*    />*/}
+                                    {/*</Form.Group>*/}
+                                </div>
                             </InputGroup>
                         </div>
                     ))}

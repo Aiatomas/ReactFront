@@ -33,6 +33,7 @@ function Products({name}) {
             name: "Склад",
             inPageCount: 99999,
             currentPage: 1,
+            search: ""
         }
         axios.post(`admin/gettable`, data)
             .then(response => {

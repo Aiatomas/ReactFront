@@ -11,6 +11,9 @@ function ProductModalAdd({namem, data, setData, data1}) {
     const [show, setShow] = useState(false);
     const [forms, setForms] = useState([]);
     const [productName, setProductName] = useState("");
+    const [x, setX] = useState("");
+    const [y, setY] = useState("");
+    const [canDo, setCanDo] = useState(false);
     const [load, setLoad] = useState(false);
     console.log(data1);
     const handleClose = () => {
@@ -20,13 +23,17 @@ function ProductModalAdd({namem, data, setData, data1}) {
 
     // Додати нову форму з двома текстовими полями та одним полем типу "checkbox"
     const addForm = () => {
-        setForms([...forms, { unitName: '', unitQuantity: '', idInStorageUnit: '' }]);
+        setForms([...forms, { unitName: '', unitQuantity: '', idInStorageUnit: '', newField1: '', newField2: '', newField3: '' }]);
     };
 
     // Оновити значення текстових полів
-    const handleTextChange = (formIndex, fieldName, event) => {
+    const handleTextChange = (formIndex, fieldName, event, isCheckbox) => {
         const updatedForms = [...forms];
-        updatedForms[formIndex][fieldName] = event.target.value;
+        if(isCheckbox){
+            updatedForms[formIndex][fieldName] = !updatedForms[formIndex][fieldName]
+        } else {
+            updatedForms[formIndex][fieldName] = event.target.value;
+        }
         // Update "idInStorageUnit" based on the "id" from the event.target
         if(fieldName === 'unitName'){
             updatedForms[formIndex]['idInStorageUnit'] = event.target.options[event.target.selectedIndex].getAttribute("tome");
@@ -55,7 +62,10 @@ function ProductModalAdd({namem, data, setData, data1}) {
         let dataToSend = {
             method: "addNew",
             productName: productName,
-            productUnits: forms
+            newField1: canDo,
+            newField2: x,
+            newField3: y,
+            productUnits: forms,
         }
         console.log(dataToSend);
 
@@ -86,21 +96,46 @@ function ProductModalAdd({namem, data, setData, data1}) {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <div>
-                        <Form.Control
-                            type="text"
-                            placeholder="Назва товару"
-                            value={productName}
-                            className=""
-                            onChange={(event) => setProductName(event.target.value)}
-                        />
+                        <div className="d-flex">
+                            <Form.Control
+                                type="text"
+                                placeholder="Назва товару"
+                                value={productName}
+                                className=""
+                                onChange={(event) => setProductName(event.target.value)}
+                            />
+                            <Form.Control
+                                type="number"
+                                placeholder="x"
+                                value={x}
+                                className=""
+                                onChange={(event) => setX(event.target.value)}
+                            />
+                            <Form.Control
+                                type="number"
+                                placeholder="y"
+                                value={y}
+                                className=""
+                                onChange={(event) => setY(event.target.value)}
+                            />
+                            <Form.Check
+                                type="checkbox"
+                                checked={canDo}
+                                className="adminFont"
+                                onChange={(event) => setCanDo(!canDo)}
+                            />
+                            <Form.Text className="adminFont text-muted">
+                                Можливість на кассі щось змінити
+                            </Form.Text>
+                        </div>
                         <div>
                             Зіставні елементи:
                         </div>
                         <Form onSubmit={handleSubmit}>
                             {forms.map((form, formIndex) => (
-                                <div key={formIndex} className="adminFont border-1">
+                                <div key={formIndex} className="adminFont border-1 border-warning border p-2 m-2">
                                     {formIndex + 1}
-                                    <Form.Group>
+                                    <Form.Group className="d-flex">
                                         <Form.Label className="adminFont">Кількість</Form.Label>
                                         <Form.Control
                                             type="number"
@@ -110,54 +145,60 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             className="adminFont"
                                             onChange={(event) => handleTextChange(formIndex, 'unitQuantity', event)}
                                         />
-                                        {/*<SearchForm*/}
-                                        {/*    props={["1", "2", "3", "11", "112"]}*/}
-                                        {/*    value={form.unitName}*/}
-                                        {/*    onChangeFunc={handleTextChange}*/}
-                                        {/*    handledField={'unitName'}*/}
-                                        {/*    formIndex={formIndex}*/}
-                                        {/*/>*/}
-                                        <Form.Text className="adminFont text-muted">
-                                            Введіть Кількість
-                                        </Form.Text>
+                                        {/*<Form.Text className="adminFont text-muted">*/}
+                                        {/*    Введіть Кількість*/}
+                                        {/*</Form.Text>*/}
                                     </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label className="adminFont">Тип</Form.Label>
-                                        {/*<Form.Control*/}
-                                        {/*    type="text"*/}
-                                        {/*    placeholder="Тип"*/}
-                                        {/*    value={form.text2}*/}
-                                        {/*    className="adminFont"*/}
-                                        {/*    onChange={(event) => handleTextChange(formIndex, 'text2', event)}*/}
+                                    <Form.Group className="d-flex">
+                                        <Form.Label className="adminFont">Найменування хуйні:</Form.Label>
                                         <Form.Select
                                             value={form.unitName}
                                             className="adminFont"
                                             onChange={(event) => handleTextChange(formIndex, 'unitName', event)}
                                         >
-                                            {/*<option className="adminFont">Тип</option>*/}
-                                            {/*<option className="adminFont" value="Бумага">Бумага</option>*/}
-                                            {/*<option className="adminFont" value="Друк">Друк</option>*/}
-                                            {/*<option className="adminFont" value="Перепліт">Перепліт</option>*/}
-                                            {/*<option className="adminFont" value="Ламінація">Ламінація</option>*/}
                                             {data1.rows.map((item, idx) => (
                                                 <option className="adminFont" tome={item.id} key={item.id}>{item.name}, {item.price1},{item.price2},{item.price3},{item.price4},{item.price5}</option>
                                             ))}
                                         </Form.Select>
+                                        {/*<Form.Text className="adminFont text-muted">*/}
+                                        {/*    Тип матеріала/роботи що буде витрачено/зроблено при виготовленні*/}
+                                        {/*</Form.Text>*/}
+                                    </Form.Group>
+                                    <Form.Group className="d-flex">
+                                        {/*<Form.Label className="adminFont">Чи блокована зміна:</Form.Label>*/}
+                                        <Form.Check
+                                            type="checkbox"
+                                            checked={form.checkbox}
+                                            className="adminFont"
+                                            onChange={(event) => handleTextChange(formIndex, 'newField1', event)}
+                                        />
                                         <Form.Text className="adminFont text-muted">
-                                            Тип матеріала/роботи що буде витрачено/зроблено при виготовленні
+                                            Можливість на кассі щось змінити
                                         </Form.Text>
                                     </Form.Group>
-                                    {/*<Form.Group>*/}
-                                    {/*    <Form.Label className="adminFont">Email address</Form.Label>*/}
-                                    {/*    <Form.Check*/}
-                                    {/*        type="checkbox"*/}
-                                    {/*        checked={form.checkbox}*/}
+
+
+                                    {/*<Form.Group className="d-flex">*/}
+                                    {/*    <Form.Label className="adminFont">x</Form.Label>*/}
+                                    {/*    <Form.Control*/}
+                                    {/*        type="number"*/}
+                                    {/*        placeholder="0"*/}
+                                    {/*        min={1}*/}
+                                    {/*        value={form.newField2}*/}
                                     {/*        className="adminFont"*/}
-                                    {/*        onChange={(event) => handleCheckboxChange(formIndex, event)}*/}
+                                    {/*        onChange={(event) => handleTextChange(formIndex, 'newField2', event)}*/}
                                     {/*    />*/}
-                                    {/*    <Form.Text className="adminFont text-muted">*/}
-                                    {/*        We'll never share your email with anyone else.*/}
-                                    {/*    </Form.Text>*/}
+                                    {/*</Form.Group>*/}
+                                    {/*<Form.Group className="d-flex">*/}
+                                    {/*    <Form.Label className="adminFont">y</Form.Label>*/}
+                                    {/*    <Form.Control*/}
+                                    {/*        type="number"*/}
+                                    {/*        placeholder="0"*/}
+                                    {/*        min={1}*/}
+                                    {/*        value={form.newField3}*/}
+                                    {/*        className="adminFont"*/}
+                                    {/*        onChange={(event) => handleTextChange(formIndex, 'newField3', event)}*/}
+                                    {/*    />*/}
                                     {/*</Form.Group>*/}
                                     <div>
                                         <Button type="button" className="adminFont" variant="outline-danger"

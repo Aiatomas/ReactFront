@@ -34,6 +34,10 @@ const ModalStorageRed = ({dataTypeInTable, tableName, itemData, item, tablPositi
         setModalInput(itemData)
     }, [data]);
 
+    const ToThisOrder = (event, orderId) => {
+
+    };
+
     let saveThis = (event) => {
         let data = {
             tableName: tableName,
@@ -85,11 +89,11 @@ const ModalStorageRed = ({dataTypeInTable, tableName, itemData, item, tablPositi
             <img src={redIcon} alt="red" className="redIcon"/>
             {showModal && (
                 <div
-                    // className="modal"
-                    style={modalStyle}
+                    className=""
+                    // style={modalStyle}
                     onMouseDown={stopPropagation}
                 >
-                    <Modal.Dialog>
+                    <Modal.Dialog style={modalStyle}>
                         {/*<Modal.Header closeButton>*/}
                         {/*    <Modal.Title>Modal title</Modal.Title>*/}
                         {/*</Modal.Header>*/}

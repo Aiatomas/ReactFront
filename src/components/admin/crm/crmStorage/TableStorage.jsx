@@ -9,18 +9,22 @@ import ModalStorageTable from "./ModalStorageTable";
 import ModalDeleteInStorage from "./ModalDeleteInStorage";
 import ModalStorageRed from "./ModalStorageRed";
 import MetaAddNewItemTable from "./MetaAddNewItemTable";
+import Button from "react-bootstrap/Button";
+import searchForm from "../SearchForm";
 
 export const TableStorage = ({name}) => {
     const [data, setData] = useState(null);
     const [inPageCount, setInPageCount] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(null);
+    const [typeSelect, setTypeSelect] = useState("");
 
     useEffect(() => {
         let data = {
             name: name,
             inPageCount: inPageCount,
             currentPage: currentPage,
+            search: typeSelect
         }
         axios.post(`admin/gettable`, data)
             .then(response => {
@@ -31,12 +35,29 @@ export const TableStorage = ({name}) => {
             .catch(error => {
                 console.log(error.message);
             })
-    }, []);
+    }, [typeSelect]);
 
     if (data) {
         return (
             <div>
                 <CrmHeader whoPick={name} data={data}/>
+                {/*<div>*/}
+                {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">1</Button>*/}
+                {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">2</Button>*/}
+                {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">3</Button>*/}
+                {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">4</Button>*/}
+                {/*</div>*/}
+                <div>
+                    <Form.Control
+                        placeholder={"searchForm"}
+                        aria-label={"searchForm"}
+                        aria-describedby="searchForm"
+                        type={"String"}
+                        value={typeSelect}
+                        className="adminFontTable"
+                        onChange={(event) => setTypeSelect(event.target.value)}
+                    />
+                </div>
                 <MetaAddNewItemTable
                     namem={name}
                     data={data}
@@ -52,7 +73,7 @@ export const TableStorage = ({name}) => {
                     <thead>
                     <tr className="">
                         {data.metadata.map((item) => (
-                            <th className="adminFontTable">{item}</th>
+                            <th className="adminFontTable" key={item}>{item}</th>
 
                         ))}
                     </tr>

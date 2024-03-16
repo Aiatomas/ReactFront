@@ -10,7 +10,8 @@ import {CurrentUser} from "../usersettings/CurrentUser";
 import {Admin} from "../admin/Admin";
 import Main from "../newcalc/Main";
 import Sheet from "../newcalc/products/Sheet";
-import Orders from "../newcalc/Orders";
+import Orders from "../newcalc/Orders/Orders";
+import OneOrder from "../newcalc/Orders/OneOrder";
 
 const AfterNav = () => {
     const pricesIsLoading = useSelector(state => state.prices.pricesIsLoading);
@@ -56,7 +57,7 @@ const AfterNav = () => {
                 <Route path="/currentUser" element={<CurrentUser/>} />
 
                 <Route path="/Orders" element={<Orders/>} />
-                <Route path="/Orders/*" element={<Sheet/>} />
+                <Route path="/Orders/:id" element={<OneOrder/>} />
             </Routes>
         </div>
     );
