@@ -50,18 +50,18 @@ function OneProductInOrders({item}) {
         <Card>
             <Card.Body>
                 <Card.Title className="adminFont">
-                    <div>Назва {item.name}</div>
+                    {/*<div>Назва {item.unitName}</div>*/}
                 </Card.Title>
                 <Card.Text className="adminFont">
                     <p>
-                        {item.newField1 === "1" ? (
+                        {item.fullOrderProduct.newField1 === "1" ? (
                             <div className="d-flex">
                                 <Form.Group className="d-flex">
                                     <Button variant="outline-dark" className="adminFont">x</Button>
                                     <Form.Control
                                         type="number"
                                         placeholder="x"
-                                        value={item.newField2}
+                                        value={item.fullOrderProduct.newField2}
                                         className="adminFontTable"
                                         // onChange={(event) => handleProductInCashChange(index, 'newField2', event)}
                                     />
@@ -71,7 +71,7 @@ function OneProductInOrders({item}) {
                                     <Form.Control
                                         type="number"
                                         placeholder="y"
-                                        value={item.newField3}
+                                        value={item.fullOrderProduct.newField3}
                                         className="adminFontTable"
                                         // onChange={(event) => handleProductInCashChange(index, 'newField3', event)}
                                     />
@@ -85,7 +85,7 @@ function OneProductInOrders({item}) {
                                         variant="outline-dark"
                                         className="adminFontTable"
                                         disabled
-                                    >{item.newField2}</Button>
+                                    >{item.fullOrderProduct.newField2}</Button>
                                 </Form.Group>
                                 <Form.Group className="d-flex">
                                     <Button variant="outline-dark" disabled className="adminFont">y:</Button>
@@ -93,14 +93,14 @@ function OneProductInOrders({item}) {
                                         variant="outline-dark"
                                         className="adminFontTable"
                                         disabled
-                                    >{item.newField3}</Button>
+                                    >{item.fullOrderProduct.newField3}</Button>
                                 </Form.Group>
                             </div>
                         )}
-                        <div>Ціна {item.priceForThis} за шт., за все: {item.priceForThis * item.amountListForOne}</div>
+                        {/*<div>Ціна {item.priceForThis} за шт., за все: {item.priceForThis * item.amountListForOne}</div>*/}
 
-                        <div>влізе на лист а3: {item.amountCanPushToOneList}шт.</div>
-                        <div>Буде витрачено листів а3: {item.amountListForOne}шт.</div>
+                        {/*<div>влізе на лист а3: {item.amountCanPushToOneList}шт.</div>*/}
+                        {/*<div>Буде витрачено листів а3: {item.amountListForOne}шт.</div>*/}
 
                         {/*x={item.newField2}*/}
                         {/*y={item.newField3}*/}
@@ -138,12 +138,12 @@ function OneProductInOrders({item}) {
                                 {/*    disabled*/}
                                 {/*/>*/}
                             </InputGroup>
-                            <p>
-                                <div className="adminFontTable">Ціна за це: {unitItem.priceForThis}</div>
-                            </p>
-                            <p>
-                                <div className="adminFontTable">за одиницю цієї хні: {unitItem.priceForThis / unitItem.quantity}</div>
-                            </p>
+                            {/*<p>*/}
+                            {/*    <div className="adminFontTable">Ціна за це: {unitItem.priceForThis}</div>*/}
+                            {/*</p>*/}
+                            {/*<p>*/}
+                            {/*    <div className="adminFontTable">за одиницю цієї хні: {unitItem.priceForThis / unitItem.quantity}</div>*/}
+                            {/*</p>*/}
                         </div>
                     ))}
                 </Card.Text>

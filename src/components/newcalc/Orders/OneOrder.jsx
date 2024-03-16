@@ -47,13 +47,13 @@ const Orders = () => {
                     </div>
                     {data.orderunits.map((orderUnit, iter3) => (
                         <div className="d-flex m-1 border-1 border-danger border" key={iter3}>
+                            <div className="p-1 m-1 border-1 border-dark border">id: {orderUnit.id}.</div>
+                            <div className="p-1 m-1 border-1 border-dark border">Назва: {orderUnit.unitName}.</div>
                             {orderUnit.fullOrderProduct &&
                                 <div>
                                     <OneProductInOrders item={orderUnit}/>
                                 </div>
                             }
-                            <div className="p-1 m-1 border-1 border-dark border">id: {orderUnit.id}.</div>
-                            <div className="p-1 m-1 border-1 border-dark border">Назва: {orderUnit.unitName}.</div>
                             <div className="p-1 m-1 border-1 border-dark border">Кількість {orderUnit.quantity} шт.</div>
                         </div>
                     ))}
