@@ -13,7 +13,7 @@ const Orders = () => {
     const [data, setData] = useState(null);
     const [pageCount, setPageCount] = useState(null);
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
     useEffect(() => {
         let data = {
@@ -22,7 +22,7 @@ const Orders = () => {
         }
         axios.post(`/api/order/get`, data)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setData(response.data)
             })
             .catch(error => {
@@ -33,28 +33,31 @@ const Orders = () => {
     if (data) {
         return (
             <div className="d-flex">
-                <div className="w-50 border-1 border-light border">
-                    <div className="m-1 p-1 btnm">id: {data.id}</div>
-                    <div className="m-1 p-1 btnm">Хто робив: {data.executorId}</div>
-                    <div className="m-1 p-1 btnm">На якого юзера: {data.userid}</div>
-                    <div className="m-1 p-1 btnm">Ціна: {data.price}</div>
-                    <div className="m-1 p-1 btnm">createdAt: {data.createdAt}</div>
-                    <div className="m-1 p-1 btnm">updatedAt: {data.updatedAt}</div>
+                <div className="w-50 border-1 border-light border d-flex flex-column p-3">
+                    <div className="text-center">
+                        Дані:
+                    </div>
+                    <div className="m-1 p-1 btn btn-light">id: {data.id}</div>
+                    <div className="m-1 p-1 btn btn-light">Хто робив: {data.executorId}</div>
+                    <div className="m-1 p-1 btn btn-light">На якого юзера: {data.userid}</div>
+                    <div className="m-1 p-1 btn btn-light">Ціна: {data.price}</div>
+                    <div className="m-1 p-1 btn btn-light">createdAt: {data.createdAt}</div>
+                    <div className="m-1 p-1 btn btn-light">updatedAt: {data.updatedAt}</div>
                 </div>
-                <div className="w-50 border-1 border-light border">
-                    <div>
+                <div className="w-50 border-1 border-light border p-3">
+                    <div className="text-center">
                         Складається з:
                     </div>
                     {data.orderunits.map((orderUnit, iter3) => (
-                        <div className="d-flex m-1 border-1 border-danger border" key={iter3}>
-                            <div className="p-1 m-1 border-1 border-dark border">id: {orderUnit.id}.</div>
-                            <div className="p-1 m-1 border-1 border-dark border">Назва: {orderUnit.unitName}.</div>
+                        <div className="btn btn-light d-flex m-1 border-light" key={iter3}>
+                            <div className="adminFontTable p-1 m-1 bg-light">id: {orderUnit.id}.</div>
+                            <div className="adminFontTable p-1 m-1 bg-light">Назва: {orderUnit.unitName}.</div>
                             {orderUnit.fullOrderProduct &&
-                                <div>
+                                <div className="adminFontTable">
                                     <OneProductInOrders item={orderUnit}/>
                                 </div>
                             }
-                            <div className="p-1 m-1 border-1 border-dark border">Кількість {orderUnit.quantity} шт.</div>
+                            <div className="adminFontTable p-1 m-1 bg-light">Кількість {orderUnit.quantity} шт.</div>
                         </div>
                     ))}
                 </div>

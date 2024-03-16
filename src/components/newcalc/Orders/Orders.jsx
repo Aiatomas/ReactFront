@@ -82,7 +82,7 @@ const Orders = () => {
                         {data.metadataProduct.map((item) => (
                             <th className="adminFontTable">{item}</th>
                         ))}
-                        <th className="adminFontTable">Склад</th>
+                        <th className="adminFontTable"></th>
                         {/*<th className="adminFontTable"></th>*/}
 
                     </tr>
@@ -107,12 +107,15 @@ const Orders = () => {
                                 ))}
                                 <th className="adminFontTable">
                                     <Link to={`/Orders/${item.id}`}>
-                                        {item.orderunits.map((orderUnit, iter3) => (
-                                            <div className="d-flex m-1" key={orderUnit + iter + iter3}>
-                                                <div className="adminFontTable p-1 border-1 border-dark border">{orderUnit.unitName}.</div>
-                                                <div className="adminFontTable p-1 border-1 border-dark border">{orderUnit.quantity} шт.</div>
-                                            </div>
-                                        ))}
+                                        <div className="adminFontTable btn btnm">
+                                            Детальніше
+                                        </div>
+                                        {/*{item.orderunits.map((orderUnit, iter3) => (*/}
+                                        {/*    <div className="d-flex m-1" key={orderUnit + iter + iter3}>*/}
+                                        {/*        <div className="adminFontTable p-1 border-1 border-dark border">{orderUnit.unitName}.</div>*/}
+                                        {/*        <div className="adminFontTable p-1 border-1 border-dark border">{orderUnit.quantity} шт.</div>*/}
+                                        {/*    </div>*/}
+                                        {/*))}*/}
                                     </Link>
                                 </th>
                             {/*<ModalDeleteInStorage*/}
