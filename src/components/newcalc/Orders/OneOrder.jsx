@@ -58,6 +58,7 @@ const Orders = () => {
                                 </div>
                             }
                             <div className="adminFontTable p-1 m-1 bg-light">Кількість {orderUnit.quantity} шт.</div>
+                            <div className="adminFontTable p-1 m-1 bg-warning">Коштує: {orderUnit.newField2}грн.</div>
                         </div>
                     ))}
                 </div>

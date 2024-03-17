@@ -35,10 +35,10 @@ export const fetchCurrentUser = () => {
             .then(response => {
                 const user = response.data
                 console.log(response.data);
-                if(response.data.length < 1){
-                    dispatch(fetchCurrentUserSuccess(null))
+                if(response.data){
+                    dispatch(fetchCurrentUserSuccess(user))
                 } else {
-                    dispatch(fetchCurrentUserSuccess(user[0]))
+                    dispatch(fetchCurrentUserSuccess(null))
                 }
             })
             .catch(error => {

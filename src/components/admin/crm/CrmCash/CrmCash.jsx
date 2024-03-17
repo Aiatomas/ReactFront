@@ -8,6 +8,8 @@ import CardProduct from "../Products/CardProduct";
 import SelectedProduct from "./products/SelectedProduct";
 import Button from "react-bootstrap/Button";
 import OverlayGetResponseForAnswer from "../../../OverlayGetResponseForAnswer";
+import {Link} from "react-router-dom";
+import {Modal} from "react-bootstrap";
 
 const CrmCash = () => {
     const [price, setPrice] = useState(1);
@@ -20,6 +22,7 @@ const CrmCash = () => {
     const [thisOrder, setThisOrder] = useState(null);
     const [typeSelect, setTypeSelect] = useState("");
     const [newData, setNewData] = useState("");
+    const [orders, setOrders] = useState(null);
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
@@ -66,7 +69,7 @@ const CrmCash = () => {
             .catch(error => {
                 console.log(error.message);
             })
-    }, [typeSelect]);
+    }, []);
 
     useEffect(() => {
         let dataToSend = {
@@ -80,32 +83,85 @@ const CrmCash = () => {
             .catch(error => {
                 console.log(error.message);
             })
-    }, [things]);
+    }, []);
 
     useEffect(() => {
         setIsLoad(true)
-        let dataToSend = {
-            method: "calculate",
-            data: selectedThings
+        if(selectedThings){
+            axios.get(`getUserInfo`)
+                .then(response => {
+                    console.log(`this is response.data pure`);
+                    console.log(response.data);
+                    setSumm(response.data.calcResponse[0].price)
+                    setIsLoad(false)
+                    setSelectedThings2(response.data.newDataWithPrices2)
+                })
+                .catch(error => {
+                    console.log(error.message);
+                })
         }
-        axios.post(`api/pricing`, dataToSend)
+    }, [selectedThings]);
+
+    useEffect(() => {
+        setIsLoad(true)
+        if(selectedThings){
+            let dataToSend = {
+                method: "calculate",
+                data: selectedThings
+            }
+            axios.post(`api/pricing`, dataToSend)
+                .then(response => {
+                    console.log(`this is response.data pure`);
+                    console.log(response.data);
+                    setSumm(response.data.calcResponse[0].price)
+                    setIsLoad(false)
+                    setSelectedThings2(response.data.newDataWithPrices2)
+                })
+                .catch(error => {
+                    console.log(error.message);
+                })
+        }
+    }, [selectedThings]);
+
+    useEffect(() => {
+        let data = {
+            name: "Orders",
+            inPageCount: 99999,
+            currentPage: 1,
+        }
+        axios.post(`/api/order/get`, data)
             .then(response => {
-                console.log(`this is response.data pure`);
                 console.log(response.data);
-                setSumm(response.data.calcResponse[0].price)
-                setIsLoad(false)
-                setSelectedThings2(response.data.newDataWithPrices2)
+                setOrders(response.data)
             })
             .catch(error => {
                 console.log(error.message);
             })
-    }, [selectedThings]);
+    }, []);
 
-    console.log(selectedThings2);
+    const handleSelectOneOrder = (event, id) => {
+        setIsLoad(true)
+        let data = {
+            name: "OneOrder",
+            id:id
+        }
+        axios.post(`/api/order/get`, data)
+            .then(response => {
+                console.log(response.data);
+                setThisOrder(response.data)
+                setSelectedThings(response.data)
+                setIsLoad(false)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    };
+
+    // console.log(selectedThings2);
     return (
         <div className="d-flex justify-content-space-between">
 
-            <div>
+            <div className="d-flex flex-column">
                 <Form.Control
                     placeholder={"searchForm"}
                     aria-label={"searchForm"}
@@ -115,6 +171,22 @@ const CrmCash = () => {
                     className="adminFontTable"
                     onChange={(event) => setTypeSelect(event.target.value)}
                 />
+                {/*{orders && (*/}
+                {/*    <div>*/}
+                {/*        {orders.rows.map((metaItem, iter2) => (*/}
+                {/*            <div>*/}
+                {/*                {thisOrder && (*/}
+                {/*                    <div key={metaItem + iter2}*/}
+                {/*                         className={metaItem.id === thisOrder.id ? 'adminFontTable btn btn-outline-warning' : 'adminFontTable btn btn-light'}*/}
+                {/*                         onClick={(event) => handleSelectOneOrder(event, metaItem.id)}>*/}
+                {/*                        {metaItem.id}*/}
+                {/*                    </div>*/}
+                {/*                )}*/}
+                {/*            </div>*/}
+                {/*        ))}*/}
+                {/*    </div>*/}
+                {/*)}*/}
+
             </div>
 
             <div className="card">
