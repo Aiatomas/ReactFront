@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import {Pagination} from "react-bootstrap";
 
-const PaginationMy = ({name, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount}) => {
+const PaginationMy = ({name, data, setData, inPageCount, setInPageCount, currentPage, setCurrentPage, pageCount, setPageCount, typeSelect}) => {
     const [pag, setPag] = useState([]);
     const setPageCountF = (value) => {
         setInPageCount(parseInt(value.target.value));
@@ -12,6 +12,7 @@ const PaginationMy = ({name, data, setData, inPageCount, setInPageCount, current
             name: name,
             inPageCount: parseInt(value.target.value),
             currentPage: currentPage,
+            search: typeSelect
         }
         axios.post(`admin/gettable`, dataa)
             .then(response => {
@@ -100,6 +101,7 @@ const PaginationMy = ({name, data, setData, inPageCount, setInPageCount, current
             name: name,
             inPageCount: inPageCount,
             currentPage: parseInt(e.target.getAttribute("toclick")),
+            search: typeSelect
         }
         axios.post(`admin/gettable`, dataa)
             .then(response => {

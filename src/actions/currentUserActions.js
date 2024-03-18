@@ -98,7 +98,7 @@ export const logoutUser = () => {
         axios.delete('/logout')
             .then(response => {
                 // dispatch(logoutSuccess())
-                // dispatch(fetchCurrentUser())
+                dispatch(fetchCurrentUser(null))
                 document.location.href="/"
             })
             .catch(error => {

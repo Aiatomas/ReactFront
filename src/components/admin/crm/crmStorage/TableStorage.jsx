@@ -40,24 +40,24 @@ export const TableStorage = ({name}) => {
     if (data) {
         return (
             <div>
-                <CrmHeader whoPick={name} data={data}/>
+                <CrmHeader whoPick={name} data={data} typeSelect={typeSelect} setTypeSelect={setTypeSelect} />
                 {/*<div>*/}
                 {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">1</Button>*/}
                 {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">2</Button>*/}
                 {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">3</Button>*/}
                 {/*    <Button variant="light" onClick={() => setTypeSelect(!isVisible)} className="adminFont">4</Button>*/}
                 {/*</div>*/}
-                <div>
-                    <Form.Control
-                        placeholder={"searchForm"}
-                        aria-label={"searchForm"}
-                        aria-describedby="searchForm"
-                        type={"String"}
-                        value={typeSelect}
-                        className="adminFontTable"
-                        onChange={(event) => setTypeSelect(event.target.value)}
-                    />
-                </div>
+                {/*<div>*/}
+                {/*    <Form.Control*/}
+                {/*        placeholder={"searchForm"}*/}
+                {/*        aria-label={"searchForm"}*/}
+                {/*        aria-describedby="searchForm"*/}
+                {/*        type={"String"}*/}
+                {/*        value={typeSelect}*/}
+                {/*        className="adminFontTable"*/}
+                {/*        onChange={(event) => setTypeSelect(event.target.value)}*/}
+                {/*    />*/}
+                {/*</div>*/}
                 <MetaAddNewItemTable
                     namem={name}
                     data={data}
@@ -119,6 +119,7 @@ export const TableStorage = ({name}) => {
                     setCurrentPage={setCurrentPage}
                     pageCount={pageCount}
                     setPageCount={setPageCount}
+                    typeSelect={typeSelect}
                 />
             </div>
         )

@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Navbar, Nav, NavDropdown, Button, Modal} from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
 
-const CrmHeader = ({whoPick, data}) => {
+const CrmHeader = ({whoPick, data, typeSelect, setTypeSelect}) => {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
@@ -29,15 +29,28 @@ const CrmHeader = ({whoPick, data}) => {
                         {/*<Nav.Link href="#" disabled>*/}
                         {/*    Link*/}
                         {/*</Nav.Link>*/}
-                    </Nav>
-                    <Form className="d-flex">
                         <Form.Control
-                            type="search"
-                            placeholder="Search"
+                            placeholder={"Search"}
+                            aria-label={"Search"}
+                            aria-describedby="searchForm"
+                            type={"search"}
+                            value={typeSelect}
                             className="me-2"
-                            aria-label="Search"
+                            onChange={(event) => setTypeSelect(event.target.value)}
                         />
                         <Button variant="outline-success">Search</Button>
+                    </Nav>
+                    <Form className="d-flex">
+                        {/*<Form.Control*/}
+                        {/*    placeholder={"Search"}*/}
+                        {/*    aria-label={"Search"}*/}
+                        {/*    aria-describedby="searchForm"*/}
+                        {/*    type={"search"}*/}
+                        {/*    value={typeSelect}*/}
+                        {/*    className="me-2"*/}
+                        {/*    onChange={(event) => setTypeSelect(event.target.value)}*/}
+                        {/*/>*/}
+                        {/*<Button variant="outline-success">Search</Button>*/}
                     </Form>
                 </Navbar.Collapse>
             </Container>
