@@ -157,7 +157,12 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             onChange={(event) => handleTextChange(formIndex, 'unitName', event)}
                                         >
                                             {data1.rows.map((item, idx) => (
-                                                <option className="adminFont" tome={item.id} key={item.id}>{item.name}, {item.price1},{item.price2},{item.price3},{item.price4},{item.price5}</option>
+                                                <option className="adminFont d-flex" tome={item.id} key={item.id}>
+                                                    {item.name}
+                                                    <span>
+                                                        {item.price1},{item.price2},{item.price3},{item.price4},{item.price5}
+                                                    </span>
+                                                </option>
                                             ))}
                                         </Form.Select>
                                         {/*<Form.Text className="adminFont text-muted">*/}
