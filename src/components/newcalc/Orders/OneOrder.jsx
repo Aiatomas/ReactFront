@@ -9,7 +9,7 @@ import Desktop from "../../admin/crm/Desktop/Desktop";
 import SelectedProduct from "../../admin/crm/CrmCash/products/SelectedProduct";
 import OneProductInOrders from "./OneProductInOrders";
 
-const Orders = () => {
+const OneOrder = () => {
     const [data, setData] = useState(null);
     const [pageCount, setPageCount] = useState(null);
     const { id } = useParams();
@@ -73,4 +73,4 @@ const Orders = () => {
     )
 };
 
-export default Orders;
+export default OneOrder;

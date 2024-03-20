@@ -15,12 +15,14 @@ const Orders = () => {
     const [inPageCount, setInPageCount] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(null);
+    const [typeSelect, setTypeSelect] = useState("");
 
     useEffect(() => {
         let data = {
             name: "Orders",
             inPageCount: inPageCount,
             currentPage: currentPage,
+            search: typeSelect
         }
         axios.post(`/api/order/get`, data)
             .then(response => {
@@ -31,12 +33,12 @@ const Orders = () => {
             .catch(error => {
                 console.log(error.message);
             })
-    }, []);
+    }, [typeSelect]);
 
     if (data) {
         return (
             <div>
-                <CrmHeader whoPick={"Orders"} data={data}/>
+                <CrmHeader whoPick={"Orders"} data={data} typeSelect={typeSelect} setTypeSelect={setTypeSelect}/>
                 {/*<MetaAddNewItemTable*/}
                 {/*    namem={"Orders"}*/}
                 {/*    data={data}*/}
@@ -143,6 +145,8 @@ const Orders = () => {
                     setCurrentPage={setCurrentPage}
                     pageCount={pageCount}
                     setPageCount={setPageCount}
+                    typeSelect={typeSelect}
+                    url={"/api/order/get"}
                 />
             </div>
         )

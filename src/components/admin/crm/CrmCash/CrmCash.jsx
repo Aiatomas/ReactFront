@@ -22,10 +22,13 @@ const CrmCash = () => {
     const [selectedThings2, setSelectedThings2] = useState([]);
     const [summ, setSumm] = useState(0);
     const [isLoad, setIsLoad] = useState(false);
-    const [thisOrder, setThisOrder] = useState(null);
+    const [thisOrder, setThisOrder] = useState({
+        id: 0
+    });
     const [typeSelect, setTypeSelect] = useState("");
     const [newData, setNewData] = useState("");
     const [orders, setOrders] = useState(null);
+    const [uniqueTypes, setUniqueTypes] = useState([]);
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
@@ -43,9 +46,29 @@ const CrmCash = () => {
         setSelectedThings(updatedSelectedThings);
     };
 
-    const handleSaveOrder = () => {
+    // console.log(things);
+
+    // useEffect(() => {
+    //     let dataToSend = {
+    //         data: selectedThings,
+    //         id: id
+    //     }
+    //     axios.post(`/api/order/create`, dataToSend)
+    //         .then(response => {
+    //             // console.log(response.data);
+    //             setThisOrder(response.data)
+    //         })
+    //         .catch(error => {
+    //             console.log(error.message);
+    //         })
+    // }, [thisOrder])
+
+    const handleSaveOrder = (event, valueName) => {
         let dataToSend = {
-            data: selectedThings
+            data: selectedThings,
+            id: false,
+            tablePosition: valueName,
+            value: event.target.value
         }
         axios.post(`/api/order/create`, dataToSend)
             .then(response => {
@@ -66,13 +89,26 @@ const CrmCash = () => {
         };
         axios.post(`admin/gettable`, data)
             .then(response => {
-                console.log(response.data);
-                setThings(response.data.rows)
+                // console.log(response.data);
+
+                let uniqueItems = {}
+                response.data.rows.forEach(item => {
+                    if (!uniqueItems[item.type]) {
+                        uniqueItems[item.type] = {...item};
+                    }
+                })
+                // console.log(uniqueItems);
+                let uniqueTypess = Object.values(uniqueItems);
+                setThings(response.data)
+                if(uniqueTypes.length === 0){
+                    setUniqueTypes(uniqueTypess)
+                }
             })
             .catch(error => {
                 console.log(error.message);
             })
-    }, []);
+    }, [typeSelect]);
+    // console.log(uniqueTypes);
 
     useEffect(() => {
         let dataToSend = {
@@ -80,7 +116,7 @@ const CrmCash = () => {
         }
         axios.post(`admin/api/products`, dataToSend)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setProducts(response.data)
             })
             .catch(error => {
@@ -93,8 +129,8 @@ const CrmCash = () => {
         if (selectedThings) {
             axios.get(`getUserInfo`)
                 .then(response => {
-                    console.log(`this is response.data pure`);
-                    console.log(response.data);
+                    // console.log(`this is response.data pure`);
+                    // console.log(response.data);
                     setSumm(response.data.calcResponse[0].price)
                     setIsLoad(false)
                     setSelectedThings2(response.data.newDataWithPrices2)
@@ -114,7 +150,7 @@ const CrmCash = () => {
             }
             axios.post(`api/pricing`, dataToSend)
                 .then(response => {
-                    console.log(`this is response.data pure`);
+                    // console.log(`this is response.data pure`);
                     console.log(response.data);
                     setSumm(response.data.calcResponse[0].price)
                     setIsLoad(false)
@@ -195,7 +231,7 @@ const CrmCash = () => {
                 <div className="card">
                     <div style={{width: '50.5vw'}}>
                         {products === null ? (
-                            <div style={{width: '47.5vw', height: '37vh', overflow: 'auto', border: '1px solid #ccc'}}
+                            <div style={{width: '47.5vw', height: '47vh', overflow: 'auto', border: '1px solid #ccc'}}
                                  className="m-3">
                                 <div className="text-center">продукти</div>
                                 <div style={{padding: '10px'}}>
@@ -203,7 +239,7 @@ const CrmCash = () => {
                                 </div>
                             </div>
                         ) : (
-                            <div style={{width: '47.5vw', height: '37vh', overflow: 'auto', border: '1px solid #ccc'}}
+                            <div style={{width: '47.5vw', height: '47vh', overflow: 'auto', border: '1px solid #ccc'}}
                                  className="m-3">
                                 <div className="text-center">продукти</div>
                                 <MDBContainer fluid className="">
@@ -218,16 +254,39 @@ const CrmCash = () => {
                                 </MDBContainer>
                             </div>
                         )}
-                        <div style={{width: '47.5vw', height: '37vh', overflow: 'auto', border: '1px solid #ccc'}}
+                        <div style={{width: '47.5vw', height: '20vh', overflow: 'auto', border: '1px solid #ccc'}}
                              className="m-3">
                             <div className="text-center">склад</div>
                             <div style={{padding: '10px'}}>
-                                {things.map((thing, index) => (
-                                    <div key={index} onClick={() => handleThingClick(thing)} className="thing">
-                                        {thing.name}
-                                    </div>
-                                ))}
+                                {things.length !== 0 ? (
+                                    // <div>
+                                    //     {things.rows.map((thing, index) => (
+                                    //         <div key={index} onClick={() => handleThingClick(thing)} className="thing adminFont">
+                                    //             {thing.name}
+                                    //         </div>
+                                    //     ))}
+                                    // </div>
+                                    <MDBContainer fluid className="">
+                                        <Row xs={1} md={4} className="">
+                                            {things.rows.map((thing, index) => (
+                                                <Col key={index} onClick={() => handleThingClick(thing)} className="thing adminFont btn btn-light text-center">
+                                                    {thing.name}
+                                                </Col>
+                                            ))}
+                                        </Row>
+                                    </MDBContainer>
+                                ) : (
+                                    <div>NETU</div>
+                                )}
                             </div>
+                        </div>
+                        <div>
+                            {uniqueTypes.map((thing, index) => (
+                                <Button type="button" key={index} onClick={(event) => setTypeSelect(thing.type)}
+                                        className="thing adminFont btn btn-light">
+                                    {thing.type}
+                                </Button>
+                            ))}
                         </div>
                     </div>
                     {/*{things.map((thing, index) => (*/}
@@ -329,7 +388,20 @@ const CrmCash = () => {
                             <div className="d-flex">
                                 <div className="d-flex flex-column">
                                     <p className="adminFont">Предоплата</p>
-                                    <Button variant="outline-warning" disabled className="adminFont">0</Button>
+
+                                    {thisOrder ? (
+                                        <Form.Control type="number"
+                                                      variant="outline-warning"
+                                                      value={thisOrder.prepayment}
+                                                      className="adminFont btn btn-outline-warning"
+                                                      onChange={handleSaveOrder}
+                                                      // onChange={handleSaveOrder}
+                                        />
+                                    ) : (
+                                        <Form.Control variant="outline-warning" onChange={handleSaveOrder} value={0} className="adminFont btn btn-outline-warning"/>
+                                    )}
+
+                                    {/*<Form.Control variant="outline-warning" value={thisOrder.prepayment} className="adminFont btn btn-outline-warning"/>*/}
                                 </div>
                                 <div className="d-flex flex-column">
                                     <p className="adminFont">Знижка</p>

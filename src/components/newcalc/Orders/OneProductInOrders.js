@@ -73,13 +73,13 @@ function OneProductInOrders({item, cash = false}) {
                         </p>
                         {item.productunits.map((unitItem, iter) => (
                             <div key={unitItem.id} className="d-flex adminFontTable border-1">
-                                <InputGroup className="adminFontTable">
+                                <div className="adminFontTable d-flex border border-dark">
                                     {/*<InputGroup.Text className="adminFontTable">{iter + 1}</InputGroup.Text>*/}
                                     <div className="adminFontTable p-1 m-1">Назва: {unitItem.name}</div>
                                     <div className="adminFontTable p-1 m-1">Кількість: {unitItem.quantity}</div>
                                     <div className="adminFontTable p-1 m-1 text-black-50">one p: {unitItem.priceForOneThis}грн.</div>
-                                    <div className="adminFontTable p-1 m-1 text-black-50">all p: {unitItem.priceForThis*unitItem.quantity}грн.</div>
-                                </InputGroup>
+                                    <div className="adminFontTable p-1 m-1 text-black-50">all p: {unitItem.priceForOneThis*unitItem.quantity}грн.</div>
+                                </div>
                             </div>
                         ))}
                     </Card.Text>
