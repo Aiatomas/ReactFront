@@ -31,7 +31,7 @@ function CardProduct({name, data, setData, item}) {
             })
     };
 
-    console.log(item);
+    // console.log(item);
     return (
         <Card>
             <Card.Body>

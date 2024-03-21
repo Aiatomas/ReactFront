@@ -13,12 +13,11 @@ import {Col, Modal, Row} from "react-bootstrap";
 import ProductModalAdd from "../Products/ProductModalAdd";
 import {MDBContainer} from "mdb-react-ui-kit";
 import OneProductInOrders from "../../../newcalc/Orders/OneProductInOrders";
+import CrmHeader from "../CrmHeader";
 
 const CrmCash2 = () => {
-    const [price, setPrice] = useState(1);
     const [things, setThings] = useState([]);
     const [products, setProducts] = useState(null);
-    const [selectedThings, setSelectedThings] = useState([]);
     const [selectedThings2, setSelectedThings2] = useState([]);
     const [summ, setSumm] = useState(0);
     const [isLoad, setIsLoad] = useState(false);
@@ -28,21 +27,16 @@ const CrmCash2 = () => {
     });
     const [newThisOrder, setNewThisOrder] = useState({id: id});
     const [typeSelect, setTypeSelect] = useState("");
-    const [newData, setNewData] = useState("");
-    const [orders, setOrders] = useState(null);
     const [uniqueTypes, setUniqueTypes] = useState([]);
     const isMounted = useRef(false);
 
     const handleThingClick = (thing) => {
-        // setThings(things.filter((t) => t !== thing));
-        // setSelectedThings([...selectedThings, {...thing, amount: 1}]);
         let newThisOrderToSend = thisOrder
         if(thing.productunits){
             newThisOrderToSend.orderunits = [...selectedThings2, {...thing, amount: 1, orderunitunits: thing.productunits}]
         } else {
             newThisOrderToSend.orderunits = [...selectedThings2, {...thing, amount: 1, orderunitunits: []}]
         }
-        // console.log(newThisOrderToSend.orderunits);
         setNewThisOrder(newThisOrderToSend)
     };
 
@@ -51,35 +45,15 @@ const CrmCash2 = () => {
         let newThisOrderToSend = thisOrder
         newThisOrderToSend.orderunits = updatedSelectedThings2.filter((t) => t !== thing)
         setNewThisOrder(newThisOrderToSend)
-        // setSelectedThings(updatedSelectedThings2.filter((t) => t !== thing));
-        // setThings([...things, thing]);
     };
 
     const handleAmountChange = (selectedThingIndex, fieldName, event) => {
         const updatedSelectedThings2 = [...selectedThings2];
         updatedSelectedThings2[selectedThingIndex][fieldName] = event.target.value;
-        // setSelectedThings2(updatedSelectedThings2);
         let newThisOrderToSend = thisOrder
         newThisOrderToSend.orderunits = updatedSelectedThings2
         setNewThisOrder(newThisOrderToSend)
     };
-
-    // console.log(things);
-
-    // useEffect(() => {
-    //     let dataToSend = {
-    //         data: selectedThings,
-    //         id: id
-    //     }
-    //     axios.post(`/api/order/create`, dataToSend)
-    //         .then(response => {
-    //             // console.log(response.data);
-    //             setThisOrder(response.data)
-    //         })
-    //         .catch(error => {
-    //             console.log(error.message);
-    //         })
-    // }, [thisOrder])
 
     useEffect(() => {
         if (isMounted.current) {
@@ -148,7 +122,8 @@ const CrmCash2 = () => {
 
     useEffect(() => {
         let dataToSend = {
-            method: "getAll"
+            method: "getAll",
+            search: typeSelect
         }
         axios.post(`/admin/api/products`, dataToSend)
             .then(response => {
@@ -158,79 +133,8 @@ const CrmCash2 = () => {
             .catch(error => {
                 console.log(error.message);
             })
-    }, []);
+    }, [typeSelect]);
 
-    // useEffect(() => {
-    //     setIsLoad(true)
-    //     if (selectedThings) {
-    //         axios.get(`getUserInfo`)
-    //             .then(response => {
-    //                 // console.log(`this is response.data pure`);
-    //                 // console.log(response.data);
-    //                 setSumm(response.data.calcResponse[0].price)
-    //                 setIsLoad(false)
-    //                 setSelectedThings2(response.data.newDataWithPrices2)
-    //             })
-    //             .catch(error => {
-    //                 console.log(error.message);
-    //             })
-    //     }
-    // }, [selectedThings]);
-
-    // useEffect(() => {
-    //     setIsLoad(true)
-    //     if (selectedThings) {
-    //         let dataToSend = {
-    //             method: "calculate",
-    //             data: selectedThings
-    //         }
-    //         axios.post(`api/pricing`, dataToSend)
-    //             .then(response => {
-    //                 // console.log(`this is response.data pure`);
-    //                 console.log(response.data);
-    //                 setSumm(response.data.calcResponse[0].price)
-    //                 setIsLoad(false)
-    //                 setSelectedThings2(response.data.newDataWithPrices2)
-    //             })
-    //             .catch(error => {
-    //                 console.log(error.message);
-    //             })
-    //     }
-    // }, [selectedThings]);
-
-    // useEffect(() => {
-    //     let data = {
-    //         name: "Orders",
-    //         inPageCount: 99999,
-    //         currentPage: 1,
-    //     }
-    //     axios.post(`/api/order/get`, data)
-    //         .then(response => {
-    //             console.log(response.data);
-    //             setOrders(response.data)
-    //         })
-    //         .catch(error => {
-    //             console.log(error.message);
-    //         })
-    // }, []);
-
-    // const handleSelectOneOrder = (event, id) => {
-    //     setIsLoad(true)
-    //     let data = {
-    //         name: "OneOrder",
-    //         id: id
-    //     }
-    //     axios.post(`/api/order/get`, data)
-    //         .then(response => {
-    //             console.log(response.data);
-    //             setThisOrder(response.data)
-    //             setSelectedThings(response.data)
-    //             setIsLoad(false)
-    //         })
-    //         .catch(error => {
-    //             console.log(error.message);
-    //         })
-    // };
     useEffect(() => {
         setIsLoad(true)
         let data = {
@@ -252,17 +156,17 @@ const CrmCash2 = () => {
     // console.log(selectedThings2);
     return (
         <div className="d-flex justify-content-space-between flex-column">
-
+            <CrmHeader whoPick={"Касса"} data={[]} typeSelect={typeSelect} setTypeSelect={setTypeSelect}/>
             <div className="d-flex flex-column">
-                <Form.Control
-                    placeholder={"searchForm"}
-                    aria-label={"searchForm"}
-                    aria-describedby="searchForm"
-                    type={"String"}
-                    value={typeSelect}
-                    className="adminFontTable"
-                    onChange={(event) => setTypeSelect(event.target.value)}
-                />
+                {/*<Form.Control*/}
+                {/*    placeholder={"searchForm"}*/}
+                {/*    aria-label={"searchForm"}*/}
+                {/*    aria-describedby="searchForm"*/}
+                {/*    type={"String"}*/}
+                {/*    value={typeSelect}*/}
+                {/*    className="adminFontTable"*/}
+                {/*    onChange={(event) => setTypeSelect(event.target.value)}*/}
+                {/*/>*/}
                 {/*{orders && (*/}
                 {/*    <div>*/}
                 {/*        {orders.rows.map((metaItem, iter2) => (*/}

@@ -12,11 +12,13 @@ import Loader2 from "../../../calc/Loader2";
 function Products({name}) {
     const [data, setData] = useState(null);
     const [data1, setData1] = useState(null);
+    const [typeSelect, setTypeSelect] = useState("");
 
 
     useEffect(() => {
         let dataToSend = {
-            method: "getAll"
+            method: "getAll",
+            search: typeSelect
         }
         axios.post(`admin/api/products`, dataToSend)
             .then(response => {
@@ -26,7 +28,7 @@ function Products({name}) {
             .catch(error => {
                 console.log(error.message);
             })
-    }, []);
+    }, [typeSelect]);
 
     useEffect(() => {
         let data = {
@@ -48,7 +50,7 @@ function Products({name}) {
     if(data){
         return (
             <>
-                <CrmHeader whoPick={name} data={data}/>
+                <CrmHeader whoPick={name} data={data} typeSelect={typeSelect} setTypeSelect={setTypeSelect}/>
                 <MDBContainer fluid className="">
                     <Row xs={1} md={4} className="g-4">
                         <ProductModalAdd

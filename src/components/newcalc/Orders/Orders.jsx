@@ -108,9 +108,20 @@ const Orders = () => {
                                     // />
                                 ))}
                                 <th className="adminFontTable">
-                                    <Link to={`/Cash/${item.id}`}>
+                                    <Link to={`/Orders/${item.id}`}>
                                         <div className="adminFontTable btn btnm">
                                             Детальніше
+                                        </div>
+                                        {/*{item.orderunits.map((orderUnit, iter3) => (*/}
+                                        {/*    <div className="d-flex m-1" key={orderUnit + iter + iter3}>*/}
+                                        {/*        <div className="adminFontTable p-1 border-1 border-dark border">{orderUnit.unitName}.</div>*/}
+                                        {/*        <div className="adminFontTable p-1 border-1 border-dark border">{orderUnit.quantity} шт.</div>*/}
+                                        {/*    </div>*/}
+                                        {/*))}*/}
+                                    </Link>
+                                    <Link to={`/Cash/${item.id}`}>
+                                        <div className="adminFontTable btn btnm">
+                                            До касси>
                                         </div>
                                         {/*{item.orderunits.map((orderUnit, iter3) => (*/}
                                         {/*    <div className="d-flex m-1" key={orderUnit + iter + iter3}>*/}
