@@ -159,9 +159,9 @@ function ProductModalAdd({namem, data, setData, data1}) {
                                             {data1.rows.map((item, idx) => (
                                                 <option className="adminFont d-flex" tome={item.id} key={item.id}>
                                                     {item.name}
-                                                    <span>
-                                                        {item.price1},{item.price2},{item.price3},{item.price4},{item.price5}
-                                                    </span>
+                                                    {/*<span>*/}
+                                                    {/*    {item.price1},{item.price2},{item.price3},{item.price4},{item.price5}*/}
+                                                    {/*</span>*/}
                                                 </option>
                                             ))}
                                         </Form.Select>

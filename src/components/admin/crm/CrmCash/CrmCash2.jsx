@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import './CrmCash.css';
 import Form from "react-bootstrap/Form";
@@ -26,25 +26,42 @@ const CrmCash2 = () => {
     const [thisOrder, setThisOrder] = useState({
         id: id
     });
+    const [newThisOrder, setNewThisOrder] = useState({id: id});
     const [typeSelect, setTypeSelect] = useState("");
     const [newData, setNewData] = useState("");
     const [orders, setOrders] = useState(null);
     const [uniqueTypes, setUniqueTypes] = useState([]);
+    const isMounted = useRef(false);
 
     const handleThingClick = (thing) => {
         // setThings(things.filter((t) => t !== thing));
-        setSelectedThings([...selectedThings, {...thing, amount: 1}]);
+        // setSelectedThings([...selectedThings, {...thing, amount: 1}]);
+        let newThisOrderToSend = thisOrder
+        if(thing.productunits){
+            newThisOrderToSend.orderunits = [...selectedThings2, {...thing, amount: 1, orderunitunits: thing.productunits}]
+        } else {
+            newThisOrderToSend.orderunits = [...selectedThings2, {...thing, amount: 1, orderunitunits: []}]
+        }
+        // console.log(newThisOrderToSend.orderunits);
+        setNewThisOrder(newThisOrderToSend)
     };
 
     const handleThingClickDelete2 = (thing) => {
-        setSelectedThings(selectedThings2.filter((t) => t !== thing));
+        const updatedSelectedThings2 = [...selectedThings2];
+        let newThisOrderToSend = thisOrder
+        newThisOrderToSend.orderunits = updatedSelectedThings2.filter((t) => t !== thing)
+        setNewThisOrder(newThisOrderToSend)
+        // setSelectedThings(updatedSelectedThings2.filter((t) => t !== thing));
         // setThings([...things, thing]);
     };
 
     const handleAmountChange = (selectedThingIndex, fieldName, event) => {
-        const updatedSelectedThings = [...selectedThings];
-        updatedSelectedThings[selectedThingIndex][fieldName] = event.target.value;
-        setSelectedThings(updatedSelectedThings);
+        const updatedSelectedThings2 = [...selectedThings2];
+        updatedSelectedThings2[selectedThingIndex][fieldName] = event.target.value;
+        // setSelectedThings2(updatedSelectedThings2);
+        let newThisOrderToSend = thisOrder
+        newThisOrderToSend.orderunits = updatedSelectedThings2
+        setNewThisOrder(newThisOrderToSend)
     };
 
     // console.log(things);
@@ -65,18 +82,25 @@ const CrmCash2 = () => {
     // }, [thisOrder])
 
     useEffect(() => {
-        let dataToSend = {
-            thisOrder: thisOrder
+        if (isMounted.current) {
+            let dataToSend = {
+                thisOrder: newThisOrder,
+                method: "calculate"
+            };
+
+            axios.post(`/api/order/save`, dataToSend)
+                .then(response => {
+                    console.log(response.data);
+                    setThisOrder(response.data);
+                    setSelectedThings2(response.data.orderunits);
+                })
+                .catch(error => {
+                    console.log(error.message);
+                });
+        } else {
+            isMounted.current = true;
         }
-        axios.post(`/api/order/save`, dataToSend)
-            .then(response => {
-                console.log(response.data);
-                setThisOrder(response.data)
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    }, [thisOrder])
+    }, [newThisOrder])
 
     const handleSaveOrder = (event, valueName) => {
         let dataToSend = {
@@ -217,7 +241,7 @@ const CrmCash2 = () => {
             .then(response => {
                 console.log(response.data);
                 setThisOrder(response.data)
-                // setSelectedThings(response.data.orderunits)
+                setSelectedThings2(response.data.orderunits)
                 setIsLoad(false)
             })
             .catch(error => {
@@ -329,7 +353,7 @@ const CrmCash2 = () => {
                         <div>
                             {selectedThings2.map((thing, index) => (
                                 <div key={index} className="d-flex">
-                                    {thing.productunits ? (
+                                    {thing.orderunitunits.length !== 0 ? (
                                         <div className="d-flex flex-column m-1 p-1" style={{width: '37.7vw'}}>
                                             {/*<SelectedProduct key={thing.id} name={"Продукти"} data={selectedThings}*/}
                                             {/*                 setData={setSelectedThings}*/}
@@ -410,7 +434,7 @@ const CrmCash2 = () => {
                     )}
                     <div>
                         <Button variant="light" disabled className="adminFont">Сумма</Button>
-                        <Button variant="light" disabled className="adminFont">{summ}</Button>
+                        <Button variant="light" disabled className="adminFont">{thisOrder.price}</Button>
                     </div>
                     <div style={{marginTop: 'auto'}}>
                         <div>
@@ -421,7 +445,7 @@ const CrmCash2 = () => {
                                     {thisOrder ? (
                                         <Form.Control type="number"
                                                       variant="outline-warning"
-                                                      value={thisOrder.prepayment}
+                                                      value={0}
                                                       className="adminFont btn btn-outline-warning"
                                                       onChange={handleSaveOrder}
                                             // onChange={handleSaveOrder}

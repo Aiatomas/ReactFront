@@ -82,7 +82,7 @@ const Orders = () => {
                         {/*<th className="adminFontTable">updatedAt</th>*/}
                         {/*<th className="adminFontTable"></th>*/}
                         {data.metadataProduct.map((item) => (
-                            <th className="adminFontTable">{item}</th>
+                            <th key={item} className="adminFontTable">{item}</th>
                         ))}
                         <th className="adminFontTable"></th>
                         {/*<th className="adminFontTable"></th>*/}

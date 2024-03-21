@@ -71,7 +71,7 @@ function OneProductInOrders({item, cash = false}) {
                                 </div>
                             )}
                         </p>
-                        {item.productunits.map((unitItem, iter) => (
+                        {item.orderunitunits.map((unitItem, iter) => (
                             <div key={unitItem.id} className="d-flex adminFontTable border-1">
                                 <div className="adminFontTable d-flex border border-dark">
                                     {/*<InputGroup.Text className="adminFontTable">{iter + 1}</InputGroup.Text>*/}
