@@ -108,7 +108,7 @@ const Orders = () => {
                                     // />
                                 ))}
                                 <th className="adminFontTable">
-                                    <Link to={`/Orders/${item.id}`}>
+                                    <Link to={`/Cash/${item.id}`}>
                                         <div className="adminFontTable btn btnm">
                                             Детальніше
                                         </div>

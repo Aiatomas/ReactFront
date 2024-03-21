@@ -8,13 +8,13 @@ import CardProduct from "../Products/CardProduct";
 import SelectedProduct from "./products/SelectedProduct";
 import Button from "react-bootstrap/Button";
 import OverlayGetResponseForAnswer from "../../../OverlayGetResponseForAnswer";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Col, Modal, Row} from "react-bootstrap";
 import ProductModalAdd from "../Products/ProductModalAdd";
 import {MDBContainer} from "mdb-react-ui-kit";
 import OneProductInOrders from "../../../newcalc/Orders/OneProductInOrders";
 
-const CrmCash = () => {
+const CrmCash2 = () => {
     const [price, setPrice] = useState(1);
     const [things, setThings] = useState([]);
     const [products, setProducts] = useState(null);
@@ -22,8 +22,9 @@ const CrmCash = () => {
     const [selectedThings2, setSelectedThings2] = useState([]);
     const [summ, setSumm] = useState(0);
     const [isLoad, setIsLoad] = useState(false);
+    const { id } = useParams(null);
     const [thisOrder, setThisOrder] = useState({
-        id: 0
+        id: id
     });
     const [typeSelect, setTypeSelect] = useState("");
     const [newData, setNewData] = useState("");
@@ -63,14 +64,25 @@ const CrmCash = () => {
     //         })
     // }, [thisOrder])
 
+    useEffect(() => {
+        let dataToSend = {
+            thisOrder: thisOrder
+        }
+        axios.post(`/api/order/save`, dataToSend)
+            .then(response => {
+                console.log(response.data);
+                setThisOrder(response.data)
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }, [thisOrder])
+
     const handleSaveOrder = (event, valueName) => {
         let dataToSend = {
-            data: selectedThings,
-            id: false,
-            tablePosition: valueName,
-            value: event.target.value
+            thisOrder: thisOrder
         }
-        axios.post(`/api/order/create`, dataToSend)
+        axios.post(`/api/order/save`, dataToSend)
             .then(response => {
                 console.log(response.data);
                 setThisOrder(response.data)
@@ -87,7 +99,7 @@ const CrmCash = () => {
             currentPage: 1,
             search: typeSelect
         };
-        axios.post(`admin/gettable`, data)
+        axios.post(`/admin/gettable`, data)
             .then(response => {
                 // console.log(response.data);
 
@@ -114,7 +126,7 @@ const CrmCash = () => {
         let dataToSend = {
             method: "getAll"
         }
-        axios.post(`admin/api/products`, dataToSend)
+        axios.post(`/admin/api/products`, dataToSend)
             .then(response => {
                 // console.log(response.data);
                 setProducts(response.data)
@@ -124,61 +136,78 @@ const CrmCash = () => {
             })
     }, []);
 
-    useEffect(() => {
-        setIsLoad(true)
-        if (selectedThings) {
-            axios.get(`getUserInfo`)
-                .then(response => {
-                    // console.log(`this is response.data pure`);
-                    // console.log(response.data);
-                    setSumm(response.data.calcResponse[0].price)
-                    setIsLoad(false)
-                    setSelectedThings2(response.data.newDataWithPrices2)
-                })
-                .catch(error => {
-                    console.log(error.message);
-                })
-        }
-    }, [selectedThings]);
+    // useEffect(() => {
+    //     setIsLoad(true)
+    //     if (selectedThings) {
+    //         axios.get(`getUserInfo`)
+    //             .then(response => {
+    //                 // console.log(`this is response.data pure`);
+    //                 // console.log(response.data);
+    //                 setSumm(response.data.calcResponse[0].price)
+    //                 setIsLoad(false)
+    //                 setSelectedThings2(response.data.newDataWithPrices2)
+    //             })
+    //             .catch(error => {
+    //                 console.log(error.message);
+    //             })
+    //     }
+    // }, [selectedThings]);
 
-    useEffect(() => {
-        setIsLoad(true)
-        if (selectedThings) {
-            let dataToSend = {
-                method: "calculate",
-                data: selectedThings
-            }
-            axios.post(`api/pricing`, dataToSend)
-                .then(response => {
-                    // console.log(`this is response.data pure`);
-                    console.log(response.data);
-                    setSumm(response.data.calcResponse[0].price)
-                    setIsLoad(false)
-                    setSelectedThings2(response.data.newDataWithPrices2)
-                })
-                .catch(error => {
-                    console.log(error.message);
-                })
-        }
-    }, [selectedThings]);
+    // useEffect(() => {
+    //     setIsLoad(true)
+    //     if (selectedThings) {
+    //         let dataToSend = {
+    //             method: "calculate",
+    //             data: selectedThings
+    //         }
+    //         axios.post(`api/pricing`, dataToSend)
+    //             .then(response => {
+    //                 // console.log(`this is response.data pure`);
+    //                 console.log(response.data);
+    //                 setSumm(response.data.calcResponse[0].price)
+    //                 setIsLoad(false)
+    //                 setSelectedThings2(response.data.newDataWithPrices2)
+    //             })
+    //             .catch(error => {
+    //                 console.log(error.message);
+    //             })
+    //     }
+    // }, [selectedThings]);
 
-    useEffect(() => {
-        let data = {
-            name: "Orders",
-            inPageCount: 99999,
-            currentPage: 1,
-        }
-        axios.post(`/api/order/get`, data)
-            .then(response => {
-                console.log(response.data);
-                setOrders(response.data)
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    }, []);
+    // useEffect(() => {
+    //     let data = {
+    //         name: "Orders",
+    //         inPageCount: 99999,
+    //         currentPage: 1,
+    //     }
+    //     axios.post(`/api/order/get`, data)
+    //         .then(response => {
+    //             console.log(response.data);
+    //             setOrders(response.data)
+    //         })
+    //         .catch(error => {
+    //             console.log(error.message);
+    //         })
+    // }, []);
 
-    const handleSelectOneOrder = (event, id) => {
+    // const handleSelectOneOrder = (event, id) => {
+    //     setIsLoad(true)
+    //     let data = {
+    //         name: "OneOrder",
+    //         id: id
+    //     }
+    //     axios.post(`/api/order/get`, data)
+    //         .then(response => {
+    //             console.log(response.data);
+    //             setThisOrder(response.data)
+    //             setSelectedThings(response.data)
+    //             setIsLoad(false)
+    //         })
+    //         .catch(error => {
+    //             console.log(error.message);
+    //         })
+    // };
+    useEffect(() => {
         setIsLoad(true)
         let data = {
             name: "OneOrder",
@@ -188,13 +217,13 @@ const CrmCash = () => {
             .then(response => {
                 console.log(response.data);
                 setThisOrder(response.data)
-                setSelectedThings(response.data)
+                // setSelectedThings(response.data.orderunits)
                 setIsLoad(false)
             })
             .catch(error => {
                 console.log(error.message);
             })
-    };
+    }, []);
 
     // console.log(selectedThings2);
     return (
@@ -395,7 +424,7 @@ const CrmCash = () => {
                                                       value={thisOrder.prepayment}
                                                       className="adminFont btn btn-outline-warning"
                                                       onChange={handleSaveOrder}
-                                                      // onChange={handleSaveOrder}
+                                            // onChange={handleSaveOrder}
                                         />
                                     ) : (
                                         <Form.Control variant="outline-warning" onChange={handleSaveOrder} value={0} className="adminFont btn btn-outline-warning"/>
@@ -454,4 +483,4 @@ const CrmCash = () => {
     );
 };
 
-export default CrmCash;
+export default CrmCash2;

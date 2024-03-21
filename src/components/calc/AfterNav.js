@@ -12,6 +12,8 @@ import Main from "../newcalc/Main";
 import Sheet from "../newcalc/products/Sheet";
 import Orders from "../newcalc/Orders/Orders";
 import OneOrder from "../newcalc/Orders/OneOrder";
+import CrmCash from "../admin/crm/CrmCash/CrmCash";
+import CrmCash2 from "../admin/crm/CrmCash/CrmCash2";
 
 const AfterNav = () => {
     const pricesIsLoading = useSelector(state => state.prices.pricesIsLoading);
@@ -58,6 +60,9 @@ const AfterNav = () => {
 
                 <Route path="/Orders" element={<Orders/>} />
                 <Route path="/Orders/:id" element={<OneOrder/>} />
+
+                <Route path="/Cash" element={<CrmCash2/>} />
+                <Route path="/Cash/:id" element={<CrmCash2/>} />
             </Routes>
         </div>
     );
